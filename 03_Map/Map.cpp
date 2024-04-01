@@ -19,14 +19,13 @@ void Map::readLocationNames(std::string path_locationsNames) {
 		f_dirLocations.close();
 	}
 }
-
 // hlavni prostredi vytvareni mapy
 void Map::createMap(std::string f_locationsName) {
-	std::string completePath = StartDirectoryMap + f_locationsName;
+	std::string path = MapFolder + f_locationsName;
 	// debugPrint
 	//std::cout << completePath << "\n\n";
-	if (std::filesystem::exists(completePath)) {
-		readLocationNames(completePath);
+	if (std::filesystem::exists(path)) {
+		readLocationNames(path);
 		createRooms();
 	}
 	else {
@@ -43,7 +42,7 @@ void Map::createRooms() {
 	for (int indexL = 0; indexL < sizeL && !m_dir_location.empty(); indexL++) {					// indexL = Location		// indexR = Room
 		lokace.clear();											//vycisti vektor lokaci - pushuju tam nove m_rooms
 		for (int indexR = 1; indexR <= 9; indexR++) {
-			filePathRoom = StartDirectoryMap + m_dir_location.at(indexL) + "/0" + std::to_string(indexR) + ".txt";
+			filePathRoom = MapFolder + m_dir_location.at(indexL) + "/0" + std::to_string(indexR) + ".txt";
 			if (std::filesystem::exists(filePathRoom)) {
 				m_room = new Room(filePathRoom);
 				lokace.push_back(m_room);
