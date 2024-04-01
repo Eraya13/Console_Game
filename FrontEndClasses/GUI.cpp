@@ -2,6 +2,11 @@
 
 GUI::GUI() {}
 // dodat parametr upscalu
+/*std::array<std::array <Tile*, 20>, 20> GUI::upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale) {
+    
+}*/
+//Note: upscaleMap se nasobi s tim, kde je kurzor, pokud budu mit dvojnasobnou velikosti nikoliv jen basic 1
+
 void GUI::printRoom(Room* actualRoom) {
     std::array<std::array <Tile*, 20>, 20> printedRoom = actualRoom-> m_tileField;
     char tileType;
@@ -57,6 +62,21 @@ void GUI::toggleCursorVisibility() {
    cursorInfo.bVisible = not cursorInfo.bVisible;     
    SetConsoleCursorInfo(hConsole, &cursorInfo); // setting cursor info
 }
+
+
+void GUI::setCursorVisible() {
+GetConsoleCursorInfo(hConsole, &cursorInfo);
+cursorInfo.bVisible = true;
+SetConsoleCursorInfo(hConsole, &cursorInfo);
+}
+
+void GUI::setCursorINvisible() {
+GetConsoleCursorInfo(hConsole, &cursorInfo);
+cursorInfo.bVisible = false;
+SetConsoleCursorInfo(hConsole, &cursorInfo);
+}
+
+
 
 // **********User input functions*******************
  char GUI::readInput_onMap() {

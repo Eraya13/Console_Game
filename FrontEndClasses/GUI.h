@@ -18,6 +18,7 @@ class GUI {
 public:
     GUI();
      // graphics:
+    std::array<std::array <Tile*, 20>, 20> upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale);
     void printRoom(Room* actualRoom);
     // GUI
     char readInput_onMap(); // cte input a vraci input
@@ -25,4 +26,7 @@ public:
     void setCursorRange(int range);
     void setDefaultCursorOnRoom(); // sklada se z volani funkci windows.h
     void toggleCursorVisibility();
+    void setCursorVisible();
+    void setCursorINvisible();
+
 };

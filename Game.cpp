@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "ActionType.h"
 
 Game::Game() {
 	m_player = nullptr;
@@ -15,16 +16,17 @@ void Game::createMap(std::string filename) {
 
 void Game::setGameElements() {
 	// create GameElements
+	system ("cls");
 	m_player = new Player("Derien", 100, 40);
 	createMap("LocationsNames.txt");
 	// real set GameElements
 	m_actualRoom = m_map->getRoom(START_LOCATION, START_ROOM);					// call room funkce - nutno drzet aktualni!
 	m_playerControls = new Controls (6, 7, m_player, m_actualRoom);
 	m_playerControls->setPlayerOnMap();
-	
 	m_gui = new GUI();
+	SetConsoleOutputCP(65001);
 	m_gui->setDefaultCursorOnRoom();
-	m_gui->toggleCursorVisibility();
+	m_gui->setCursorINvisible();
 	std::cout << "\nGame elements are set succesfully\n";
 	system("pause");
 	system ("cls");
@@ -39,8 +41,8 @@ void Game::gameLoop() {
 	// printActualRoom -> Village
 	m_gui->printRoom(m_actualRoom);
 	while (m_player->getHealth() > 0 && m_gameState == true ) {
-		bool changeRoomYesOrNo = false;	
 		performAction(decideActionType());
+		m_gui->setDefaultCursorOnRoom();
 		m_gui->printRoom(m_actualRoom);			// ma se printnout znovu, pokud se skutecne neco stane...
 	}
 }
@@ -57,7 +59,7 @@ ActionType Game::decideActionType() {
 			case 'D':
 				m_playerControls->setDirection(key);
 				return ActionType::Movement;
-			case '\t':					// TAB
+			case '\t':				// TAB
 				return ActionType::InGameMenu;	
 		}
 	} while (key != 27);			// ESC
@@ -65,22 +67,43 @@ ActionType Game::decideActionType() {
 }
 
 void Game::performAction(ActionType action) {
-	if (action == ActionType::Movement) {
+	bool changeRoomYesOrNo = false;		// vychozi hodnota
+	switch (action) {
+		case ActionType::Movement:
+			// vytvoreni nove pozice na zaklade drivejsiho key
+			m_playerControls->createNextPosition();
+			// posoudi se, zda se hrac pohne nebo bude mit interakci
+			m_playerControls->analyzeAperformNextPosition(changeRoomYesOrNo);
+			if (changeRoomYesOrNo == true) { 
+				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
+			}
+			break;
+
+		case ActionType::InGameMenu:
+            // commands 
+            break;
+
+        case ActionType::QuitGame:
+            m_gameState = false;
+            break;
+	}
+
+	/*if (action == ActionType::Movement) {
 		bool changeRoomYesOrNo = false;
 		// vytvoreni nove pozice na zaklade drivejsiho key
 		m_playerControls->createNextPosition();
 		// posoudi se, zda se hrac pohne nebo bude mit interakci
 		m_playerControls->analyzeAperformNextPosition(changeRoomYesOrNo);
-		if (changeRoomYesOrNo == true) {			//TODO
+		if (changeRoomYesOrNo == true) {			
 			std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
 		}
 	}
 	else if (action == ActionType::QuitGame) {
 		m_gameState = false;
 	} 
-	else {
+	else { //zde dojde k nastaveni kurzoru pro Menu
 		// displayInGameMenu()
-	}
+	}*/
 }
 
 
