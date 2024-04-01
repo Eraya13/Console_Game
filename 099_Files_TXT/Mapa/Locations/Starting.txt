@@ -1,6 +1,8 @@
 "C:/06_Programming/C++_Visual Studio/Save_the Princess_Final_Project/Files_TXT/Mapa/Locations/"
 
-f_locationsName= LocationsNames.txt
+f_locationsName / file = LocationsNames.txt
+
+MapFolder = ../099_Files_TXT/Mapa/Locations/
 
 
-C:/06_Programming/C++_Visual Studio/Save_the Princess_Final_Project/Files_TXT/Mapa/Locations/nazevLokace/0int.txt
+C:/06_Programming/C++_Visual Studio/Save_the Princess_Final_Project/Files_TXT/Mapa/Locations/nazevLokace/int.txt

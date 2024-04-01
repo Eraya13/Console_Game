@@ -1,8 +1,15 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(Game VERSION 0.1.0 LANGUAGES C CXX)
+cmake_minimum_required(VERSION 3.26)
+project(Projekt_Save_The_Princess)
 
-include(CTest)
-enable_testing()
+set(CMAKE_CXX_STANDARD 17)
+
+include_directories(01_Enums)
+include_directories(02_Entity)
+include_directories(03_Map)
+include_directories(04_Structs)
+include_directories(099_Files_TXT)
+include_directories(FrontEndClasses)
+include_directories(Players_Classes)
 
 add_executable(Game
 01_Enums/ActionType.h
@@ -12,17 +19,13 @@ add_executable(Game
 03_Map/Map.cpp
 03_Map/Room.cpp
 03_Map/Tile.cpp
+04_Structs/PositionStruct.h
 FrontEndClasses/DisplayScreens.cpp
 FrontEndClasses/GUI.cpp
 Players_Classes/Controls.cpp
 Players_Classes/Player.cpp
-Players_Classes/PositionStruct.h
 DataFormatting.cpp
 Game.cpp
 GlobalVariables.h
 ErrorLog.cpp
 main.cpp)
-
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
