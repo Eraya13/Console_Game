@@ -75,35 +75,20 @@ void Game::performAction(ActionType action) {
 			// posoudi se, zda se hrac pohne nebo bude mit interakci
 			m_playerControls->analyzeAperformNextPosition(changeRoomYesOrNo);
 			if (changeRoomYesOrNo == true) { 
+				// todo actions for settting Travel Menu
 				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
 			}
 			break;
 
 		case ActionType::InGameMenu:
-            // commands 
+            // Setting for General Menu Print
+			// Print InGameMenu()
             break;
 
         case ActionType::QuitGame:
             m_gameState = false;
             break;
 	}
-
-	/*if (action == ActionType::Movement) {
-		bool changeRoomYesOrNo = false;
-		// vytvoreni nove pozice na zaklade drivejsiho key
-		m_playerControls->createNextPosition();
-		// posoudi se, zda se hrac pohne nebo bude mit interakci
-		m_playerControls->analyzeAperformNextPosition(changeRoomYesOrNo);
-		if (changeRoomYesOrNo == true) {			
-			std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
-		}
-	}
-	else if (action == ActionType::QuitGame) {
-		m_gameState = false;
-	} 
-	else { //zde dojde k nastaveni kurzoru pro Menu
-		// displayInGameMenu()
-	}*/
 }
 
 

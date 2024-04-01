@@ -1,6 +1,8 @@
 #include "GUI.h"
 
-GUI::GUI() {}
+GUI::GUI() {
+    m_screen = new DisplayScreens();
+}
 // dodat parametr upscalu
 /*std::array<std::array <Tile*, 20>, 20> GUI::upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale) {
     
@@ -49,6 +51,52 @@ void GUI::setColorTile(int color) {
     SetConsoleTextAttribute(hConsole, BACKGROUND * (int)Colors::Black); // reset pozadi na cernou (pismena neobarvujeme)
 }
 
+
+
+
+
+// --------Cursor settings--------
+// nastavi omezeni - posledni pozici pro kurzor...
+
+
+void GUI::setCursorPosition () {
+    cursorPos = { 0, 21 };
+    SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y});
+}
+
+void GUI::setCursorRange(int range) {
+ std::cout << "setCursorRange";
+}
+
+void GUI::setCursorPosition (int short x, int short y) {
+    if (x >=0 && y >= 0 ) {
+        cursorPos = { x, y };
+        SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y});
+    }
+    else {
+        std::cout << "\nInvalid cursor position." << std::endl; // todo ErrorLog
+    }
+    
+}
+
+void GUI::displayInGameMenu () {
+    char input;
+    setCursorPosition();
+    m_screen->inGameMenu_m();
+    do {
+        input=readInput_onMap();
+        switch (input) {
+            case 'W':
+                cursorPos.Y--;
+                break;
+            case 'S':
+                cursorPos.Y++;
+                break;
+        }
+
+    } while (input!='\r');   // or 13 = ENTER
+}
+
 void GUI::setDefaultCursorOnRoom() {
     // starting position - always the same!
    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -80,7 +128,7 @@ SetConsoleCursorInfo(hConsole, &cursorInfo);
 
 // **********User input functions*******************
  char GUI::readInput_onMap() {
-    std::cout << "Ctu zmacknuti tlacitka: \n";      // debug_print
+    //std::cout << "Ctu zmacknuti tlacitka: \n";      // debug_print
     char input = toupper(_getch());          // WASD + tab + enter
     return input;
 }
