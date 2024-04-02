@@ -15,7 +15,7 @@ class GUI {
         // varriables:
     CONSOLE_CURSOR_INFO cursorInfo;
     COORD cursorPos;
-    int short m_cursorMax;
+    int short m_cursorMax;  // range variable for MenuPrint
     int short m_cursorMin;
     void setColorTile(int color);
     void setCursorStartPosition();  // set start position cursor for menu

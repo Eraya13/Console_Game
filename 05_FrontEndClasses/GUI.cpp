@@ -165,12 +165,11 @@ void GUI::displayMenuOptions (bool &gameState) {
             system ("pause");
             break;
         case 4: // Nic se nedeje - konec funkce
-            // - dalsi funkce nastavi neviditelnost
-            std::cout << "\nExit Game\n" << std::endl; // debug print
+            std::cout << "\nExit Menu\n" << std::endl; // debug print
             system ("pause");
             break;
         case 5:
-            std::cout << "\nExit Game\n" << std::endl; // debug print
+            std::cout << "\nLeave Game\n" << std::endl; // debug print
             gameState = false;
             system ("pause");
             break;
