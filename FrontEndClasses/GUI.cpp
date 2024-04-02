@@ -5,7 +5,6 @@ GUI::GUI() {
 }
 // dodat parametr upscalu
 /*std::array<std::array <Tile*, 20>, 20> GUI::upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale) {
-    
 }*/
 //Note: upscaleMap se nasobi s tim, kde je kurzor, pokud budu mit dvojnasobnou velikosti nikoliv jen basic 1
 
@@ -46,85 +45,140 @@ void GUI::printRoom(Room* actualRoom) {
 
 // Settings windows GUI
 void GUI::setColorTile(int color) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, BACKGROUND * color);    // nastavi se pozadovana barva pro "mezeru"
     printf(" ");
     SetConsoleTextAttribute(hConsole, BACKGROUND * (int)Colors::Black); // reset pozadi na cernou (pismena neobarvujeme)
 }
 
-
-
-
-
 // --------Cursor settings--------
-// nastavi omezeni - posledni pozici pro kurzor...
-
-
-void GUI::setCursorPosition () {
-    cursorPos = { 0, 21 };
-    SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y});
-}
-
-void GUI::setCursorRange(int range) {
- std::cout << "setCursorRange";
-}
-
-void GUI::setCursorPosition (int short x, int short y) {
-    if (x >=0 && y >= 0 ) {
-        cursorPos = { x, y };
-        SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y});
-    }
-    else {
-        std::cout << "\nInvalid cursor position." << std::endl; // todo ErrorLog
-    }
-    
-}
-
-void GUI::displayInGameMenu () {
-    char input;
-    setCursorPosition();
-    m_screen->inGameMenu_m();
-    do {
-        input=readInput_onMap();
-        switch (input) {
-            case 'W':
-                cursorPos.Y--;
-                break;
-            case 'S':
-                cursorPos.Y++;
-                break;
-        }
-
-    } while (input!='\r');   // or 13 = ENTER
-}
-
-void GUI::setDefaultCursorOnRoom() {
-    // starting position - always the same!
-   hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-   cursorPos = {0, 0}; 
-   SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y});
-}
-
+// Visibility:
 void GUI::toggleCursorVisibility() {
+   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
    GetConsoleCursorInfo(hConsole, &cursorInfo); // getting cursor info
    // this toggles cursor visibility - not sets true to false and vice versa
    cursorInfo.bVisible = not cursorInfo.bVisible;     
    SetConsoleCursorInfo(hConsole, &cursorInfo); // setting cursor info
 }
 
-
 void GUI::setCursorVisible() {
-GetConsoleCursorInfo(hConsole, &cursorInfo);
-cursorInfo.bVisible = true;
-SetConsoleCursorInfo(hConsole, &cursorInfo);
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleCursorInfo(hConsole, &cursorInfo);
+    cursorInfo.bVisible = true;
+    SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
 
 void GUI::setCursorINvisible() {
-GetConsoleCursorInfo(hConsole, &cursorInfo);
-cursorInfo.bVisible = false;
-SetConsoleCursorInfo(hConsole, &cursorInfo);
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleCursorInfo(hConsole, &cursorInfo);
+    cursorInfo.bVisible = false;
+    SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
 
+// ********** Set Cursor position ****************
+// to do set enum value "map" + certain value for each type menu
+void GUI::setDefaultCursorOnRoom() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cursorPos = {0, 0}; // start position map
+    SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y});
+}
 
+void GUI::setCursorStartPosition() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cursorPos = { 0, m_cursorMin };
+    SetConsoleCursorPosition(hConsole, cursorPos);
+}
+
+void GUI::setCursorPosition () {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cursorPos.X = 0;
+    //std::cout << "Kurzorr Y: " << cursorPos.Y << std::endl;
+    SetConsoleCursorPosition(hConsole, cursorPos);
+}
+
+// ********** Set Cursor other things ****************
+void GUI::setCursorRange (int short defaultPosition, int short options) {
+    m_cursorMin = defaultPosition;
+    m_cursorMax = defaultPosition + options - 1;
+}
+
+COORD GUI::getConsoleCursorPosition (HANDLE hConsole) {
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    return csbi.dwCursorPosition;
+}
+
+void GUI::cursorNavigation (int short def_position, int short options) {
+    char input;
+	// bude obecna promenna z Menu enum class
+    setCursorRange(def_position, options);
+    setCursorStartPosition();
+    changeCursorPos();
+}
+
+// je to soucasti cursorNavigation - otestovat doma
+void GUI::changeCursorPos() {
+	int input;
+    do {
+        input = readInput_onMap();
+            switch (input) {
+                case 'W':
+                    cursorPos.Y--;
+                    break;
+                case 'S':
+                    cursorPos.Y++;
+                    break; 
+        	}
+        if (cursorPos.Y > m_cursorMax) {
+            cursorPos.Y--; 
+        }
+        else if (cursorPos.Y < m_cursorMin) {
+            cursorPos.Y++;
+        }
+        setCursorPosition();
+    } while (input!= '\r');
+}
+
+// Display PRINT
+void GUI::displayInGameMenu() {
+   m_screen->inGameMenu_m();
+}
+
+// Display Options:
+void GUI::displayMenuOptions (bool &gameState) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cursorPos = getConsoleCursorPosition(hConsole);
+    // uprava cursorPos.Y
+    int option = cursorPos.Y - (int short) 1 - (int short) 20; // Menu::Menu_startPos
+    system ("cls");				// mozna bu
+    switch (option) {
+        case 1:
+            std::cout << "\nPersonal Stats\n" << std::endl;
+            system ("pause");
+            break;
+        case 2:
+            std::cout << "\nInventory\n" << std::endl;
+            system ("pause");
+            break;
+        case 3:
+            std::cout << "\nQuests\n" << std::endl;
+            system ("pause");
+            break;
+        case 4: // Nic se nedeje - konec funkce
+            // - dalsi funkce nastavi neviditelnost
+            std::cout << "\nExit Game\n" << std::endl; // debug print
+            system ("pause");
+            break;
+        case 5:
+            std::cout << "\nExit Game\n" << std::endl; // debug print
+            gameState = false;
+            system ("pause");
+            break;
+        default:
+            std::cout << "\nError - no option found\n" << std::endl; // todo ErorLog
+            system ("pause");
+  }
+}
 
 // **********User input functions*******************
  char GUI::readInput_onMap() {

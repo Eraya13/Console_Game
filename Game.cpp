@@ -38,10 +38,12 @@ void Game::testFunction() {
 
 // Hlavni funkce hry:
 void Game::gameLoop() {
+	m_gui->setCursorINvisible();
 	// printActualRoom -> Village
 	m_gui->printRoom(m_actualRoom);
 	while (m_player->getHealth() > 0 && m_gameState == true ) {
 		performAction(decideActionType());
+		if (m_gameState== false) continue;
 		m_gui->setDefaultCursorOnRoom();
 		m_gui->printRoom(m_actualRoom);			// ma se printnout znovu, pokud se skutecne neco stane...
 	}
@@ -79,12 +81,13 @@ void Game::performAction(ActionType action) {
 				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
 			}
 			break;
-
-		case ActionType::InGameMenu:
-            // Setting for General Menu Print
-			// Print InGameMenu()
+		case ActionType::InGameMenu:	 // Setting for Menu Print
+			m_gui->setCursorVisible();
+			m_gui->displayInGameMenu();
+			m_gui->cursorNavigation(22,5);
+			m_gui->displayMenuOptions(m_gameState);	
+			m_gui->setCursorINvisible();
             break;
-
         case ActionType::QuitGame:
             m_gameState = false;
             break;
