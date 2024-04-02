@@ -2,7 +2,6 @@
 #include <fstream>
 #include <filesystem>
 #include "Game.h"
-#include "../FrontEndClasses\DisplayScreens.h"
 
 int main() {
     // Get the current working directory

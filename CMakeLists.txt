@@ -8,7 +8,7 @@ include_directories(02_Entity)
 include_directories(03_Map)
 include_directories(04_Structs)
 include_directories(099_Files_TXT)
-include_directories(FrontEndClasses)
+include_directories(05_FrontEndClasses)
 include_directories(Players_Classes)
 
 add_executable(Game
@@ -20,8 +20,8 @@ add_executable(Game
 03_Map/Room.cpp
 03_Map/Tile.cpp
 04_Structs/PositionStruct.h
-FrontEndClasses/DisplayScreens.cpp
-FrontEndClasses/GUI.cpp
+05_FrontEndClasses/DisplayScreens.cpp
+05_FrontEndClasses/GUI.cpp
 Players_Classes/Controls.cpp
 Players_Classes/Player.cpp
 DataFormatting.cpp

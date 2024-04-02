@@ -5,7 +5,7 @@
 #include "Players_Classes/Controls.h"
 #include "GlobalVariables.h"
 #include "03_Map/Map.h"
-#include "FrontEndClasses/GUI.h"
+#include "05_FrontEndClasses/GUI.h"
 #include "01_Enums/ActionType.h"
 
 
