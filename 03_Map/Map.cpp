@@ -9,12 +9,12 @@ void Map::readLocationNames(std::string path_locationsNames) {
 	std::ifstream f_dirLocations;			   // deklarace citatka pro konkretni soubor
 	f_dirLocations.open(path_locationsNames); // nacteni cesty
 	if (f_dirLocations.is_open()) {
-		int index = 0;					// starting index lokace = Village
+		int indexLokace = 0;					// starting index lokace = Village
 		while (!(f_dirLocations.eof())) {
 			std::string name;
 			getline(f_dirLocations, name);			// cteni 1 radku = 1 lokace
-			m_dir_location.at(index) = name;		// array imp part of path lokace
-			index++;
+			m_dir_location.at(indexLokace) = name;		// array imp part of path lokace
+			indexLokace++;
 		}
 		f_dirLocations.close();
 	}
@@ -37,9 +37,9 @@ void Map::createMap(std::string f_locationsName) {
 void Map::createRooms() {
 	std::vector<Room*> lokace;		// lokalni promenna pro push_back roomek do m_mapy
 	std::string filePathRoom;        // Village = home
-	int sizeL = 4;			// pocet lokaci ve hre (tolik mame slozek)
+	int locationAmount = 4;			// pocet lokaci ve hre (tolik mame slozek)
 
-	for (int indexL = 0; indexL < sizeL && !m_dir_location.empty(); indexL++) {					// indexL = Location		// indexR = Room
+	for (int indexL = 0; indexL < locationAmount && !m_dir_location.empty(); indexL++) {					// indexL = Location		// indexR = Room
 		lokace.clear();											//vycisti vektor lokaci - pushuju tam nove m_rooms
 		for (int indexR = 1; indexR <= 9; indexR++) {
 			filePathRoom = MapFolder + m_dir_location.at(indexL) + "/0" + std::to_string(indexR) + ".txt";

@@ -7,7 +7,7 @@ Game::Game() {
 	m_actualRoom = nullptr;
 	m_playerControls = nullptr;
 	m_gui = nullptr;
-	m_gameState = true;
+	m_gameOngoing = true;
 }
 
 void Game::createMap(std::string filename) {
@@ -24,7 +24,7 @@ void Game::setGameElements() {
 	m_playerControls = new Controls (6, 7, m_player, m_actualRoom);
 	m_playerControls->setPlayerOnMap();
 	m_gui = new GUI();
-	SetConsoleOutputCP(65001);
+	SetConsoleOutputCP(65001);	// nastavi kodovani na UTF-8
 	m_gui->setDefaultCursorOnRoom();
 	m_gui->setCursorINvisible();
 	std::cout << "\nGame elements are set succesfully\n";
@@ -41,9 +41,9 @@ void Game::gameLoop() {
 	m_gui->setCursorINvisible();
 	// printActualRoom -> Village
 	m_gui->printRoom(m_actualRoom);
-	while (m_player->getHealth() > 0 && m_gameState == true ) {
+	while (m_player->getHealth() > 0 && m_gameOngoing) {
 		performAction(decideActionType());
-		if (m_gameState== false) continue;
+		if (!m_gameOngoing) continue;
 		m_gui->setDefaultCursorOnRoom();
 		m_gui->printRoom(m_actualRoom);			// ma se printnout znovu, pokud se skutecne neco stane...
 	}
@@ -85,11 +85,11 @@ void Game::performAction(ActionType action) {
 			m_gui->setCursorVisible();
 			m_gui->displayInGameMenu();
 			m_gui->cursorNavigation(22,5);
-			m_gui->displayMenuOptions(m_gameState);	
+			m_gui->displayMenuOptions(m_gameOngoing);	
 			m_gui->setCursorINvisible();
             break;
         case ActionType::QuitGame:
-            m_gameState = false;
+            m_gameOngoing = false;
             break;
 	}
 }

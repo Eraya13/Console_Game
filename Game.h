@@ -22,7 +22,7 @@ private:
 	Room* m_actualRoom;
 	Controls* m_playerControls;
 	GUI* m_gui;
-	bool m_gameState;
+	bool m_gameOngoing;
 	// private funkce:
 	void createMap(std::string filename);
 	ActionType decideActionType();

@@ -52,7 +52,8 @@ void GUI::setColorTile(int color) {
 }
 
 // --------Cursor settings--------
-// Visibility:
+// Visibility:¨
+// tuto metodu zatim nepouzivam...
 void GUI::toggleCursorVisibility() {
    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
    GetConsoleCursorInfo(hConsole, &cursorInfo); // getting cursor info
@@ -60,7 +61,7 @@ void GUI::toggleCursorVisibility() {
    cursorInfo.bVisible = not cursorInfo.bVisible;     
    SetConsoleCursorInfo(hConsole, &cursorInfo); // setting cursor info
 }
-
+// metody nize se pouzivaji!!!
 void GUI::setCursorVisible() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     GetConsoleCursorInfo(hConsole, &cursorInfo);
@@ -145,7 +146,7 @@ void GUI::displayInGameMenu() {
 }
 
 // Display Options:
-void GUI::displayMenuOptions (bool &gameState) {
+void GUI::displayMenuOptions (bool &gameOngoing) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     cursorPos = getConsoleCursorPosition(hConsole);
     // uprava cursorPos.Y
@@ -170,7 +171,7 @@ void GUI::displayMenuOptions (bool &gameState) {
             break;
         case 5:
             std::cout << "\nLeave Game\n" << std::endl; // debug print
-            gameState = false;
+            gameOngoing = false;
             system ("pause");
             break;
         default:

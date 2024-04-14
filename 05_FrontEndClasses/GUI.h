@@ -39,5 +39,5 @@ public:
     void cursorNavigation(int short def_position, int short options);
    // Menus
     void displayInGameMenu(); 
-    void displayMenuOptions (bool &gameState);
+    void displayMenuOptions (bool &gameOngoing);
 };
