@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "ActionType.h"
+
 
 Game::Game() {
 	m_player = nullptr;
@@ -81,7 +81,7 @@ void Game::performAction(ActionType action) {
 				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
 			}
 			break;
-		case ActionType::InGameMenu:	 // Setting for Menu Print
+		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
 			m_gui->setCursorVisible();
 			m_gui->displayInGameMenu();
 			m_gui->cursorNavigation(22,5);

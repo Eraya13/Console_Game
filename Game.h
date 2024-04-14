@@ -7,7 +7,7 @@
 #include "03_Map/Map.h"
 #include "05_FrontEndClasses/GUI.h"
 #include "01_Enums/ActionType.h"
-
+#include "ActionType.h"
 
 //TODO ERRORLOG globalem nebo singletonem
 
