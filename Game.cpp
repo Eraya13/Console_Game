@@ -14,6 +14,12 @@ void Game::createMap(std::string filename) {
 	m_map = new Map(filename);
 }
 
+
+void Game::setCursor() {
+	m_gui->setDefaultCursorOnRoom();
+	m_gui->setCursorINvisible();
+}
+
 void Game::setGameElements() {
 	// create GameElements
 	system ("cls");
@@ -25,8 +31,7 @@ void Game::setGameElements() {
 	m_playerControls->setPlayerOnMap();
 	m_gui = new GUI();
 	SetConsoleOutputCP(65001);	// nastavi kodovani na UTF-8
-	m_gui->setDefaultCursorOnRoom();
-	m_gui->setCursorINvisible();
+	setCursor();
 	std::cout << "\nGame elements are set succesfully\n";
 	system("pause");
 	system ("cls");
@@ -36,6 +41,9 @@ void Game::testFunction() {
 
 }
 
+
+
+
 // Hlavni funkce hry:
 void Game::gameLoop() {
 	m_gui->setCursorINvisible();
@@ -44,7 +52,7 @@ void Game::gameLoop() {
 	while (m_player->getHealth() > 0 && m_gameOngoing) {
 		performAction(decideActionType());
 		if (!m_gameOngoing) continue;
-		m_gui->setDefaultCursorOnRoom();
+		setCursor();
 		m_gui->printRoom(m_actualRoom);			// ma se printnout znovu, pokud se skutecne neco stane...
 	}
 }

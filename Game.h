@@ -27,6 +27,7 @@ private:
 	void createMap(std::string filename);
 	ActionType decideActionType();
 	void performAction(ActionType action);
+	void setGUI_forRoom();
 
 public:
 	Game();
