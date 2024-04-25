@@ -162,7 +162,7 @@ void GUI::displayMenuOptions (bool &gameOngoing) {
             system ("pause");
             break;
         case 3:
-            std::cout << "\nQuests\n" << std::endl;
+            std::cout << "\nQuests\n" << std::endl;     // MISTO TOHO UDELAT DIARY!!!! (bude obsahovat celé konverzace or záznam, co uživatel dělal na mapě - logger)
             system ("pause");
             break;
         case 4: // Nic se nedeje - konec funkce
@@ -178,6 +178,7 @@ void GUI::displayMenuOptions (bool &gameOngoing) {
             std::cout << "\nError - no option found\n" << std::endl; // todo ErorLog
             system ("pause");
   }
+   system ("cls");
 }
 
 // **********User input functions*******************
