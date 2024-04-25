@@ -98,7 +98,7 @@ void GUI::setCursorPosition () {
 }
 
 // ********** Set Cursor other things ****************
-void GUI::setCursorRange (int short defaultPosition, int short options) {
+void GUI::setCursorRange (int short const defaultPosition, int short const options) {
     m_cursorMin = defaultPosition;
     m_cursorMax = defaultPosition + options - 1;
 }
@@ -109,7 +109,7 @@ COORD GUI::getConsoleCursorPosition (HANDLE hConsole) {
     return csbi.dwCursorPosition;
 }
 
-void GUI::cursorNavigation (int short def_position, int short options) {
+void GUI::cursorNavigation (int short const def_position, int short const options){
     char input;
 	// bude obecna promenna z Menu enum class
     setCursorRange(def_position, options);

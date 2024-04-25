@@ -12,10 +12,10 @@ private:
 	void createMap(std::string f_locationsName);
 	void createRooms();
 	// reading if exist
-	void readLocationNames(std::string path_locationsNames);
+	void readLocationNames(std::string const path_locationsNames);
 public:
 	Map(std::string filename);
-	Room* getRoom(int location, int index);
+	Room* getRoom(int location, int index) const;
 	// changeRoom()
 	
 

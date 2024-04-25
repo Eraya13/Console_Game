@@ -5,7 +5,7 @@ Map::Map(std::string filename) {
 }
 
 // precteni jmen lokaci (dirs) + ulozeni techto jmen do arraye m_dir_location
-void Map::readLocationNames(std::string path_locationsNames) {	
+void Map::readLocationNames(std::string const path_locationsNames) {	
 	std::ifstream f_dirLocations;			   // deklarace citatka pro konkretni soubor
 	f_dirLocations.open(path_locationsNames); // nacteni cesty
 	if (f_dirLocations.is_open()) {
@@ -63,6 +63,6 @@ void Map::createRooms() {
 	}
 }
 
-Room* Map::getRoom(int location, int index) {
+Room* Map::getRoom(int location, int index) const {
 	return m_map.at(location).at(index);
 }

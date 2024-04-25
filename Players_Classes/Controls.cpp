@@ -13,9 +13,7 @@ void Controls::setDirection(char key) {
 }
 
 // gettery:
-Position Controls::getOldPosition() {
-	return m_playerOldPosition;
-}
+Position Controls::getOldPosition() const { return m_playerOldPosition; }
 
 char Controls::getTileType_nextPosition() {
 	int nextPos_x = m_playerNextPosition.st_x;

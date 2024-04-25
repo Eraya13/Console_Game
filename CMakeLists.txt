@@ -11,11 +11,14 @@ include_directories(099_Files_TXT)
 include_directories(05_FrontEndClasses)
 include_directories(Players_Classes)
 
-add_executable(Game
+add_executable (Game
 01_Enums/ActionType.h
 01_Enums/Colors.h
 01_Enums/TileType.h
+02_Entity/IEntity.h
+02_Entity/Entity.cpp
 02_Entity/Enemy.cpp
+02_Entity/NPC.cpp
 03_Map/Map.cpp
 03_Map/Room.cpp
 03_Map/Tile.cpp

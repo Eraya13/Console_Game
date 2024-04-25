@@ -28,7 +28,7 @@ public:
 	void analyzeAperformNextPosition(bool& changeRoomYesOrNo);
 
 	// gettery:
-	Position getOldPosition();
+	Position getOldPosition() const;
 	//Position getNextPosition();			bude se hodit pro portaly
 
 	char getTileType_nextPosition();

@@ -19,7 +19,7 @@ class GUI {
     int short m_cursorMin;
     void setColorTile(int color);
     void setCursorStartPosition();  // set start position cursor for menu
-    void setCursorRange(int short defaultPosition, int short options); // nastavi range cursoru pro cteni menu
+    void setCursorRange(int short const defaultPosition, int short const options); // nastavi range cursoru pro cteni menu
     void changeCursorPos();
     void setCursorPosition();       // set cursor podle inputu playera (uvnitr menu)
 public:
@@ -36,7 +36,7 @@ public:
     void setCursorINvisible();
     // Settery Cursor Position
     void setDefaultCursorOnRoom(); // set cursor for room print
-    void cursorNavigation(int short def_position, int short options);
+    void cursorNavigation(int short const def_position, int short const options);
    // Menus
     void displayInGameMenu(); 
     void displayMenuOptions (bool &gameOngoing);

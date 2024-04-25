@@ -1,16 +1,12 @@
 #pragma once
-#include <iostream>
+#include "../02_Entity/Entity.h"
 
-class Enemy {
-private:
-	std::string m_name;
-	int m_health;
-	int m_attack;
+class Enemy : public Entity {
+protected:
+	
 public:
-	Enemy(std::string name, int health, int attack);
-	int getHealth();
-	int getAttack();
-	void setHealth(int minusHealth);
-
+	Enemy ();
+	// konstruktor pro dedicnost
+	Enemy(std::string name, int attack, int defense, int health, int xp);
 };
 

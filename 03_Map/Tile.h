@@ -13,7 +13,7 @@ private:
 	// IEntity *m_Entity;			// Tile obsahuje 1 Entity if E, N, I
 public:
 	Tile(char tile);
-	char getTileType();
+	char getTileType() const;
 	void setTileType(char newType);			// zmena TileType -> pohyb hrace / akce hrace
 	void emptyTileEntity();					// odstrani odkaz na Entitu z Tily
 	Enemy* castEnemy();

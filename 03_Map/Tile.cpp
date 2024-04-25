@@ -5,9 +5,7 @@ Tile::Tile(char type) {
 	//m_entity = nullptr;
 }
 
-char Tile::getTileType() {
-	return m_tileType;
-}
+char Tile::getTileType() const { return m_tileType; }
 
 void Tile::setTileType(char newType) {
 	m_tileType = newType;

@@ -11,7 +11,7 @@ Room::Room(std::string roomFilePath) {
 }
 
 // cteni souboru roomky
-void Room::readFile(std::string pathRoom) {
+void Room::readFile(std::string const pathRoom) {
     std::ifstream fileRoom(pathRoom);
     if (fileRoom.is_open()) {
         for (int row = 0; row < m_tileField.size(); row++) {        // cteni po radcich  0-19 = 20 hodnot!!!        velikost 20, last index 19
@@ -22,6 +22,7 @@ void Room::readFile(std::string pathRoom) {
                     tileFromFile = toupper(tileFromFile); // potlaceni malych pismen
                     if (tileFromFile == '.' || tileFromFile == '#' || tileFromFile == 'O' || tileFromFile == 'H'                // non-Entity Types of tile
                         || tileFromFile == 'N' || tileFromFile == 'E' || tileFromFile == 'I' || tileFromFile == 'P') {          // Entity types of tile
+                        
                         m_tileField.at(row).at(column) = new Tile(tileFromFile);
                     }
                     else {

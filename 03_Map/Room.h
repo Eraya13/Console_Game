@@ -12,7 +12,7 @@ class Room {
 private:
 	//	std::vector <std::vector<Enemy*>> m_enemyList;
 	//	std::vector <std::vector<NPC*>> m_NPCList;
-	void readFile(std::string pathRoom);
+	void readFile(std::string const pathRoom);
 	void createTileField(std::string roomFilePath);
 public:
 	Room();
