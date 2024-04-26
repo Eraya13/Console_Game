@@ -22,6 +22,7 @@ add_executable (Game
 03_Map/Map.cpp
 03_Map/Room.cpp
 03_Map/Tile.cpp
+03_Map/EntityManager.cpp
 04_Structs/PositionStruct.h
 05_FrontEndClasses/DisplayScreens.cpp
 05_FrontEndClasses/GUI.cpp
