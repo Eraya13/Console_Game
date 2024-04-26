@@ -17,10 +17,10 @@ int main() {
     hra->gameLoop();*/
     
     
-    IEntity* entity;
+    /*IEntity* entity;
     entity = new Enemy("Derrien", 20, 10, 100, 454);
     entity->printInfo();
-    
+    */
 
     
     

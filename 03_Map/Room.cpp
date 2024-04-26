@@ -8,6 +8,7 @@ Room::Room() {
 //*********** real konstruktor
 Room::Room(std::string roomFilePath) {
     createTileField(roomFilePath);
+    fillEnemiesList();
 }
 
 // cteni souboru roomky
@@ -58,4 +59,12 @@ void Room::createTileField() {
 void Room::createTileField(std::string roomFileName) {
     std::string path = roomFileName;
     readFile(path);
+}
+
+void Room::fillEnemiesList() {
+    l_enemies.push_back(new Enemy("Dark Knight", 40, 10, 100, 250));
+    l_enemies.push_back(new Enemy("Skeleton", 20, 5, 50, 100));
+    l_enemies.push_back(new Enemy("Goblin", 30, 10, 100, 150));
+    l_enemies.push_back(new Enemy("Orc", 50, 15, 150, 200));
+    l_enemies.push_back(new Enemy("Strong Dark Knight", 70, 10, 200, 250));
 }

@@ -14,3 +14,22 @@ void Tile::setTileType(char newType) {
 void Tile::emptyTileEntity() {
 	//m_entity = nullptr;
 }
+
+
+
+
+// nepouzivat!!!
+void Tile::setTileEntity(IEntity *entity) {
+	switch (m_tileType) {
+		case 'E':
+		    m_entity = entity;
+			break;
+		case 'N':
+		    m_entity = entity;
+			break;
+		case 'I':
+		    m_entity = entity;
+			break;
+	}
+
+}
