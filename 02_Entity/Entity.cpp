@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(std::string name, int attack, int defense, int health, int xp) {
+Entity::Entity(std::string name, int attack, int defense, int health, int xp) : IEntity() {
     m_name = name;
     m_attack = attack;
     m_defense = defense;

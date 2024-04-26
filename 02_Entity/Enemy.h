@@ -8,5 +8,6 @@ public:
 	Enemy ();
 	// konstruktor pro dedicnost
 	Enemy(std::string name, int attack, int defense, int health, int xp);
+	void printInfo();
 };
 
