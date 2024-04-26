@@ -6,10 +6,8 @@
 #include "../GlobalVariables.h"		// chce to předělat!!! - nebudu používat jako variables GLOBAL!!!! spíše to budou nějaké cesty proměnné...
 #include "Tile.h"
 #include "../ErrorLog.h"
-#include "../02_Entity/Entity.h"
-
-
-
+#include "../02_Entity/Enemy.h"
+#include "../02_Entity/NPC.h"
 
 class Room {
 private:
