@@ -25,7 +25,7 @@ class GUI {
 public:
     GUI();
      // graphics:
-    std::array<std::array <Tile*, 20>, 20> upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale);
+    //std::array<std::array <Tile*, 20>, 20> upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale);
     void printRoom(Room* actualRoom);
     char readInput_onMap(); // cte input a vraci input
     // Gettery:

@@ -21,7 +21,7 @@ void Map::readLocationNames(std::string const path_locationsNames) {
 }
 // hlavni prostredi vytvareni mapy
 void Map::createMap(std::string f_locationsName) {
-	std::string path = MapFolder + f_locationsName;
+	std::string path = MapFolder + f_locationsName;			// MapFolder is type of relative path
 	// debugPrint
 	//std::cout << completePath << "\n\n";
 	if (std::filesystem::exists(path)) {

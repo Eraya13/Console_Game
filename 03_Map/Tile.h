@@ -15,6 +15,9 @@ public:
 	Tile(char tile);
 	char getTileType() const;
 	void setTileType(char newType);			// zmena TileType -> pohyb hrace / akce hrace
+	// void fillEntityToTile(NPC* NPC);
+	//void fillEntityToTile (Entity* Entity);
+	//void fillEntityToTile (Item* Item);
 	void emptyTileEntity();					// odstrani odkaz na Entitu z Tily
 	Enemy* castEnemy();
 	//Entity castNPC();
