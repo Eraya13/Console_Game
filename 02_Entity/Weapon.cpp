@@ -1,7 +1,8 @@
 #include "Weapon.h"
 
-Weapon::Weapon (std::string name, std::string category, int attackBonus) : Item (name, category) {
+Weapon::Weapon (std::string name, int attackBonus) : Item (name) {
 		m_attackBonus = attackBonus;
+		setCategory();
 }
 // ** setters **
 void Weapon::setInfo () {

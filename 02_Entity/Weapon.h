@@ -6,7 +6,7 @@ protected:
 	int m_attackBonus;
 
 public:
-	Weapon(std::string name, std::string category, int attackBonus);
+	Weapon(std::string name, int attackBonus);
 	int getAttackBonus() const;
 	void setInfo() override;
 	void setCategory() override;

@@ -1,7 +1,8 @@
 #include "Armor.h"
 
-Armor::Armor(std::string name, std::string category, int defenseBonus) : Item (name, category) {
+Armor::Armor(std::string name, int defenseBonus) : Item (name) {
 		m_defenseBonus = defenseBonus;
+		setCategory();
 }
 
 // ** setters **

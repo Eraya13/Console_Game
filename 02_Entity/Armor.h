@@ -6,7 +6,7 @@ protected:
 	int m_defenseBonus;
 
 public:
-	Armor(std::string name, std::string category, int defenseBonus);
+	Armor(std::string name, int defenseBonus);
 	int getDefenseBonus() const;
 	void setInfo() override;
 	void setCategory () override;

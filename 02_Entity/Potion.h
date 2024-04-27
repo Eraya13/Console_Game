@@ -6,7 +6,7 @@ protected:
 	int m_healthBonus;
 
 public:
-	Potion(std::string name, std::string category, int healthBonus);
+	Potion(std::string name, int healthBonus);
 	int getHealthBonus() const;
 	void setInfo() override;
 	void setCategory() override;

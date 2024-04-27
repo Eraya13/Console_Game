@@ -1,7 +1,8 @@
 #include "Potion.h"
 
-Potion::Potion(std::string name, std::string category, int healthBonus) : Item(name, category) {
+Potion::Potion(std::string name, int healthBonus) : Item(name) {
     m_healthBonus = healthBonus;
+    setCategory();
 }
 // ** setters **
 void Potion::setInfo() {

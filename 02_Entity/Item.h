@@ -9,7 +9,7 @@ protected:
 		std::string m_category; // rebuilt to enum class
 // category: armor		healing_potion		weapon
 public:
-	Item(std::string name, std::string category);
+	Item(std::string name);
 	std::string getName() const;
 	std::string getCategory() const;
 	std::string getInfo() const;

@@ -1,8 +1,7 @@
 #include "Item.h"
 
-Item::Item(std::string name, std::string category) {
+Item::Item(std::string name) {
 	m_name = name;
-	m_category = category;
 }
 
 std::string Item::getName() const { return m_name; }
