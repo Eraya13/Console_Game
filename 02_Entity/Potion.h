@@ -8,5 +8,6 @@ protected:
 public:
 	Potion(std::string name, std::string category, int healthBonus);
 	int getHealthBonus() const;
-	void setInfo();
+	void setInfo() override;
+	void setCategory() override;
 };

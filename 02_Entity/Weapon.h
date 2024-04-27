@@ -8,4 +8,6 @@ protected:
 public:
 	Weapon(std::string name, std::string category, int attackBonus);
 	int getAttackBonus() const;
+	void setInfo() override;
+	void setCategory() override;
 };

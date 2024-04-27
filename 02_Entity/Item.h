@@ -13,5 +13,6 @@ public:
 	std::string getName() const;
 	std::string getCategory() const;
 	std::string getInfo() const;
+	virtual void setInfo() = 0;
 	virtual void setCategory() = 0;
 };
