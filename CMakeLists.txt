@@ -19,6 +19,9 @@ add_executable (Game
 02_Entity/Entity.cpp
 02_Entity/Enemy.cpp
 02_Entity/NPC.cpp
+02_Entity/Item.cpp
+02_Entity/Weapon.cpp
+02_Entity/Armor.cpp
 03_Map/Map.cpp
 03_Map/Room.cpp
 03_Map/Tile.cpp
