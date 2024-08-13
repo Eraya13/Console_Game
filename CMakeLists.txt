@@ -31,8 +31,9 @@ add_executable (Game
 05_FrontEndClasses/GUI.cpp
 Players_Classes/Controls.cpp
 Players_Classes/Player.cpp
+Players_Classes/Player.h
 DataFormatting.cpp
-Game.cpp
+Game.cpp Game.h
 GlobalVariables.h
 ErrorLog.cpp
 main.cpp)
