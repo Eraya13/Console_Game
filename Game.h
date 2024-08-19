@@ -1,13 +1,10 @@
 #pragma once
-#include <iostream>
 #include "ErrorLog.h"
-#include "Players_Classes/Player.h"
-#include "Players_Classes/Controls.h"
-#include "GlobalVariables.h"
+#include "00_Players_Classes/Player.h"
+#include "00_Players_Classes/Controls.h"
 #include "03_Map/Map.h"
 #include "05_FrontEndClasses/GUI.h"
 #include "01_Enums/ActionType.h"
-#include "ActionType.h"
 
 //TODO ERRORLOG globalem nebo singletonem
 

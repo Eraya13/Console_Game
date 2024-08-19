@@ -2,7 +2,6 @@
 #include "../04_Structs/PositionStruct.h"
 #include "Player.h"
 #include "../03_Map/Room.h"
-#include "../03_Map/Tile.h"
 
 class Controls {
 private:

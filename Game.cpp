@@ -41,9 +41,6 @@ void Game::testFunction() {
 
 }
 
-
-
-
 // Hlavni funkce hry:
 void Game::gameLoop() {
 	m_gui->setCursorINvisible();
