@@ -17,7 +17,7 @@ add_executable (Game
 01_Enums/Colors.h
 01_Enums/TileType.h
 02_Entity/IEntity.h
-
+#je pekně
 02_Entity/Entity.cpp 02_Entity/Entity.h
 02_Entity/Enemy.cpp 02_Entity/Enemy.h
 02_Entity/NPC.cpp 02_Entity/NPC.h
