@@ -7,13 +7,13 @@
 #include "DisplayScreens.h"
 
 class GUI {
-	private:
+private:
     DisplayScreens* m_screen;
-    int static const BACKGROUND = 16;
     // Cursor setting
         // varriables:
     CONSOLE_CURSOR_INFO cursorInfo;
     COORD cursorPos;
+    int static const BACKGROUND = 16;
     int short m_cursorMax;  // range variable for MenuPrint
     int short m_cursorMin;
     void setColorTile(int color);

@@ -1,6 +1,6 @@
 #include "Map.h"
 
-// inicializace konstant
+// inicializace konstant - relativních cest
 const std::string Map::MAP_FOLDER = "Files/Map/Locations/";
 //const std::string Map::LOCATION_NAMES = "LocationsNames.txt";
 
