@@ -16,7 +16,7 @@ private:
     int static const BACKGROUND = 16;
     int short m_cursorMax;  // range variable for MenuPrint
     int short m_cursorMin;
-    void setColorTile(int color);
+
     void setCursorStartPosition();  // set start position cursor for menu
     void setCursorRange(int short const defaultPosition, int short const options); // nastavi range cursoru pro cteni menu
     void changeCursorPos();
@@ -39,4 +39,7 @@ public:
    // Menus
     void displayInGameMenu(); 
     void displayMenuOptions (bool &gameOngoing);
+
+    void setColorTile(int color);
+    void setTextVisible();
 };

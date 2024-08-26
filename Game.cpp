@@ -20,6 +20,11 @@ void Game::setCursor() {
 	m_gui->setCursorINvisible();
 }
 
+void Game::setTextVisible() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole,7); // nastavi pismo na white
+}
+
 void Game::setGameElements() {
 	// create GameElements
 	system ("cls");
@@ -31,8 +36,9 @@ void Game::setGameElements() {
 	m_playerControls->setPlayerOnMap();
 	m_gui = new GUI();
 	SetConsoleOutputCP(65001);	// nastavi kodovani na UTF-8
-	setCursor();
-	std::cout << "\nGame elements are set succesfully\n";
+    //setCursor();
+    system ("cls");
+    std::cout << "\nGame elements are set succesfully\n";
 	system("pause");
 	system ("cls");
 }
@@ -54,6 +60,7 @@ void Game::gameLoop() {
 	}
 }
 
+// rozhodne co za akce se má provést - pohyb / zobrazení menu / ukončení hry
 ActionType Game::decideActionType() {
 	bool inputOk = true;
 	char key;
@@ -69,10 +76,11 @@ ActionType Game::decideActionType() {
 			case '\t':				// TAB
 				return ActionType::InGameMenu;	
 		}
-	} while (key != 27);			// ESC
+    } while (key != 27);			// ESC - nefunguje
 	return ActionType::QuitGame;
 }
 
+// provede akci - na základě hodnoty, která se vrátí z decideActionType()
 void Game::performAction(ActionType action) {
 	bool changeRoomYesOrNo = false;		// vychozi hodnota
 	switch (action) {
@@ -87,11 +95,16 @@ void Game::performAction(ActionType action) {
 			}
 			break;
 		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
-			m_gui->setCursorVisible();
-			m_gui->displayInGameMenu();
-			m_gui->cursorNavigation(22,5);
-			m_gui->displayMenuOptions(m_gameOngoing);	
-			m_gui->setCursorINvisible();
+            //setTextVisible();
+            m_gui->setCursorVisible();
+            m_gui->displayInGameMenu();
+
+            m_gui->cursorNavigation(22,5);
+
+
+
+            m_gui->displayMenuOptions(m_gameOngoing);
+            //m_gui->setCursorINvisible();
             break;
         case ActionType::QuitGame:
             m_gameOngoing = false;

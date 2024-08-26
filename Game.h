@@ -25,6 +25,7 @@ private:
 	ActionType decideActionType();
 	void performAction(ActionType action);
 	void setCursor();
+    void setTextVisible();
 
 public:
 	Game();

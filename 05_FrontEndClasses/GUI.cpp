@@ -44,23 +44,25 @@ void GUI::printRoom(Room* actualRoom) {
 }
 
 // Settings windows GUI
+
+// --------Colors settings--------
+// Negativní důsledek: Pokud se pokusím zobrazit text - je zobrazet podle poslední vypsané tily (nehezký tedy)
+// obarví tilu pro mapu dle typu tily a následně setne Konzoli na černou...
 void GUI::setColorTile(int color) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, BACKGROUND * color);    // nastavi se pozadovana barva pro "mezeru"
     printf(" ");
-    SetConsoleTextAttribute(hConsole, BACKGROUND * (int)Colors::Black); // reset pozadi na cernou (pismena neobarvujeme)
+    //SetConsoleTextAttribute(hConsole, BACKGROUND); // reset pozadi i textu cernou (pismena neobarvujeme)
+}
+
+// Text je opět viditelný
+void GUI::setTextVisible() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole,(int)Colors::White); // nastavi pismo na white
 }
 
 // --------Cursor settings--------
-// Visibility:¨
-// tuto metodu zatim nepouzivam...
-void GUI::toggleCursorVisibility() {
-   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-   GetConsoleCursorInfo(hConsole, &cursorInfo); // getting cursor info
-   // this toggles cursor visibility - not sets true to false and vice versa
-   cursorInfo.bVisible = not cursorInfo.bVisible;     
-   SetConsoleCursorInfo(hConsole, &cursorInfo); // setting cursor info
-}
+
 // metody nize se pouzivaji!!!
 void GUI::setCursorVisible() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -109,6 +111,7 @@ COORD GUI::getConsoleCursorPosition (HANDLE hConsole) {
     return csbi.dwCursorPosition;
 }
 
+// spustí se navigace kurzoru - tzn. hráč si může přesouvat kurzor a když zmáčkne enter vše skončí (něco si vybere)
 void GUI::cursorNavigation (int short const def_position, int short const options){
     char input;
 	// bude obecna promenna z Menu enum class
@@ -117,7 +120,7 @@ void GUI::cursorNavigation (int short const def_position, int short const option
     changeCursorPos();
 }
 
-// je to soucasti cursorNavigation - otestovat doma
+// je to soucasti cursorNavigation
 void GUI::changeCursorPos() {
 	int input;
     do {
@@ -179,6 +182,18 @@ void GUI::displayMenuOptions (bool &gameOngoing) {
             system ("pause");
   }
    system ("cls");
+}
+
+
+
+// Visibility:
+// tuto metodu zatim nepouzivam...
+void GUI::toggleCursorVisibility() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleCursorInfo(hConsole, &cursorInfo); // getting cursor info
+    // this toggles cursor visibility - not sets true to false and vice versa
+    cursorInfo.bVisible = not cursorInfo.bVisible;
+    SetConsoleCursorInfo(hConsole, &cursorInfo); // setting cursor info
 }
 
 // **********User input functions*******************
