@@ -3,13 +3,13 @@ project(Game)
 
 set(CMAKE_CXX_STANDARD 17)
 
+ include_directories(00_Players_Classes)
 include_directories(01_Enums)
 include_directories(02_Entity)
 include_directories(03_Map)
 include_directories(04_Structs)
 include_directories(099_Files_TXT)
 include_directories(05_FrontEndClasses)
-include_directories(Players_Classes)
 
 add_executable (Game
 #Enums
@@ -43,6 +43,8 @@ Game.cpp Game.h
 #GlobalVariables.h
 ErrorLog.cpp ErrorLog.h
 main.cpp
+05_FrontEndClasses/ConsoleManager.h 05_FrontEndClasses/ConsoleManager.cpp
+05_FrontEndClasses/View.h 05_FrontEndClasses/View.cpp
 )
 
 include(GNUInstallDirs)

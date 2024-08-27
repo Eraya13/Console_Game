@@ -15,6 +15,10 @@ int Player::getAttack() {
 	return m_attack;
 }
 
+std::string Player::getName() {
+    return m_name;
+}
+
 void Player::setHealth(int minusHealth) {
 	m_health -= minusHealth;
 }
@@ -26,13 +30,3 @@ void Player::battle(Enemy* Enemy) {
 void Player::talk() {
 	std::cout << "Your NPC say Hello :).\n";
 }
-
-
-
-
-/*Position Player::setNewPositionToAnalyze(Position nextPosition) {
-	Position nextPosition = nextPosition;
-	return nextPosition;
-	}*/
-
-	// check pro return funkce - tzn. overeni, zda je pohyb mozny

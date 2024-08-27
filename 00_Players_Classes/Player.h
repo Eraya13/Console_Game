@@ -6,12 +6,14 @@ private:
 	std::string m_name;
 	int m_health;
 	int m_attack;
+    int m_defense;
 public:
-	Player(std::string name, int health, int attack);
+    Player(std::string name, int health, int attack);       // todo defense, level, xp
 	
 	// gettery
 	int getHealth();
 	int getAttack();
+    std::string getName();
 
 	// settery
 	void setHealth(int minusHealth);
