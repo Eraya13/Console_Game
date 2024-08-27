@@ -45,11 +45,11 @@ void Game::gameLoop() {
 	// printActualRoom -> Village
     ConsoleManager::printRoom(m_actualRoom);
 	while (m_player->getHealth() > 0 && m_gameOngoing) {
-		performAction(decideActionType());
-        if (!m_gameOngoing) continue;       // přeruší se while cyklus a ukončí se hra...
+        performAction(decideActionType());
         setCursor();
+        if (!m_gameOngoing) continue;       // přeruší se while cyklus a ukončí se hra...
         ConsoleManager::printRoom(m_actualRoom);		// ma se printnout znovu, pokud se skutecne neco stane...
-	}
+    }
 }
 
 // rozhodne co za akce se má provést - pohyb / zobrazení menu / ukončení hry
@@ -83,8 +83,10 @@ void Game::performAction(ActionType action) {
 			m_playerControls->analyzeAperformNextPosition(changeRoomYesOrNo);
 			if (changeRoomYesOrNo == true) { 
 				// todo actions for settting Travel Menu
-                ConsoleManager::setCursorVisible();
 				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
+                ConsoleManager::setTextVisible();
+                system("pause");
+                system ("cls");
 			}
 			break;
 		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
@@ -93,7 +95,6 @@ void Game::performAction(ActionType action) {
             ConsoleManager::displayInGameMenu();     // zobrazí se InGameMenu
             ConsoleManager::cursorNavigation(22, 4);  // 22 4 Hráči je umožněna navigace mezi options InGameMenu
             ConsoleManager::executeInGameMenuOption(m_gameOngoing);  // Hráč zmáčkl "Enter" a posuzuje se, zda náhodou nevybral Exit Game (Konec hry)
-            ConsoleManager::setCursorINvisible();
             break;
         case ActionType::QuitGame:
             m_gameOngoing = false;

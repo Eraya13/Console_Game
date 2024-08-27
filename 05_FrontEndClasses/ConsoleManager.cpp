@@ -12,6 +12,7 @@ short ConsoleManager::m_cursorMin = 0;
 // --------Cursor settings--------
 void ConsoleManager::setCursorForRoomPrint() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cursorPos = { 0, 0 };
     SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y}); // nastavení kurzoru na zadanou pozici
 }
 
