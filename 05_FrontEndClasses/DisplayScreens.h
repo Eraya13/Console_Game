@@ -5,7 +5,7 @@ class DisplayScreens {
     private:
     public:
         DisplayScreens();
-        void inGameMenu_m();         // _m - sign for menu func
+        static void inGameMenu_m();         // _m - sign for menu func
         void personalStats();                
         void inventory_m();
         // FUTURE MENU

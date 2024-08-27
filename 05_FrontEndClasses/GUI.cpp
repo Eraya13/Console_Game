@@ -1,7 +1,7 @@
 #include "GUI.h"
 
 GUI::GUI() {
-    m_screen = new DisplayScreens();
+    //m_screen = new DisplayScreens();
 }
 // dodat parametr upscalu
 /*std::array<std::array <Tile*, 20>, 20> GUI::upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale) {
@@ -55,7 +55,8 @@ void GUI::setColorTile(int color) {
     //SetConsoleTextAttribute(hConsole, BACKGROUND); // reset pozadi i textu cernou (pismena neobarvujeme)
 }
 
-// Text je opět viditelný
+// Text je opět viditelný - má být v případě, že dojde k cestování nebo menu zobrazení
+// automaticky je zas neviditelný v případě provedení akce na mapě (znovunačtení roomky)
 void GUI::setTextVisible() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole,(int)Colors::White); // nastavi pismo na white
@@ -145,7 +146,7 @@ void GUI::changeCursorPos() {
 
 // Display PRINT
 void GUI::displayInGameMenu() {
-   m_screen->inGameMenu_m();
+    DisplayScreens::inGameMenu_m();
 }
 
 // Display Options:

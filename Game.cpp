@@ -14,15 +14,9 @@ void Game::createMap(std::string filename) {
 	m_map = new Map(filename);
 }
 
-
 void Game::setCursor() {
 	m_gui->setDefaultCursorOnRoom();
 	m_gui->setCursorINvisible();
-}
-
-void Game::setTextVisible() {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole,7); // nastavi pismo na white
 }
 
 void Game::setGameElements() {
@@ -91,20 +85,17 @@ void Game::performAction(ActionType action) {
 			m_playerControls->analyzeAperformNextPosition(changeRoomYesOrNo);
 			if (changeRoomYesOrNo == true) { 
 				// todo actions for settting Travel Menu
+                m_gui->setTextVisible();
 				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
 			}
 			break;
 		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
-            //setTextVisible();
-            m_gui->setCursorVisible();
-            m_gui->displayInGameMenu();
-
-            m_gui->cursorNavigation(22,5);
-
-
-
-            m_gui->displayMenuOptions(m_gameOngoing);
-            //m_gui->setCursorINvisible();
+            m_gui->setTextVisible();        // text je již vidět (zobrazování mapy ho skrylo)
+            m_gui->setCursorVisible();      // curzor je viditelný
+            m_gui->displayInGameMenu();     // zobrazí se InGameMenu
+            m_gui->cursorNavigation(22,5);  // Hráči je umožněna navigace mezi options InGameMenu
+            m_gui->displayMenuOptions(m_gameOngoing);  // Hráč zmáčkl "Enter" a posuzuje se, zda náhodou nevybral Exit Game (Konec hry)
+            m_gui->setCursorINvisible();  // Kurzor je neviditelný
             break;
         case ActionType::QuitGame:
             m_gameOngoing = false;

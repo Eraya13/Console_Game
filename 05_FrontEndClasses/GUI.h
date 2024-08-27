@@ -6,9 +6,11 @@
 #include "../03_Map/Room.h"
 #include "DisplayScreens.h"
 
+
+// předělat třídu na čiště statickou? - měla bych pak 4 statické atributy
 class GUI {
 private:
-    DisplayScreens* m_screen;
+    static DisplayScreens* m_screen;
     // Cursor setting
         // varriables:
     CONSOLE_CURSOR_INFO cursorInfo;
