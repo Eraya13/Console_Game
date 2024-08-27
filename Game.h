@@ -3,7 +3,6 @@
 #include "00_Players_Classes/Player.h"
 #include "00_Players_Classes/Controls.h"
 #include "03_Map/Map.h"
-#include "05_FrontEndClasses/GUI.h"
 #include "05_FrontEndClasses/ConsoleManager.h"
 #include "01_Enums/ActionType.h"
 
@@ -19,15 +18,12 @@ private:
 	Map* m_map;
 	Room* m_actualRoom;
 	Controls* m_playerControls;
-	GUI* m_gui;
 	bool m_gameOngoing;
 	// private funkce:
 	void createMap(std::string filename);
 	ActionType decideActionType();
 	void performAction(ActionType action);
 	void setCursor();
-    void setTextVisible();
-
 public:
 	Game();
 	// create Player + his classes & map vector etc

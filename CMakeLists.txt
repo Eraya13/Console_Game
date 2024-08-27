@@ -33,7 +33,7 @@ add_executable (Game
 04_Structs/PositionStruct.h
 
 05_FrontEndClasses/DisplayScreens.cpp 05_FrontEndClasses/DisplayScreens.h
-05_FrontEndClasses/GUI.cpp 05_FrontEndClasses/GUI.h
+
 
 00_Players_Classes/Controls.cpp 00_Players_Classes/Controls.h
 00_Players_Classes/Player.cpp 00_Players_Classes/Player.h

@@ -6,7 +6,6 @@ Game::Game() {
 	m_map = nullptr;
 	m_actualRoom = nullptr;
 	m_playerControls = nullptr;
-	m_gui = nullptr;
 	m_gameOngoing = true;
 }
 
@@ -29,11 +28,9 @@ void Game::setGameElements() {
 	m_actualRoom = m_map->getRoom(START_LOCATION, START_ROOM);					// call room funkce - nutno drzet aktualni!
 	m_playerControls = new Controls (6, 7, m_player, m_actualRoom);
 	m_playerControls->setPlayerOnMap();
-	m_gui = new GUI();
-
     // debug prints:
     system ("cls");
-    std::cout << "\nGame cats are set succesfully\n";
+    std::cout << "\nGame elements are set succesfully\n";
 	system("pause");
 	system ("cls");
     setCursor();
@@ -60,7 +57,7 @@ ActionType Game::decideActionType() {
 	bool inputOk = true;
 	char key;
 	do {
-		key = m_gui->readInput_onMap();
+        key = ConsoleManager::readInput_onMap();
 		switch (key) {
 			case 'W':
 			case 'A':
@@ -86,16 +83,16 @@ void Game::performAction(ActionType action) {
 			m_playerControls->analyzeAperformNextPosition(changeRoomYesOrNo);
 			if (changeRoomYesOrNo == true) { 
 				// todo actions for settting Travel Menu
-                m_gui->setTextVisible();
+                ConsoleManager::setCursorVisible();
 				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
 			}
 			break;
 		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
             ConsoleManager::setTextVisible();        // text je již vidět (zobrazování mapy ho skrylo)
             ConsoleManager::setCursorVisible();      // curzor je viditelný
-            m_gui->displayInGameMenu();     // zobrazí se InGameMenu
-            m_gui->cursorNavigation(22,5);  // Hráči je umožněna navigace mezi options InGameMenu
-            m_gui->displayMenuOptions(m_gameOngoing);  // Hráč zmáčkl "Enter" a posuzuje se, zda náhodou nevybral Exit Game (Konec hry)
+            ConsoleManager::displayInGameMenu();     // zobrazí se InGameMenu
+            ConsoleManager::cursorNavigation(22, 4);  // 22 4 Hráči je umožněna navigace mezi options InGameMenu
+            ConsoleManager::executeInGameMenuOption(m_gameOngoing);  // Hráč zmáčkl "Enter" a posuzuje se, zda náhodou nevybral Exit Game (Konec hry)
             ConsoleManager::setCursorINvisible();
             break;
         case ActionType::QuitGame:

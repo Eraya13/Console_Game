@@ -18,16 +18,17 @@ private:
     static int short m_cursorMin;
 
     // Cursor functions
-
+    static COORD getConsoleCursorPosition (HANDLE hConsole);
     // interní funkce cursorNavigation()
     static void setCursorRange(int short const defaultPosition, int short const options); // nastavi vertikální range cursoru, v kterém se může pohybovat pro cteni menu
     static void setCursorPosForMenu();  // set start position cursor for menu
     static void changeCursorPos();         // posune pozici kurzoru nahoru či dolů - dokud není zadán enter a nejedná se o pozici mimo range
+    static void setCursorPosition();       // nastaví onu pozici od usera v changeCursorRoom
 public:
     ConsoleManager(); // nevyužiju
     // GUI & Main Print (PrintRoom)
     static void printRoom(Room* actualRoom);
-    char readInput_onMap(); // cte input a vraci input
+    static char readInput_onMap(); // cte input a vraci input
 
     // Cursor functions
     static void setCursorVisible();
