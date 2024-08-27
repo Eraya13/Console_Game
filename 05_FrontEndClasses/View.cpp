@@ -9,6 +9,16 @@ void View::init(Player* player) {
      m_player = player;
 }
 
+void View::inGameMenu_m () {
+    std::cout << "--------------****In Game Menu****---------------\n\n"
+              << "\t\tPersonal Stats\n"
+              << "\t\tInventory\n"
+              << "\t\tQuests\n"
+              << "\t\tExit Menu\n"
+              << "\t\tLeave Game\n\n"
+              << "\t\t\t\t~Press [ENTER] to make selection";
+}
+
 void View::playerStats() {
     std::cout << "-----------**Personal Stats**-----------" << "\n\n"
             << "\t\t Name:\t" << m_player->getName() << "\n"

@@ -15,26 +15,28 @@ void Game::createMap(std::string filename) {
 }
 
 void Game::setCursor() {
-	m_gui->setDefaultCursorOnRoom();
-	m_gui->setCursorINvisible();
+    ConsoleManager::setCursorForRoomPrint();
+    ConsoleManager::setCursorINvisible();
 }
 
 void Game::setGameElements() {
-	// create GameElements
+    SetConsoleOutputCP(65001);	// nastavi kodovani na UTF-8
+    // create GameElements
 	system ("cls");
-	m_player = new Player("Derien", 100, 40);
+    m_player = new Player("Derien", 100, 40);   // poupravit
 	createMap("LocationsNames.txt");
 	// real set GameElements
 	m_actualRoom = m_map->getRoom(START_LOCATION, START_ROOM);					// call room funkce - nutno drzet aktualni!
 	m_playerControls = new Controls (6, 7, m_player, m_actualRoom);
 	m_playerControls->setPlayerOnMap();
 	m_gui = new GUI();
-	SetConsoleOutputCP(65001);	// nastavi kodovani na UTF-8
-    //setCursor();
+
+    // debug prints:
     system ("cls");
-    std::cout << "\nGame elements are set succesfully\n";
+    std::cout << "\nGame cats are set succesfully\n";
 	system("pause");
 	system ("cls");
+    setCursor();
 }
 
 void Game::testFunction() {
@@ -43,14 +45,13 @@ void Game::testFunction() {
 
 // Hlavni funkce hry:
 void Game::gameLoop() {
-	m_gui->setCursorINvisible();
 	// printActualRoom -> Village
-	m_gui->printRoom(m_actualRoom);
+    ConsoleManager::printRoom(m_actualRoom);
 	while (m_player->getHealth() > 0 && m_gameOngoing) {
 		performAction(decideActionType());
-		if (!m_gameOngoing) continue;
-		setCursor();
-		m_gui->printRoom(m_actualRoom);			// ma se printnout znovu, pokud se skutecne neco stane...
+        if (!m_gameOngoing) continue;       // přeruší se while cyklus a ukončí se hra...
+        setCursor();
+        ConsoleManager::printRoom(m_actualRoom);		// ma se printnout znovu, pokud se skutecne neco stane...
 	}
 }
 
@@ -90,12 +91,12 @@ void Game::performAction(ActionType action) {
 			}
 			break;
 		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
-            m_gui->setTextVisible();        // text je již vidět (zobrazování mapy ho skrylo)
-            m_gui->setCursorVisible();      // curzor je viditelný
+            ConsoleManager::setTextVisible();        // text je již vidět (zobrazování mapy ho skrylo)
+            ConsoleManager::setCursorVisible();      // curzor je viditelný
             m_gui->displayInGameMenu();     // zobrazí se InGameMenu
             m_gui->cursorNavigation(22,5);  // Hráči je umožněna navigace mezi options InGameMenu
             m_gui->displayMenuOptions(m_gameOngoing);  // Hráč zmáčkl "Enter" a posuzuje se, zda náhodou nevybral Exit Game (Konec hry)
-            m_gui->setCursorINvisible();  // Kurzor je neviditelný
+            ConsoleManager::setCursorINvisible();
             break;
         case ActionType::QuitGame:
             m_gameOngoing = false;

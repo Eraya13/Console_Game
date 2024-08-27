@@ -4,6 +4,7 @@
 #include "00_Players_Classes/Controls.h"
 #include "03_Map/Map.h"
 #include "05_FrontEndClasses/GUI.h"
+#include "05_FrontEndClasses/ConsoleManager.h"
 #include "01_Enums/ActionType.h"
 
 //TODO ERRORLOG globalem nebo singletonem
