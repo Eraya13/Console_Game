@@ -107,17 +107,26 @@ void ConsoleManager::setTextVisible() {
     SetConsoleTextAttribute(hConsole,(int)Colors::White); // nastavi pismo na white
 }
 
-// dodat parametr upscalu
-/*std::array<std::array <Tile*, 20>, 20> GUI::upscaleMap(std::array<std::array <Tile*, 20>, 20>, int scale) {
-}*/
-//Note: upscaleMap se nasobi s tim, kde je kurzor, pokud budu mit dvojnasobnou velikosti nikoliv jen basic 1
+std::array<std::array <char, 40>, 20> ConsoleManager::AdjustTileFieldToSquareAspect(Room* actualRoom) {
+    std::array<std::array <Tile*, 20>, 20> realTileField = actualRoom-> m_tileField;
+    std::array<std::array <char, 40>, 20> virtualTileField;
+    for (int row = 0; row < virtualTileField.size(); row++) {      // 0 - 20 řádek
+        std::array <char, 40> tileRow;
+        for (int column = 0; column < virtualTileField.size(); column++) {     // 0 - 39 sloupec
+            virtualTileField.at(row).at(2*column) = realTileField.at(row).at(column)->getTileType();
+            virtualTileField.at(row).at((2*column) + 1) = realTileField.at(row).at(column)->getTileType();
+        }
+    }
+    return virtualTileField;
+}
 
-void ConsoleManager::printRoom(Room* actualRoom) {
-    std::array<std::array <Tile*, 20>, 20> printedRoom = actualRoom-> m_tileField;
+void ConsoleManager::printRoom(std::array<std::array <char, 40>, 20> virtualTileField) {
     char tileType;
-    for (int row = 0; row < printedRoom.size(); row++) {
-        for (int column = 0; column < printedRoom.size(); column++) {
-            char tileType = printedRoom.at(row).at(column)->getTileType(); // Toto je konkretni Tila!!!
+    for (int row = 0; row < virtualTileField.size(); row++) {  // kolik má pole v sobě polí (tzn. řádků)
+        //-- Pole řádků - řádek obsahuje sloupce = vnější se skládá z pole a pole z polí (pokud je) nebo z prvků
+        for (int column = 0; column < virtualTileField.at(row).size(); column++) { // kolik má řádek prvků
+            char tileType = virtualTileField.at(row).at(column); // Toto je konkretni Tila!!!
+            // Vypíše se konkrétní Tile type - grafické zobrazení
             switch (tileType) {
             case '#': // WALL
                 setColorTile((int) Colors::Grey);
@@ -146,6 +155,7 @@ void ConsoleManager::printRoom(Room* actualRoom) {
         std::cout << std::endl;
     }
 }
+
 
 // ------**DisplayPrints**------
 void ConsoleManager::displayInGameMenu() {

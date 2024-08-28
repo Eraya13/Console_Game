@@ -43,12 +43,12 @@ void Game::testFunction() {
 // Hlavni funkce hry:
 void Game::gameLoop() {
 	// printActualRoom -> Village
-    ConsoleManager::printRoom(m_actualRoom);
+    ConsoleManager::printRoom(ConsoleManager::AdjustTileFieldToSquareAspect(m_actualRoom));
 	while (m_player->getHealth() > 0 && m_gameOngoing) {
         performAction(decideActionType());
         setCursor();
         if (!m_gameOngoing) continue;       // přeruší se while cyklus a ukončí se hra...
-        ConsoleManager::printRoom(m_actualRoom);		// ma se printnout znovu, pokud se skutecne neco stane...
+        ConsoleManager::printRoom(ConsoleManager::AdjustTileFieldToSquareAspect(m_actualRoom));
     }
 }
 

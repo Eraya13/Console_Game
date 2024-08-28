@@ -27,7 +27,12 @@ private:
 public:
     ConsoleManager(); // nevyužiju
     // GUI & Main Print (PrintRoom)
-    static void printRoom(Room* actualRoom);
+
+    // Tranformuje TileField 20x20 na 20x40, aby roomka, aby každá tila tvořila čtverec při zobrazení
+    // Tato funkce je potřeba jelikož příkazový řádek znak v poměru 2:1 (výška:šířka) - tzn. výška je dvojnásobná oproti šířce znaku
+    static std::array<std::array <char, 40>, 20>  AdjustTileFieldToSquareAspect(Room* actualRoom);
+    // Zobrazí Roomku jako TileField 20x40 - vypadá to mnohem lépe než 20x20 (obdelníkové prvky)
+    static void printRoom(std::array<std::array <char, 40>, 20> virtualTileField);     // 40 columns : 20 rows
     static char readInput_onMap(); // cte input a vraci input
 
     // Cursor functions
@@ -35,6 +40,7 @@ public:
     static void setCursorINvisible();
     static void setCursorForRoomPrint(); // set cursor for room print
     static void cursorNavigation(int short const def_position, int short const options);
+
     // Print functions
     static void setColorTile(int color);
     static void setTextVisible(); // nastaví visibilitu textu pro "menu zobrazení" a zobrazení, když je skrytá mapa
