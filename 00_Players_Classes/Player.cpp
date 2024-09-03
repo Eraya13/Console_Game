@@ -29,3 +29,24 @@ void Player::setHealth(int minusHealth) {
 void Player::battle(Enemy* Enemy) {
 	std::cout << "You defeated your enemy.\n";
 }
+
+
+//**** Inventory methods
+
+std::vector<Item*> Player::getInventoryItemList() {
+    return m_inventory->getItemList();
+}
+
+int Player::getNumberOfPotions() {
+    return m_inventory->getNumberOfPotions();
+}
+
+int Player::getTotalNumberOfItems() {
+    return m_inventory->getNumberOfItems();
+}
+
+Item* Player::selectItem(int itemIndex) {
+    return m_inventory->getItem(itemIndex);
+}
+
+

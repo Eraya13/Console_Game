@@ -145,6 +145,7 @@ void Game::executeInventoryOption(){
         int short totalOptions = m_player->getTotalNumberOfItems() + 1; // 1 = for Leave Inventory without any other actions
         ConsoleManager::cursorNavigation(3, totalOptions);
         int realItemIndex = ConsoleManager::getOptionIndex();
+
         // podminka, ktera ověří, že si uživatel nezvolil návrat do hry
         if (realItemIndex < totalOptions) {
             realItemIndex--;    // úprava na reálné indexy (od 0)

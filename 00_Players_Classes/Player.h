@@ -15,16 +15,29 @@ private:
     Weapon* m_weapon;
 public:
     Player(std::string name, int health, int attack);       // todo defense, level, xp
-	
-	// gettery
+    // **Player personal methods**
+    // gettery
 	int getHealth();
 	int getAttack();
     std::string getName();
-
 	// settery
 	void setHealth(int minusHealth);
 
-	// entity funkce:
+    // Inventory methods
+    std::vector<Item*> getInventoryItemList();
+    void addItemToInventory(Item* item);
+    // akce pro spotrebovani potionu vcetne jeho odstraneni, vymazani z inventare a vyhealovani hrace
+    void drinkPotion();
+    void discardItem(Item* item);
+    int getNumberOfPotions();
+    int getTotalNumberOfItems();
+    Item* selectItem(int itemIndex);
+    // Armor methods
+
+    // Weapon methods
+
+
+    // entity funkce:
 	void battle(Enemy* Enemy);
 };
 
