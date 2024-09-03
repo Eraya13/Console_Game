@@ -35,26 +35,28 @@ void View::playerStats() {
               << "--\tDetails:\n"
               << "\t\tBonus attack: \n"
               << "\t\tDescription:" << "\n\n";;
-    std::cout << "\t\t\t\t\t~Press [any key] to continue";
+    std::cout << "t\t\t~Press [any key] to continue";
 }
 
 void View::Inventory_m() {
     std::cout << "-----------**Inventory**-----------" << "\n\n"
               /*"Total Coins"*/
-              << "\t\tHP potions: " << "\t\t" << "\n\n"//m_inventory->getNumberOfPotions();
-              << "\t\tDrink potion" << "\n"
-              << "\t\tDisplay all items" << "\n"
-              << "\t\tLeave Inventory" << "\n\n"
-              << "\t\t\t\t~Press [ENTER] to make selection";
+              << "\tHP potions: " << "\t\t" << m_inventory->getNumberOfPotions() << "\n\n"
+              << "\tDrink potion" << "\n"
+              << "\tDisplay all items" << "\n"
+              << "\tLeave Inventory" << "\n\n"
+              << "\t\t\t~Press [ENTER] to make selection";
 }
 
 void View::listInventoryItems() {
     std::vector<Item*> itemList = m_inventory->getItemList();
-    std::cout << "|\tType\t\t\t|\tName\t\t\t|\tItem Bonus"
-              << "----------------------------------------------------------------------------------------------";
+    int totalNumberItems = 0;
+    std::cout << "\tType\t\t|\tName\t\t\t|\tItem Bonus\n"
+              << "----------------------------------------------------------------------------------------------\n";
     for (Item* item : itemList) {
         item->printBriefInfo();
+        totalNumberItems++;
     }
-    std::cout << "\n\nThat's all items.";
+    std::cout << "\n\nTotal number of items: " << totalNumberItems << "\n\n";
 }
 
