@@ -20,9 +20,15 @@ int Inventory::drinkPotion(Item* item) {
     return 0;
 }
 
-void Inventory::discardItem(Item* item) {
-    delete item;
-    m_totalNumberItems--;
+void Inventory::discardItem(Item* item, int itemIndex) {
+    if (itemIndex >= 0 && itemIndex < m_items.size()) {
+        m_items.erase(m_items.begin() + itemIndex);
+        delete item;
+        m_totalNumberItems--;
+    }
+    else {
+        std::cout << "\n\nItem could not be removed - because the index is not correct";
+    }
 }
 
 int Inventory::getNumberOfPotions() {

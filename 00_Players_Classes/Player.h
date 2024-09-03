@@ -28,7 +28,7 @@ public:
     void addItemToInventory(Item* item);
     // akce pro spotrebovani potionu vcetne jeho odstraneni, vymazani z inventare a vyhealovani hrace
     void drinkPotion();
-    void discardItem(Item* item);
+    void discardItem(Item* item, int itemIndex);
     int getNumberOfPotions();
     int getTotalNumberOfItems();
     Item* selectItem(int itemIndex);

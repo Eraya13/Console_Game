@@ -18,7 +18,7 @@ public:
     // functions to item
     void addItem(Item* item);
     // rovnou provede volání destruktoru item
-    void discardItem(Item* Item);
+    void discardItem(Item* item, int itemIndex);
     // vybere item na základě indexu ve vektoru m_items
     int drinkPotion(Item* item);
     int getNumberOfPotions();

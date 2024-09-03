@@ -76,7 +76,6 @@ void View::displayItem(Item* item) {
         std::cout << "\nDynamic cast of Item* Father failed" << std::endl;
     }
     displayItem_m();
-    system("pause");
 }
 
 void View::displayItem_m() {

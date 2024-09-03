@@ -27,6 +27,7 @@ private:
     void accessInventory();
     void executeInventoryOption();
     void executeItemAction();
+    void executeItemAction(Item* item, int itemIndex);
 public:
 	Game();
 	// create Player + his classes & map vector etc

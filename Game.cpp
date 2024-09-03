@@ -152,10 +152,30 @@ void Game::executeInventoryOption(){
             Item* selectedItem = m_player->selectItem(realItemIndex);
             View::displayItem(selectedItem);
             ConsoleManager::cursorNavigation(5, 3);
+            executeItemAction(selectedItem, realItemIndex);
         }
         break;
     }
     default:        // 3 - nic se nestane a vypíše se mapa
+        break;
+    }
+}
+void Game::executeItemAction(Item* item, int itemIndex) {
+    int option = ConsoleManager::getOptionIndex();
+    system("cls");
+    switch(option) {
+    case 1:
+        if (item->getCategory()=="Potion") {
+            // drinkPotion
+        }
+        if (item->getCategory()=="Armor" || item->getCategory()=="Weapon") {
+            // equip
+        }
+        break;
+    case 2:     // discard of Item + delete
+        m_player->discardItem(item, itemIndex);
+        break;
+    default:   // Back to inventory
         break;
     }
 }
@@ -166,6 +186,8 @@ void Game::accessInventory() {
     ConsoleManager::cursorNavigation(4, 3);
     executeInventoryOption();
 }
+
+
 
 
 

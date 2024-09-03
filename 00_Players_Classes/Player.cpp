@@ -30,7 +30,6 @@ void Player::battle(Enemy* Enemy) {
 	std::cout << "You defeated your enemy.\n";
 }
 
-
 //**** Inventory methods
 
 std::vector<Item*> Player::getInventoryItemList() {
@@ -49,4 +48,7 @@ Item* Player::selectItem(int itemIndex) {
     return m_inventory->getItem(itemIndex);
 }
 
+void Player::discardItem(Item* item, int itemIndex) {
+    m_inventory->discardItem(item, itemIndex);
+}
 
