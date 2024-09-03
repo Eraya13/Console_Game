@@ -30,7 +30,7 @@ void ConsoleManager::setCursorVisible() {
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
 
-// Navigation private functions:
+//*********** Navigation private functions:
 void ConsoleManager::setCursorPosForMenu() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     cursorPos = { 0, m_cursorMin };
@@ -78,8 +78,8 @@ void ConsoleManager::changeCursorPos() {
 }
 
 // spustí se navigace kurzoru - tzn. hráč si může přesouvat kurzor a když zmáčkne enter vše skončí (něco si vybere)
-void ConsoleManager::cursorNavigation (int short const def_position, int short const options){
-    setCursorRange(def_position, options);
+void ConsoleManager::cursorNavigation (int short const start_position, int short const total_options){
+    setCursorRange(start_position, total_options);
     setCursorPosForMenu();
     changeCursorPos();
 }

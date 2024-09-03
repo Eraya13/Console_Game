@@ -92,7 +92,7 @@ void Game::performAction(ActionType action) {
 		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
             ConsoleManager::setTextVisible();        // text je již vidět (zobrazování mapy ho skrylo)
             ConsoleManager::setCursorVisible();      // curzor je viditelný
-            ConsoleManager::displayInGameMenu();     // zobrazí se InGameMenu
+            ConsoleManager::displayInGameMenu();     // zobrazí se InGameMenu - nenastavuju kde...
             ConsoleManager::cursorNavigation(22, 4);  // 22 4 Hráči je umožněna navigace mezi options InGameMenu
             ConsoleManager::executeInGameMenuOption(m_gameOngoing);  // Hráč zmáčkl "Enter" a posuzuje se, zda náhodou nevybral Exit Game (Konec hry)
             break;

@@ -45,6 +45,8 @@ ErrorLog.cpp ErrorLog.h
 main.cpp
 05_FrontEndClasses/ConsoleManager.h 05_FrontEndClasses/ConsoleManager.cpp
 05_FrontEndClasses/View.h 05_FrontEndClasses/View.cpp
+00_Players_Classes/Inventory.h 00_Players_Classes/Inventory.cpp
+02_Entity/Potion.h 02_Entity/Potion.cpp
 )
 
 include(GNUInstallDirs)
