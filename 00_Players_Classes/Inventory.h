@@ -11,6 +11,7 @@ class Inventory
 private:
     //int m_coins;
     std::vector<Item*> m_items;
+    int m_totalNumberItems;
 public:
     ~Inventory();
     Inventory();
@@ -21,6 +22,7 @@ public:
     // vybere item na základě indexu ve vektoru m_items
     void selectItem(int indexItem);
     int drinkPotion(Item* item);
+    int getNumberOfPotions();
     int const getCoins();
     std::vector<Item*> getItemList();
 };
