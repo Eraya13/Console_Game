@@ -5,6 +5,9 @@ Player::Player(std::string name, int health, int attack) {
 	m_name = name;
 	m_health = health;
 	m_attack = attack;
+    m_armor = nullptr;
+    m_weapon = nullptr;
+    m_inventory = new Inventory();
 }
 
 int Player::getHealth() {
