@@ -60,26 +60,15 @@ Alfa version
 -----------**Personal Stats**-----------
 
 	Name of hero: 		Derrien
-	Title:			Adventurer	(stated by Quest Grade)
-	// Quest grade:		- odviji se od splněných určitých úkolů
-
-	------Experience-----
-
-	Level:			cislo
-	Total XP:		xp Total->m_player
-	XP to Next Lv: 		xp (metoda, ktera vypočítáva)->m_player
-		
-	------Combat Stats-----
-	
 	Health:			number	HP
-	Attack damage:		attack->m_player		(+40 bonus)
-	Defense:		defence->m_player		(+cislo bonus)
+	Attack damage:		attack->m_player	(+40 bonus)
+	Defense:		defence->m_player	(+cislo bonus)
 
-	Equipped armor:		nazev armor
+	Equipped armor:		nazev armor		-------**Experience**------
 	--   Details:
-		Name:			name
-		Bonus Defence:		40
-		Bonus Attack:		none
+		Name:			name		Level:		cislo
+		Bonus Defence:		40		Total XP:		xp Total->m_player
+		Bonus Attack:		none		XP to Next Lv: 		xp (výpočet)
 	Description: blahfjlablaf
 	
 	Equipped weapon:		name
@@ -87,8 +76,10 @@ Alfa version
 		Bonus Defence:		40
 		Bonus Attack:		20
 	Description: blahfjlablaf
-
+	
+	
 					~Press [any key] to continue
+
 -----------**Inventory**-----------
 
 
@@ -101,15 +92,87 @@ Alfa version
 	Exit 				~PRESS 0
 
 
+---- List all items ----
 
+  Name
+  Name
+  Name
+  Name
+  Name
+  Name
+  Name
+
+
+			~Press [ENTER] to make selection for additional info
+-----Zobrazení itemu----
+
+Weapon:
+	Moonlight sword						
+	Weapon
+	
+	blahdsa bldjflkdsf hksjlakl jikr 
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+	~ Equip / Unequip			-- zobrazí se podle nějaké proměnné bool
+	~ Discard item
+	~ Back to inventory (zobrazí se list itemů again)
+Armour:
+
+	Silver armour						
+	Armour
+	
+	blahdsa bldjflkdsf hksjlakl jikr 
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+	~ Equip / Unqeuip		
+	~ Discard item
+	~ Back to inventory (zobrazí se list itemů again)
+
+
+Potion:
+	Health Potion						
+	Potion
+	
+	blahdsa bldjflkdsf hksjlakl jikr 
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+	~ Drink potion
+	~ Discard item
+	~ Back to inventory (zobrazí se list itemů again)
+	
+
+
+Postup Inventáře:
+
+- zobrazí se inventář - člověk má omezené možnosti (musí potvrdit enterem) = enter stop getch
+- na základě cursorPos se zvolí nějaká volba 
+
+a) vypití poitionu: - přidání health -> systém (cls) -> printMapy -> zobrazení hlášky pod mapou
+
+\t\tYou drank the health potion and recovered x HP points.
+\nYour actual health: číslo m_player->getHealth();
+
+b) Exit: system(cls) -> printMapy
+
+c) List all items -> metoda listAllItems - "header" + each položka ve formátu:
+
+ID	  |   Type		   |	Name		|   	Item Bonus			
+----------------------------------------------------------------------------------------------
+40	  |   Weapon		   |    Diamond Sword	|	+ 40 damage	
+
+
+-- kurzor - setne pozice na základě toho, že bude kopírovat for cyklus při výpisu položek - tzn. hodnotu "kolik je předmětů" v itemlistu inventory
+
+na základě pozice se vybere item -> new screen - podrobnosti o itemu + akce (opět výběr se setne jen na možnosti pod zobrazením)
+
+Discard = screena pod textem Opravdu chcete tento předmět smazat? Yes, no (vertikální)
+-- v obou případech návrat do inventáře (předmět tam už nemá být)
+Yes = -- Napsat hned pod to hlášku o smazání předmětu
 
 	--- will be listed by Type
--- selection = Enter
--- selection = display more info about item
-(2 choices will be displayed)
-	use item			ONLY POTIONS
-	discard item			NOT QUEST ITEMS!!!
-	equip item			Weapon / Armour / SHIELD
 	
 	Back to the inventory
 (version of getch if item quest item / armor || shield || weapon / HP potion)

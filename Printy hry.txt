@@ -27,10 +27,7 @@ Press Enter to select (in the end)
 
 	Personal Stats
 	Inventory
-	Quest List
-	Upscale Options
 	Exit Menu
-	
 	Leave Game
 			
 		~Press [ENTER] to make selection
@@ -87,8 +84,7 @@ Alfa version
 	HP potions:		cislo
 		
 	Drink potion			~PRESS 1
-	List all items			~PRESS 2
-
+	Display all items		~PRESS 2
 	Exit 				~PRESS 0
 
 
@@ -107,10 +103,10 @@ Alfa version
 -----Zobrazení itemu----
 
 Weapon:
-	Moonlight sword						
-	Weapon
+	Moonlight sword		m_item->Name					
+	Weapon			m_item->Category
 	
-	blahdsa bldjflkdsf hksjlakl jikr 
+	blahdsa bldjflkdsf hksjlakl jikr 	Description
 	sjka rkuzrsa\bfsalke
 	kůsf kjasljrk  jlkra lkjlsd 
 
@@ -133,7 +129,7 @@ Armour:
 
 Potion:
 	Health Potion						
-	Potion
+	Potion		+ 100 HP
 	
 	blahdsa bldjflkdsf hksjlakl jikr 
 	sjka rkuzrsa\bfsalke
@@ -142,6 +138,21 @@ Potion:
 	~ Drink potion
 	~ Discard item
 	~ Back to inventory (zobrazí se list itemů again)
+
+------------**Discard Menu:
+
+	Health Potion						
+	Potion
+	
+	blahdsa bldjflkdsf hksjlakl jikr 
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+
+Are you sure you want to discard this item?
+
+		Yes
+		No
 	
 
 
