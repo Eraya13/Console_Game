@@ -20,10 +20,11 @@ public:
     // rovnou provede volání destruktoru item
     void discardItem(Item* Item);
     // vybere item na základě indexu ve vektoru m_items
-    void selectItem(int indexItem);
     int drinkPotion(Item* item);
     int getNumberOfPotions();
     int const getCoins();
+    int getNumberOfItems();
+    Item* getItem(int itemIndex);
     std::vector<Item*> getItemList();
 };
 
