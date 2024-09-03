@@ -93,14 +93,47 @@ void Game::performAction(ActionType action) {
             ConsoleManager::setTextVisible();        // text je již vidět (zobrazování mapy ho skrylo)
             ConsoleManager::setCursorVisible();      // curzor je viditelný
             ConsoleManager::displayInGameMenu();     // zobrazí se InGameMenu - nenastavuju kde...
-            ConsoleManager::cursorNavigation(22, 4);  // 22 4 Hráči je umožněna navigace mezi options InGameMenu
-            ConsoleManager::executeInGameMenuOption(m_gameOngoing);  // Hráč zmáčkl "Enter" a posuzuje se, zda náhodou nevybral Exit Game (Konec hry)
+            ConsoleManager::cursorNavigation(22, 4);  // 22 4 Hráči je umožněna navigace mezi options InGameMenu - kontrola Enteru
+            executeInGameMenuOption(m_gameOngoing);  // Provedení akce podle pozice kurzoru - několik možností dle switche
             break;
         case ActionType::QuitGame:
             m_gameOngoing = false;
             break;
 	}
 }
+
+// ------**Execution of Menus**------               // ZMĚNÍ SE: ZŮSTANE POUZE PERSONAL STATS, INVENTORY, EXIT MENU, LEAVE GAME
+// **Provedení vybraných možností z InGameMenu
+void Game::executeInGameMenuOption(bool &gameOngoing) {
+    int option = ConsoleManager::getOptionIndex();
+    system ("cls");
+    switch (option) {
+    case 1:
+        std::cout << "\nPersonal Stats\n" << std::endl;
+        system ("pause");
+        break;
+    case 2:
+        std::cout << "\nInventory\n" << std::endl;      // zde se zavolá View::DisplayInventory_m + navigationCursor + executeInventoryOption
+        system ("pause");
+        break;
+    case 3:
+        std::cout << "\nExit Menu\n"  << std::endl;
+        system ("pause");
+        break;
+    case 4: // Nic se nedeje - konec funkce
+        std::cout << "\nLeave Game\n" << std::endl; // debug print
+        gameOngoing = false;
+        system ("pause");
+        break;
+    default:
+        std::cout << "\nError - no option found\n" << std::endl; // todo ErorLog
+        system ("pause");
+    }
+    system ("cls");
+}
+
+
+
 
 
 

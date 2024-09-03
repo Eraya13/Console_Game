@@ -24,6 +24,8 @@ private:
 	ActionType decideActionType();
 	void performAction(ActionType action);
 	void setCursor();
+    void executeInGameMenuOption(bool &gameOngoing);
+    void executeInventoryMenu();
 public:
 	Game();
 	// create Player + his classes & map vector etc
