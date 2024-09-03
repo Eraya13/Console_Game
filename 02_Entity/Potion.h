@@ -1,13 +1,17 @@
-#pragma once
-#include "../02_Entity/Item.h"
+#ifndef POTION_H
+#define POTION_H
 
-class Potion: public Item{
+#include "Item.h"
+class Potion : public Item {
 protected:
-	int m_healthBonus;
+int m_healthBonus;
 
 public:
-	Potion(std::string name, int healthBonus);
-	int getHealthBonus() const;
-	void setInfo() override;
-	void setCategory() override;
+Potion(std::string name, int healthBonus);
+int getHealthBonus() const;
+void setInfo(std::string info) override;
+void setCategory(std::string category) override;
+~Potion();
 };
+
+#endif // POTION_H

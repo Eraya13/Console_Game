@@ -8,6 +8,7 @@ protected:
 public:
 	Armor(std::string name, int defenseBonus);
 	int getDefenseBonus() const;
-	void setInfo() override;
-	void setCategory () override;
+    void setInfo(std::string info) override;
+    void setCategory(std::string category) override;
+    ~Armor();
 };

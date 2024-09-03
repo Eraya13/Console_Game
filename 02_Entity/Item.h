@@ -1,5 +1,5 @@
 #pragma once
-#include "../02_Entity/Entity.h"
+#include "IEntity.h"
 
 class Item: public IEntity {
 protected:
@@ -13,6 +13,8 @@ public:
 	std::string getName() const;
 	std::string getCategory() const;
 	std::string getInfo() const;
-	virtual void setInfo() = 0;
-	virtual void setCategory() = 0;
+    void printInfo();
+    virtual void setInfo(std::string info) = 0;
+    virtual void setCategory(std::string category) = 0;
+    virtual ~Item() = 0;
 };

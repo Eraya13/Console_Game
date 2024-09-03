@@ -1,15 +1,20 @@
 #include "Potion.h"
 
-Potion::Potion(std::string name, int healthBonus) : Item(name) {
+Potion::Potion (std::string name, int healthBonus) : Item (name) {
     m_healthBonus = healthBonus;
-    setCategory();
+    m_category = "Health Potion";
+    m_info = "";
 }
 // ** setters **
-void Potion::setInfo() {
-	m_info = "Something specific for Potion.";
+void Potion::setCategory(std::string category) { m_category = "Potion"; }
+
+void Potion::setInfo (std::string info) {
+    m_info = "Some information about Potion";
 }
-void Potion::setCategory() { m_category = "Potion";} 
 
 // ** getters **
-int Potion::getHealthBonus() const {return m_healthBonus; }
+int Potion::getHealthBonus () const { return m_healthBonus; }
 
+Potion::~Potion() {
+    std::cout << "Destruktor Potion zavolán" << std::endl;
+}
