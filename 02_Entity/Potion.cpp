@@ -26,5 +26,5 @@ Potion::~Potion() {
 }
 
 void Potion::printBriefInfo() {
-    std::cout  << "|\t" << getCategory() << "   |\t" << getName() <<"   |\t+ " << getHealthBonus() << "HP" << std::endl;
+    std::cout  << "\t" << getCategory() << "\t\t|\t" << getName() << "\t\t|\t+ " << getHealthBonus() << " HP" << std::endl;
 }

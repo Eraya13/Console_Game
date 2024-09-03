@@ -1,7 +1,8 @@
 #include "Armor.h"
 
 Armor::Armor(std::string name, int defenseBonus) : Item (name) {
-		m_defenseBonus = defenseBonus;
+    m_defenseBonus = defenseBonus;
+    m_category = "Armor";
 }
 
 // ** setters **
@@ -18,7 +19,7 @@ void Armor::setInfo (std::string info) {
 int Armor::getDefenseBonus () const { return m_defenseBonus; }
 
 void Armor::printBriefInfo() {
-    std::cout  << "|\t" << getCategory() << "   |\t" << getName() <<"   |\t+ " << getDefenseBonus() << "defense" << std::endl;
+    std::cout  << "\t" << getCategory() <<  "\t\t|\t" << getName() << "\t\t|\t+ " << getDefenseBonus() << " defense" << std::endl;
 }
 
 Armor::~Armor() {

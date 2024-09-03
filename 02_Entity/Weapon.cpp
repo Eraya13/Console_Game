@@ -20,5 +20,5 @@ Weapon::~Weapon() {
 }
 
 void Weapon::printBriefInfo() {
-    std::cout  << "|\t" << getCategory() << "   |\t" << getName() <<"   |\t+ " << getAttackBonus() << "damage" << std::endl;
+    std::cout  << "\t" << getCategory() << "\t\t|\t" << getName() << "\t\t|\t+ " << getAttackBonus() << " damage" << std::endl;
 }
