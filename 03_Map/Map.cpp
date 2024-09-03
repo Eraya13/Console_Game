@@ -26,7 +26,7 @@ bool Map::readLocationNames(std::string const path_locationNames) {
     std::ifstream f_LocationNames(path_locationNames);
     if (!f_LocationNames.is_open()) {
         return false;
-        std::cout << "File cannot be open - no file for relative path: " << path_locationNames;
+        //std::cout << "File cannot be open - no file for relative path: " << path_locationNames;
     }
 
     int indexLokace = 0;					// starting index lokace = Village
@@ -47,7 +47,7 @@ bool Map::readRoomFile(std::string path) {
     std::ifstream roomFile(path);
     // pokud nepůjde otevřít - dostaneme zde chybovou hlášku a nemá smysl vytvářet tuto roomku
     if (!roomFile.is_open()) {
-        std::cerr << "File in relative path - "<< path << " has not been found - probably does not exist" << std::endl;
+        //std::cerr << "File in relative path - "<< path << " has not been found - probably does not exist" << std::endl;
         return false;
     }
     return true;
@@ -72,9 +72,9 @@ void Map::createRooms() {
         }
         //Debug prints
         //std::cout << path_Room << std::endl;
-        std::cout << "Adding location: " << m_dir_location.at(indexL) <<  " to m_map."  << std::endl;
+        /*std::cout << "Adding location: " << m_dir_location.at(indexL) <<  " to m_map."  << std::endl;
         std::cout << "Number of rooms in lokace: " << lokace.size() << std::endl;
-        system("pause");
+        system("pause");*/
 
         // Pridani lokace do m_mapy
         m_map.push_back(lokace); // vektor vektoru roomek

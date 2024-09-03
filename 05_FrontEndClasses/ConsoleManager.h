@@ -22,8 +22,6 @@ private:
     static int const BACKGROUND;
     static int short m_cursorMax;  // range variable for MenuPrint
     static int short m_cursorMin;
-    static int short getOptionIndex();
-
     // Cursor functions
     static COORD getConsoleCursorPosition (HANDLE hConsole);
     // interní funkce cursorNavigation()
@@ -40,7 +38,6 @@ public:
     static std::array<std::array <char, 40>, 20>  AdjustTileFieldToSquareAspect(Room* actualRoom);
     // Zobrazí Roomku jako TileField 20x40 - vypadá to mnohem lépe než 20x20 (obdelníkové prvky)
     static void printRoom(std::array<std::array <char, 40>, 20> virtualTileField);     // 40 columns : 20 rows
-
     static char readUserInput(); // cte input a vraci input
 
     // Cursor functions
@@ -48,15 +45,13 @@ public:
     static void setCursorINvisible();
     static void setCursorForRoomPrint(); // set cursor for room print
     static void cursorNavigation(int short const def_position, int short const options);
-
+    static int short getOptionIndex();
     // Print functions
     static void setColorTile(int color);
     static void setTextVisible(); // nastaví visibilitu textu pro "menu zobrazení" a zobrazení, když je skrytá mapa
 
     // Menus call for print
     static void displayInGameMenu();
-    static void displayInventoryMenu();
-
     // **Provedení vybraných možností z menu
     // Zobrazení vybrané možnosti z InGameMenu na základě pozice kurzoru
     static void executeInGameMenuOption(bool &gameOngoing);

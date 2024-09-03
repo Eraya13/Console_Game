@@ -92,7 +92,7 @@ void Game::performAction(ActionType action) {
 		case ActionType::InGameMenu:	 // Setting for Menu Print - InGameMenuSetting();
             ConsoleManager::setTextVisible();        // text je již vidět (zobrazování mapy ho skrylo)
             ConsoleManager::setCursorVisible();      // curzor je viditelný
-            ConsoleManager::displayInGameMenu();     // zobrazí se InGameMenu - nenastavuju kde...
+            View::inGameMenu_m();                   // zobrazí se InGameMenu - nenastavuju kde...
             ConsoleManager::cursorNavigation(22, 4);  // 22 4 Hráči je umožněna navigace mezi options InGameMenu - kontrola Enteru
             executeInGameMenuOption(m_gameOngoing);  // Provedení akce podle pozice kurzoru - několik možností dle switche
             break;
@@ -112,10 +112,10 @@ void Game::executeInGameMenuOption(bool &gameOngoing) {
         std::cout << "\nPersonal Stats\n" << std::endl;
         system ("pause");
         break;
-    case 2:
-        std::cout << "\nInventory\n" << std::endl;      // zde se zavolá View::DisplayInventory_m + navigationCursor + executeInventoryOption
-        system ("pause");
+    case 2: {
+        accessInventory();
         break;
+    }
     case 3:
         std::cout << "\nExit Menu\n"  << std::endl;
         system ("pause");
@@ -132,8 +132,39 @@ void Game::executeInGameMenuOption(bool &gameOngoing) {
     system ("cls");
 }
 
+void Game::executeInventoryOption(){
+    int option = ConsoleManager::getOptionIndex();      // převod indexu na možnost k provedení dle switche
+    std::vector<Item*> items = m_player->getInventoryItemList();
+    system ("cls");
+    switch (option) {
+    case 1:
+        // Item* findHealthPotion(); -- inventory musí najít
+        break;
+    case 2: {
+        View::listInventoryItems(items);
+        int short totalOptions = m_player->getTotalNumberOfItems() + 1; // 1 = for Leave Inventory without any other actions
+        ConsoleManager::cursorNavigation(3, totalOptions);
+        int realItemIndex = ConsoleManager::getOptionIndex();
+        // podminka, ktera ověří, že si uživatel nezvolil návrat do hry
+        if (realItemIndex < totalOptions) {
+            realItemIndex--;    // úprava na reálné indexy (od 0)
+            Item* selectedItem = m_player->selectItem(realItemIndex);
+            View::displayItem(selectedItem);
+            ConsoleManager::cursorNavigation(5, 3);
+        }
+        break;
+    }
+    default:        // 3 - nic se nestane a vypíše se mapa
+        break;
+    }
+}
 
-
+void Game::accessInventory() {
+    int totalPotions = m_player->getNumberOfPotions();
+    View::Inventory_m(totalPotions);// zde se zavolá View::DisplayInventory_m + navigationCursor + executeInventoryOption
+    ConsoleManager::cursorNavigation(4, 3);
+    executeInventoryOption();
+}
 
 
 

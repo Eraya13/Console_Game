@@ -1,5 +1,4 @@
 #pragma once
-#include "ErrorLog.h"
 #include "00_Players_Classes/Player.h"
 #include "00_Players_Classes/Controls.h"
 #include "03_Map/Map.h"
@@ -10,22 +9,24 @@
 
 class Game {
 private:
-	// constants:
-	const int START_ROOM = 0;
-	const int START_LOCATION = 0;
-	// Entity
-	Player* m_player;
-	Map* m_map;
-	Room* m_actualRoom;
-	Controls* m_playerControls;
-	bool m_gameOngoing;
-	// private funkce:
-	void createMap(std::string filename);
-	ActionType decideActionType();
-	void performAction(ActionType action);
-	void setCursor();
+    // constants:
+    const int START_ROOM = 0;
+    const int START_LOCATION = 0;
+    // Entity
+    Player* m_player;
+    Map* m_map;
+    Room* m_actualRoom;
+    Controls* m_playerControls;
+    bool m_gameOngoing;
+    // private funkce:
+    void createMap(std::string filename);
+    ActionType decideActionType();
+    void performAction(ActionType action);
+    void setCursor();
     void executeInGameMenuOption(bool &gameOngoing);
-    void executeInventoryMenu();
+    void accessInventory();
+    void executeInventoryOption();
+    void executeItemAction();
 public:
 	Game();
 	// create Player + his classes & map vector etc

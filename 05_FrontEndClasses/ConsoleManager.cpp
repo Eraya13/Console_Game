@@ -77,6 +77,8 @@ void ConsoleManager::changeCursorPos() {
     } while (input!= '\r');
 }
 
+
+
 // spustí se navigace kurzoru - tzn. hráč si může přesouvat kurzor a když zmáčkne enter vše skončí (něco si vybere)
 void ConsoleManager::cursorNavigation (int short const start_position, int short const total_options){
     setCursorRange(start_position, total_options);
@@ -162,61 +164,8 @@ void ConsoleManager::displayInGameMenu() {
     View::inGameMenu_m();
 }
 
-void ConsoleManager::displayInventoryMenu() {
-    View::Inventory_m();
-}
-
 // ------**Execution of Menus**------               // ZMĚNÍ SE: ZŮSTANE POUZE PERSONAL STATS, INVENTORY, EXIT MENU, LEAVE GAME
 // **Provedení vybraných možností z InGameMenu
 int short ConsoleManager::getOptionIndex() {
     return cursorPos.Y - m_cursorMin + 1;
-}
-
-void ConsoleManager::executeInGameMenuOption (bool &gameOngoing) {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    cursorPos = getConsoleCursorPosition(hConsole);
-    int option = getOptionIndex();      // převod indexu na možnost k provedení dle switche
-    system ("cls");
-    switch (option) {
-    case 1:
-        std::cout << "\nPersonal Stats\n" << std::endl;
-        system ("pause");
-        break;
-    case 2:
-        std::cout << "\nInventory\n" << std::endl;      // zde se zavolá View::DisplayInventory_m + navigationCursor + executeInventoryOption
-        system ("pause");
-        break;
-    case 3:
-        std::cout << "\nExit Menu\n"  << std::endl;
-        system ("pause");
-        break;
-    case 4: // Nic se nedeje - konec funkce
-        std::cout << "\nLeave Game\n" << std::endl; // debug print
-        gameOngoing = false;
-        system ("pause");
-        break;
-    default:
-        std::cout << "\nError - no option found\n" << std::endl; // todo ErorLog
-        system ("pause");
-    }
-    system ("cls");
-}
-
-
-void ConsoleManager::executeInventoryMenuOption() {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    cursorPos = getConsoleCursorPosition(hConsole);
-    int option = getOptionIndex();      // převod indexu na možnost k provedení dle switche
-    system ("cls");
-    switch (option) {
-    case 1:
-        break;
-    case 2: {
-        View::listInventoryItems();
-        system("pause");
-        break;
-    }
-    case 3:
-        break;
-    }
 }
