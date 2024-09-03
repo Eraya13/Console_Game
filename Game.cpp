@@ -57,7 +57,7 @@ ActionType Game::decideActionType() {
 	bool inputOk = true;
 	char key;
 	do {
-        key = ConsoleManager::readInput_onMap();
+        key = ConsoleManager::readUserInput();
 		switch (key) {
 			case 'W':
 			case 'A':

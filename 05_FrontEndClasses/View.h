@@ -1,24 +1,28 @@
 #ifndef VIEW_H
 #define VIEW_H
+#include <vector>
+
 #include "../00_Players_Classes/Player.h"
+#include "../00_Players_Classes/Inventory.h"
+
+
 
 class View
 {
 private:
-    static Player* m_player;
 public:
+    static Player* m_player;
+    static Inventory* m_inventory;
     // Statická metoda pro inicializaci ukazatele na hráče
     static void init(Player* player);
+    static void initInventory(Inventory* inventory);
     static void inGameMenu_m();         // _m - sign for menu print
-    static void playerStats();
-    static void inventoryInfo_m();
     static void listInventoryItems();
+    static void Inventory_m();
+    static void playerStats();
 
-
-    //void inventory_m();
     // FUTURE MENU
     // void NewGame_m();
-    View();
 };
 
 #endif // VIEW_H

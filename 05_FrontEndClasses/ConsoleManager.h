@@ -2,6 +2,12 @@
 #define CONSOLEMANAGER_H
 #include <windows.h>
 #include <conio.h>
+#include <vector>
+
+#include "../02_Entity/Item.h"
+#include "../02_Entity/Potion.h"
+#include "../02_Entity/Weapon.h"
+#include "../02_Entity/Armor.h"
 
 #include "View.h"
 #include "../01_Enums/Colors.h"
@@ -16,6 +22,7 @@ private:
     static int const BACKGROUND;
     static int short m_cursorMax;  // range variable for MenuPrint
     static int short m_cursorMin;
+    static int short getOptionIndex();
 
     // Cursor functions
     static COORD getConsoleCursorPosition (HANDLE hConsole);
@@ -34,7 +41,7 @@ public:
     // Zobrazí Roomku jako TileField 20x40 - vypadá to mnohem lépe než 20x20 (obdelníkové prvky)
     static void printRoom(std::array<std::array <char, 40>, 20> virtualTileField);     // 40 columns : 20 rows
 
-    static char readInput_onMap(); // cte input a vraci input
+    static char readUserInput(); // cte input a vraci input
 
     // Cursor functions
     static void setCursorVisible();
@@ -48,11 +55,12 @@ public:
 
     // Menus call for print
     static void displayInGameMenu();
+    static void displayInventoryMenu();
 
     // **Provedení vybraných možností z menu
     // Zobrazení vybrané možnosti z InGameMenu na základě pozice kurzoru
     static void executeInGameMenuOption(bool &gameOngoing);
-
+    static void executeInventoryMenuOption();
 };
 
 #endif // CONSOLEMANAGER_H

@@ -2,11 +2,14 @@
 
 // Inicializace statického ukazatele
 Player* View::m_player = nullptr;
-
-View::View() {}
+Inventory* View::m_inventory = nullptr;
 
 void View::init(Player* player) {
-     m_player = player;
+    m_player = player;
+}
+
+void View::initInventory(Inventory* inventory) {
+    m_inventory = inventory;
 }
 
 void View::inGameMenu_m () {
@@ -34,3 +37,24 @@ void View::playerStats() {
               << "\t\tDescription:" << "\n\n";;
     std::cout << "\t\t\t\t\t~Press [any key] to continue";
 }
+
+void View::Inventory_m() {
+    std::cout << "-----------**Inventory**-----------" << "\n\n"
+              /*"Total Coins"*/
+              << "\t\tHP potions: " << "\t\t" << "\n\n"//m_inventory->getNumberOfPotions();
+              << "\t\tDrink potion" << "\n"
+              << "\t\tDisplay all items" << "\n"
+              << "\t\tLeave Inventory" << "\n\n"
+              << "\t\t\t\t~Press [ENTER] to make selection";
+}
+
+void View::listInventoryItems() {
+    std::vector<Item*> itemList = m_inventory->getItemList();
+    std::cout << "|\tType\t\t\t|\tName\t\t\t|\tItem Bonus"
+              << "----------------------------------------------------------------------------------------------";
+    for (Item* item : itemList) {
+        item->printBriefInfo();
+    }
+    std::cout << "\n\nThat's all items.";
+}
+

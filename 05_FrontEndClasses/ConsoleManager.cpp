@@ -37,9 +37,9 @@ void ConsoleManager::setCursorPosForMenu() {
     SetConsoleCursorPosition(hConsole, cursorPos);
 }
 
-void ConsoleManager::setCursorRange (int short const defaultPosition, int short const options) {
-    m_cursorMin = defaultPosition;
-    m_cursorMax = defaultPosition + options - 1;
+void ConsoleManager::setCursorRange (int short const startPositon, int short const totalOptions) {
+    m_cursorMin = startPositon;
+    m_cursorMax = startPositon + totalOptions - 1;
 }
 
 void ConsoleManager::setCursorPosition () {
@@ -58,7 +58,7 @@ COORD ConsoleManager::getConsoleCursorPosition (HANDLE hConsole) {
 void ConsoleManager::changeCursorPos() {
     int input;
     do {
-        input = readInput_onMap();
+        input = readUserInput();
         switch (input) {
         case 'W':
             cursorPos.Y--;
@@ -85,7 +85,7 @@ void ConsoleManager::cursorNavigation (int short const start_position, int short
 }
 
 //----------**GUI & Main Print (PrintRoom)----------**
-char ConsoleManager::readInput_onMap() {
+char ConsoleManager::readUserInput() {
     //std::cout << "Ctu zmacknuti tlacitka: \n";      // debug_print
     char input = toupper(_getch());          // WASD + tab + enter
     return input;
@@ -162,21 +162,28 @@ void ConsoleManager::displayInGameMenu() {
     View::inGameMenu_m();
 }
 
+void ConsoleManager::displayInventoryMenu() {
+    View::Inventory_m();
+}
+
 // ------**Execution of Menus**------               // ZMĚNÍ SE: ZŮSTANE POUZE PERSONAL STATS, INVENTORY, EXIT MENU, LEAVE GAME
 // **Provedení vybraných možností z InGameMenu
+int short ConsoleManager::getOptionIndex() {
+    return cursorPos.Y - m_cursorMin + 1;
+}
+
 void ConsoleManager::executeInGameMenuOption (bool &gameOngoing) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     cursorPos = getConsoleCursorPosition(hConsole);
-    // uprava cursorPos.Y
-    int option = cursorPos.Y - (int short) 1 - (int short) 20; // Menu::Menu_startPos
-    system ("cls");				// mozna bu
+    int option = getOptionIndex();      // převod indexu na možnost k provedení dle switche
+    system ("cls");
     switch (option) {
     case 1:
         std::cout << "\nPersonal Stats\n" << std::endl;
         system ("pause");
         break;
     case 2:
-        std::cout << "\nInventory\n" << std::endl;
+        std::cout << "\nInventory\n" << std::endl;      // zde se zavolá View::DisplayInventory_m + navigationCursor + executeInventoryOption
         system ("pause");
         break;
     case 3:
@@ -193,4 +200,23 @@ void ConsoleManager::executeInGameMenuOption (bool &gameOngoing) {
         system ("pause");
     }
     system ("cls");
+}
+
+
+void ConsoleManager::executeInventoryMenuOption() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cursorPos = getConsoleCursorPosition(hConsole);
+    int option = getOptionIndex();      // převod indexu na možnost k provedení dle switche
+    system ("cls");
+    switch (option) {
+    case 1:
+        break;
+    case 2: {
+        View::listInventoryItems();
+        system("pause");
+        break;
+    }
+    case 3:
+        break;
+    }
 }
