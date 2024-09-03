@@ -26,7 +26,3 @@ void Player::setHealth(int minusHealth) {
 void Player::battle(Enemy* Enemy) {
 	std::cout << "You defeated your enemy.\n";
 }
-
-void Player::talk() {
-	std::cout << "Your NPC say Hello :).\n";
-}

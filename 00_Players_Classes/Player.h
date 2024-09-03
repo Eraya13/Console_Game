@@ -20,6 +20,5 @@ public:
 
 	// entity funkce:
 	void battle(Enemy* Enemy);
-	void talk(/*NPC* NPC*/);
 };
 
