@@ -2,23 +2,23 @@
 #define VIEW_H
 #include <vector>
 
-#include "../00_Players_Classes/Player.h"
-#include "../00_Players_Classes/Inventory.h"
-
-
+#include "../02_Entity/Item.h"
+#include "../02_Entity/Armor.h"
+#include "../02_Entity/Weapon.h"
+#include "../02_Entity/Potion.h"
 
 class View
 {
 private:
+    static void toEquipOption(Weapon* weapon);
+    static void toEquipOption(Armor* armor);
+    static void howToSelect();
 public:
-    static Player* m_player;
-    static Inventory* m_inventory;
-    // Statická metoda pro inicializaci ukazatele na hráče
-    static void init(Player* player);
-    static void initInventory(Inventory* inventory);
     static void inGameMenu_m();         // _m - sign for menu print
-    static void listInventoryItems();
-    static void Inventory_m();
+    static void listInventoryItems(std::vector<Item*> items);
+    static void Inventory_m(int totalPotions);
+    static void displayItem(Item* item);
+    static void displayItem_m();
     static void playerStats();
 
     // FUTURE MENU
