@@ -11,7 +11,6 @@ void Item::printInfo() {
     std::cout<< "The item is" << m_name ;
 }
 
-
 // Implementace čistě virtuálního destruktoru
 Item::~Item() {
     std::cout << "Destroyed";

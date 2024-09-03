@@ -17,6 +17,10 @@ void Armor::setInfo (std::string info) {
 // ** getters **
 int Armor::getDefenseBonus () const { return m_defenseBonus; }
 
-Armor::~Armor() {
-    std::cout << "Destruktor Armor zavolán" << std::endl;
+void Armor::printBriefInfo() {
+    std::cout  << "|\t" << getCategory() << "   |\t" << getName() <<"   |\t+ " << getDefenseBonus() << "defense" << std::endl;
 }
+
+Armor::~Armor() {
+}
+

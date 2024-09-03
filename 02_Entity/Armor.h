@@ -10,5 +10,6 @@ public:
 	int getDefenseBonus() const;
     void setInfo(std::string info) override;
     void setCategory(std::string category) override;
+    void printBriefInfo() override;
     ~Armor();
 };

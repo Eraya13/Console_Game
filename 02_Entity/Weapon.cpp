@@ -18,3 +18,7 @@ int Weapon::getAttackBonus () const { return m_attackBonus; }
 Weapon::~Weapon() {
     std::cout << "Destruktor Weapon zavolán" << std::endl;
 }
+
+void Weapon::printBriefInfo() {
+    std::cout  << "|\t" << getCategory() << "   |\t" << getName() <<"   |\t+ " << getAttackBonus() << "damage" << std::endl;
+}

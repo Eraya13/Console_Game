@@ -16,5 +16,7 @@ public:
     void printInfo();
     virtual void setInfo(std::string info) = 0;
     virtual void setCategory(std::string category) = 0;
+    // specifická metoda, která zobrazí formátovaně info o daném objektu místo předání hodnot
+    virtual void printBriefInfo() = 0;
     virtual ~Item() = 0;
 };

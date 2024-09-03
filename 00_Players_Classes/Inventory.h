@@ -11,8 +11,8 @@ class Inventory
 private:
     //int m_coins;
     std::vector<Item*> m_items;
-    ~Inventory();
 public:
+    ~Inventory();
     Inventory();
     // functions to item
     void addItem(Item* item);
