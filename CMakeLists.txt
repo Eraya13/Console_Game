@@ -35,7 +35,7 @@ add_executable (Game
 
 
 
-00_Players_Classes/Controls.cpp 00_Players_Classes/Controls.h
+00_Players_Classes/PlayerController.cpp 00_Players_Classes/PlayerController.h
 00_Players_Classes/Player.cpp 00_Players_Classes/Player.h
 
 DataFormatting.cpp DataFormatting.h

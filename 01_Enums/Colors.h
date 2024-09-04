@@ -1,10 +1,15 @@
 #pragma once
 
+    /**
+    * @enum Colors
+    * @brief Defines a set of colors used in the game
+    *
+    * This enum class defines the colors used for text and background that can be displayed on the Windows console. */
 enum class Colors {
-    Black = 0,          // or 16!
-    Blue = 1,       // DB vs LB - small dif
-    Green = 2,      // DG vs LG - no dif
-    Cyan = 3,       // tyrkysová
+    Black = 0,      
+    Blue = 1,       
+    Green = 2,
+    Cyan = 3,       
     Red = 4,
     Purple = 5,         
     DarkYellow = 6,     
