@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "../03_Map/Room.h"
 
-class Controls {
+class PlayerController {
 private:
 	char m_direction;		// smer pro NextPozici
 	Position m_playerOldPosition;
@@ -20,7 +20,7 @@ private:
 	void travel(char tileType, bool& changeRoomYesOrNo);			// predavani adresy s hodnotou - nutnost, aby promenna byla znama pred zavolanim teto funkce!!
 
 public:
-	Controls(int x, int y, Player* player, Room* room);			// x = row	y = column
+    PlayerController(int x, int y, Player* player, Room* room);			// x = row	y = column
 
 	// position func
 	void createNextPosition();

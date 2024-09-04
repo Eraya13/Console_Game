@@ -12,7 +12,7 @@ public:
 	Item(std::string name);
 	std::string getName() const;
 	std::string getCategory() const;
-	std::string getInfo() const;
+    std::string getInfo() const;
     void printInfo();
     virtual void setInfo(std::string info) = 0;
     virtual void setCategory(std::string category) = 0;

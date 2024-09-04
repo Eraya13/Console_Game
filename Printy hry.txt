@@ -79,7 +79,6 @@ Alfa version
 
 -----------**Inventory**-----------
 
-
 	Total coins:		cislo
 	HP potions:		cislo
 		
@@ -126,7 +125,7 @@ Armour:
 	~ Discard item
 	~ Back to inventory (zobrazí se list itemů again)
 
-
+-----------------------------------------**Inventory**-----------------------------------------
 Potion:
 	Health Potion						
 	Potion		+ 100 HP

@@ -4,7 +4,6 @@ void View::howToSelect() {
     std::cout << "\t\t\t~Press [ENTER] to make selection";
 }
 
-
 void View::inGameMenu_m () {
     std::cout << "--------------****In Game Menu****---------------\n\n"
               << "\t\tPersonal Stats\n"

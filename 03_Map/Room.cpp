@@ -18,7 +18,7 @@ void Room::createTileField (std::string roomFilePath) {
                 if (tileFromFile != '\n') {
                     tileFromFile = toupper(tileFromFile);   // potlaceni malych pismen
                     if (tileFromFile == '.' || tileFromFile == '#' || tileFromFile == 'O' || tileFromFile == 'H'                // non-Entity Types of tile
-                        || tileFromFile == 'N' || tileFromFile == 'E' || tileFromFile == 'I' || tileFromFile == 'P') {          // Entity types of tile
+                        || tileFromFile == 'E' || tileFromFile == 'I' || tileFromFile == 'P') {          // Entity types of tile
 
                         m_tileField.at(row).at(column) = new Tile(tileFromFile);
                     }
@@ -41,16 +41,12 @@ void Room::createTileField (std::string roomFilePath) {
 
 // další funkce - s Entity Managerem
 
-IEntity* Room::recognizeEntityTypeTile(char tileType, int& e, int& n, int& i) {
+IEntity* Room::recognizeEntityTypeTile(char tileType, int& e, int& i) {
     IEntity* entity;
     switch (tileType) {
         case 'E':
             entity = m_EntityManager->getEnemyReference(e);
             e++;
-            break;
-        case 'N':
-            entity = m_EntityManager->getNPCReference(n);
-            n++;
             break;
         case 'I':
             // todo same
@@ -65,7 +61,6 @@ IEntity* Room::recognizeEntityTypeTile(char tileType, int& e, int& n, int& i) {
 
 void Room::assignEntitiesToTiles() {
     int e_index = 0;
-    int n_index = 0;
     int i_index = 0;
     char tileType;
     IEntity* entity;
@@ -76,7 +71,7 @@ void Room::assignEntitiesToTiles() {
     for (int row = 0; row < m_tileField.size(); row++) {                    // cteni po radcich  0-19 = 20 hodnot!!!        velikost 20, last index 19
         for (int column = 0; column < m_tileField.size(); column++) {       // definitivni urceni hodnot na collumns
         tileType = m_tileField.at(row).at(column)->getTileType();
-                        entity = recognizeEntityTypeTile(tileType, e_index, n_index, i_index);
+                        entity = recognizeEntityTypeTile(tileType, e_index, i_index);
             if (entity!= nullptr) {
                 m_tileField.at(row).at(column)->setTileEntity(entity);
             }    

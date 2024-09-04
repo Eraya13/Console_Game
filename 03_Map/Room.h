@@ -10,7 +10,7 @@
 class Room {
 private:
 	EntityManager* m_EntityManager;
-    IEntity* recognizeEntityTypeTile(char tileType, int& e_index, int& n_index, int& i_index);
+    IEntity* recognizeEntityTypeTile(char tileType, int& e_index, int& i_index);
 	void createTileField(std::string roomFilePath);
 public:											// tiles are public - no secret from Room - room has access everywhere...
 	Room(std::string roomFilePath);
