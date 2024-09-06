@@ -144,6 +144,9 @@
     * @param action - The type of action to perform is determined by method `decideActionType`.*/
     void performAction(ActionType action);
 
+
+    void browseInventory();
+    void manageItemInteraction(int itemIndex);
     /**
     * @brief Executes the selected option from the In-Game Menu.
     *

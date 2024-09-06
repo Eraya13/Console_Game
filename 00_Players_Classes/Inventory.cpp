@@ -12,12 +12,17 @@ void Inventory::addItem(Item* item) {
     m_totalNumberItems++;
 }
 
-int Inventory::drinkPotion(Item* item) {
-    if (Potion* potion = dynamic_cast<Potion*>(item)) {
-        int health = potion->getHealthBonus();
-        return health;
+void Inventory::findPotion(Item* &potion, int& index) {
+    potion = nullptr;
+    index = -1;
+
+    for (int i = 0; i < m_items.size(); i++) {
+        if (m_items.at(i)->getCategory()== "Potion") {
+            potion = m_items.at(i);
+            index = i;
+            return;
+        }
     }
-    return 0;
 }
 
 void Inventory::discardItem(Item* item, int itemIndex) {

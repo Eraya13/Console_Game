@@ -15,8 +15,7 @@ private:
     * @brief A vector that stores pointers to items in the inventory
     *
     * This container holds all the items that player has collected.
-    * Each item is represented by a pointer to `Item` object.
-    */
+    * Each item is represented by a pointer to `Item` object.*/
     std::vector<Item*> m_items;
 
     /**
@@ -29,8 +28,7 @@ public:
     /**
     * @brief Constructs a new `Inventory` object
     *
-    * This constructor initializes the inventory preparing it to store items.
-    */
+    * This constructor initializes the inventory preparing it to store items.*/
     Inventory();
 
     /**
@@ -45,30 +43,38 @@ public:
     * This function takes a pointer to an `Item` object and adds it to the inventory.
     * It also increments the total number of items in the inventory.
     *
-    * @param item A pointer to the `Item` to be added to the inventory
-    */
+    * @param item - A pointer to the `Item` to be added to the inventory*/
     void addItem(Item* item);
 
     /**
     * @brief Removes an item from the inventory and deallocates its memory.
     *
-    * This function removes an `Item` from the inventory based on its index, deletes the item to free up memory,
+    * This method removes an `Item` from the inventory based on its index, deletes the item to free up memory,
     * and decrements the total number of items in the inventory. If the provided index is invalid, an error message is displayed.
     *
-    * @param item - pointer to the `Item` to be removed and deleted
-    * @param itemIndex - index of the `Item` that should be removed from m_items container
-    */
+    * @param item - A pointer to the `Item` to be removed and deleted.
+    * @param itemIndex - A index of the `Item` that should be removed from m_items container. */
     void discardItem(Item* item, int itemIndex);
-    // chybí implementace ještě
-    int drinkPotion(Item* item);
-    
+
+    /**
+    * @brief Finds the first potion in the inventory.
+    *
+    * This method searches the inventory for the first item categorized as a "Potion".
+    * If potion is found, it sets the `potion` pointer to potion item and updates the `index` to
+    * the position of the potion in the inventory (`m_items`). If no potion is found, `potion` remains `nullptr` and
+    * `index` is set to -1.
+    * The potion found is used by the player to restore health in function drinkPotion.
+    * @param[out] potion - reference to a pointer to the potion found, or `nullptr` if no potion is available.
+    * @param[out] index - index of the found potion in the inventory, or -1 if no potion is found.
+    */
+    void findPotion(Item*& potion, int& index);
+
     /**
     * @brief Returns the number of potions in the inventory
     *
     * This function iterates through the inventory items and counts how many of them are categorized as "Potion".
     *
-    * @return The total number of potions in the inventory
-    */
+    * @return The total number of potions in the inventory*/
     int getNumberOfPotions();
     //int const getCoins();
  
@@ -77,8 +83,7 @@ public:
     *
     * This function provides the total count of items currently stored in the inventory.
     *
-    * @return The total number of items in the inventory
-    */
+    * @return The total number of items in the inventory*/
     int getNumberOfItems();
 
     /**

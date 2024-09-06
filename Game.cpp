@@ -21,7 +21,7 @@ void Game::setGameElements() {
     SetConsoleOutputCP(65001);	// sets coding to UTF-8
     // Here are created game elements
 	system ("cls");
-    m_player = new Player("Derien", 100, 40);
+    m_player = new Player("Derien", 40, 40);
 	createMap("LocationsNames.txt");
 	// setting game elements
     m_actualRoom = m_map->getRoom(START_LOCATION, START_ROOM);
@@ -69,8 +69,8 @@ void Game::performAction(ActionType action) {
 		case ActionType::Movement:
 			// It creates a new position according to WASD
             m_playerController->createNextPosition();
-			// analyze if movement is possible to the next position 
-            m_playerController->analyzeAperformNextPosition(changeRoomYesOrNo);
+			// analyze if movement is possible to the next position
+            m_playerController->processNextPosition(changeRoomYesOrNo);
 			if (changeRoomYesOrNo == true) { 
 				// todo actions for settting Travel Menu
 				std::cout << "\n\t***Hrac bude presun na jinou mapu***\n";
@@ -94,6 +94,28 @@ void Game::performAction(ActionType action) {
 	}
 }
 
+void Game::browseInventory() {
+    std::vector<Item*> items = m_player->getInventoryItemList();
+    View::listInventoryItems(items);
+    int short totalOptions = m_player->getTotalNumberOfItems() + 1; // adds '1' for option 'Leave Inventory' without action
+    ConsoleManager::cursorNavigation(3, totalOptions);
+    int selectedOption = ConsoleManager::getOptionIndex();
+
+    // if statement to check if user haven't choose option 'Leave Inventory'
+    if (selectedOption < totalOptions) {
+        selectedOption--;    // removing the value selectedOption  to real index of item in itemList in inventory
+        int realItemIndex = selectedOption;
+        manageItemInteraction(realItemIndex);
+    }
+}
+
+void Game::manageItemInteraction(int itemIndex) {
+    Item* selectedItem = m_player->selectItem(itemIndex);
+    View::displayItem(selectedItem);
+    ConsoleManager::cursorNavigation(5, 3);
+    executeItemAction(selectedItem, itemIndex);
+}
+
 // ------**Execution of Menus**------
 // **Provedení vybraných možností z InGameMenu
 void Game::executeInGameMenuOption(bool &gameOngoing) {
@@ -104,18 +126,13 @@ void Game::executeInGameMenuOption(bool &gameOngoing) {
         std::cout << "\nPersonal Stats\n" << std::endl;
         system ("pause");
         break;
-    case 2: {
+    case 2:
         accessInventory();
         break;
-    }
     case 3:
-        std::cout << "\nExit Menu\n"  << std::endl;
-        system ("pause");
         break;
     case 4:
-        std::cout << "\nLeave Game\n" << std::endl; // debug print
         gameOngoing = false;
-        system ("pause");
         break;
     default:
         std::cout << "\nError - no option found\n" << std::endl; // todo ErorLog
@@ -131,22 +148,10 @@ void Game::executeInventoryOption(){
     system ("cls");
     switch (option) {
     case 1:
-        // Item* findHealthPotion(); -- inventory musí najít
+        m_player->drinkPotion();
         break;
     case 2: {
-        View::listInventoryItems(items);
-        int short totalOptions = m_player->getTotalNumberOfItems() + 1; // adds '1' for option 'Leave Inventory' without action
-        ConsoleManager::cursorNavigation(3, totalOptions);
-        int realItemIndex = ConsoleManager::getOptionIndex();
-
-        // if statement to check if user haven't choose option 'Leave Inventory'
-        if (realItemIndex < totalOptions) {
-            realItemIndex--;    // úprava na reálné indexy (od 0)
-            Item* selectedItem = m_player->selectItem(realItemIndex);
-            View::displayItem(selectedItem);
-            ConsoleManager::cursorNavigation(5, 3);
-            executeItemAction(selectedItem, realItemIndex);
-        }
+        browseInventory();
         break;
     }
     case 3:        // The Inventory will be close due to selection of option 'Leave Inventory' 
@@ -160,7 +165,7 @@ void Game::executeItemAction(Item* item, int itemIndex) {
     switch(option) {
     case 1:
         if (item->getCategory()=="Potion") {
-            // drinkPotion
+            m_player->drinkPotion();
         }
         if (item->getCategory()=="Armor" || item->getCategory()=="Weapon") {
             // equip
