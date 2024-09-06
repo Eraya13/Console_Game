@@ -2,7 +2,6 @@
 
 EntityManager::EntityManager() {
     fillListEnemies();
-    // fillListNPC();
 }
 
 void EntityManager::addEntity(Enemy* enemy) {
@@ -15,7 +14,6 @@ void EntityManager::fillListEnemies() {
     addEntity(new Enemy("Goblin",30, 10, 100, 200));
     addEntity(new Enemy("Orc",50, 15, 100, 300));
 }
-
 
 Enemy* EntityManager::getEnemyReference (int index) const {
     return l_enemies.at(index);

@@ -26,6 +26,17 @@ void Player::setHealth(int minusHealth) {
 	m_health -= minusHealth;
 }
 
+void Player::restoreHealth(int amount) {
+    int maxHealth = 100;
+    if (m_health + amount <= maxHealth) {
+        m_health += amount;
+        std::cout << "Health restored by " << amount << " HP.\n"
+                  << "Player's health is now " << getHealth() << " HP.";
+        system("pause");
+        // todo View:: showPlayersHealth - show Player's health
+    }
+}
+
 void Player::battle(Enemy* Enemy) {
 	std::cout << "You defeated your enemy.\n";
 }
@@ -50,5 +61,27 @@ Item* Player::selectItem(int itemIndex) {
 
 void Player::discardItem(Item* item, int itemIndex) {
     m_inventory->discardItem(item, itemIndex);
+}
+
+void Player::drinkPotion() {
+    Item* potion = nullptr;
+    int index = -1;
+
+    m_inventory->findPotion(potion, index);
+
+    if (potion != nullptr) {
+        int healthBonus = static_cast<Potion*>(potion)->getHealthBonus();
+        restoreHealth(healthBonus);
+        m_inventory->discardItem(potion, index);
+    } else {
+        std::cout << "No potion found in inventory.\n";
+        system("pause");
+    }
+}
+
+void Player::drinkPotion(Potion* potion, int itemIndex) {
+    int healthBonus = potion->getHealthBonus();
+    restoreHealth(healthBonus);
+    m_inventory->discardItem(potion, itemIndex);
 }
 
