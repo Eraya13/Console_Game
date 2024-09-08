@@ -129,7 +129,7 @@ void Game::executeInGameMenuOption(bool &gameOngoing) {
     case 2:
         accessInventory();
         break;
-    case 3:
+    case 3:     // Leave menu - hide options only map displayed
         break;
     case 4:
         gameOngoing = false;

@@ -35,6 +35,9 @@ void Player::restoreHealth(int amount) {
         system("pause");
         // todo View:: showPlayersHealth - show Player's health
     }
+    else {
+
+    }
 }
 
 void Player::battle(Enemy* Enemy) {

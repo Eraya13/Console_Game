@@ -3,7 +3,7 @@ project(Game)
 
 set(CMAKE_CXX_STANDARD 17)
 
- include_directories(00_Players_Classes)
+include_directories(00_Players_Classes)
 include_directories(01_Enums)
 include_directories(02_Entity)
 include_directories(03_Map)
@@ -20,7 +20,6 @@ add_executable (Game
 02_Entity/IEntity.h
 02_Entity/Entity.cpp 02_Entity/Entity.h
 02_Entity/Enemy.cpp 02_Entity/Enemy.h
-02_Entity/NPC.cpp 02_Entity/NPC.h
 02_Entity/Item.cpp 02_Entity/Item.h
 02_Entity/Weapon.cpp 02_Entity/Weapon.h
 02_Entity/Armor.cpp 02_Entity/Armor.h
@@ -31,9 +30,6 @@ add_executable (Game
 03_Map/EntityManager.cpp 03_Map/EntityManager.h
 
 04_Structs/PositionStruct.h
-
-
-
 
 00_Players_Classes/PlayerController.cpp 00_Players_Classes/PlayerController.h
 00_Players_Classes/Player.cpp 00_Players_Classes/Player.h
