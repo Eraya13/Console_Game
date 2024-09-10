@@ -22,7 +22,7 @@ void Potion::setInfo (std::string info) {
 int Potion::getHealthBonus () const { return m_healthBonus; }
 
 Potion::~Potion() {
-    std::cout << "Destruktor Potion zavolán" << std::endl;
+    //std::cout << "Destruktor Potion zavolán" << std::endl;
 }
 
 void Potion::printBriefInfo() {

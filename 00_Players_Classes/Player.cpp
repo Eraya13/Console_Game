@@ -30,9 +30,11 @@ void Player::restoreHealth(int amount) {
     int maxHealth = 100;
     if (m_health + amount <= maxHealth) {
         m_health += amount;
-        std::cout << "Health restored by " << amount << " HP.\n"
-                  << "Player's health is now " << getHealth() << " HP.";
+        // todo View!!
+        std::cout << "\tHealth restored by " << amount << " HP.\n"
+                  << "\tPlayer's health is now " << getHealth() << " HP.\n\n";
         system("pause");
+        system("cls");
         // todo View:: showPlayersHealth - show Player's health
     }
     else {
@@ -77,6 +79,7 @@ void Player::drinkPotion() {
         restoreHealth(healthBonus);
         m_inventory->discardItem(potion, index);
     } else {
+        // todo View!!!
         std::cout << "No potion found in inventory.\n";
         system("pause");
     }

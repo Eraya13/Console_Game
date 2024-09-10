@@ -13,6 +13,6 @@ void Item::printInfo() {
 
 // Implementace čistě virtuálního destruktoru
 Item::~Item() {
-    std::cout << "Destroyed";
+    //std::cout << "Destroyed";
 }
 

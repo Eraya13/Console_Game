@@ -26,6 +26,9 @@ void Inventory::findPotion(Item* &potion, int& index) {
 }
 
 void Inventory::discardItem(Item* item, int itemIndex) {
+    // zmizí menu - zobrazí se pouze informace o Itemu (bez menu)
+    // ověření volby
+    // Pokud bude odpověď stále Ano -> provede se
     if (itemIndex >= 0 && itemIndex < m_items.size()) {
         m_items.erase(m_items.begin() + itemIndex);
         delete item;
