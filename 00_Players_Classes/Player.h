@@ -4,6 +4,11 @@
 #include "../02_Entity/Armor.h"
 #include "Inventory.h"
 
+/**
+ * @brief Represents the player character in the game
+ *
+ * The Player class manages the player's attributes such as health, attack, defense, inventory, and equipped items (armor and weapon).
+ * It provides methods to interact with the player's inventory, manage health, and engage in combat with enemies. */
 class Player {
 private:
 /**

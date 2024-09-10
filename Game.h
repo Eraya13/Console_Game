@@ -144,10 +144,30 @@
     * @param action - The type of action to perform is determined by method `decideActionType`.*/
     void performAction(ActionType action);
 
-
+/**
+ * @brief Displays the player's inventory and handles item selection.
+ *
+ * This method retrieves the list of items from the player's inventory, displays them,
+ * and allows the player to navigate through the inventory using the cursor.
+ * Once an item is selected, it calls `manageItemInteraction()` to handle further actions
+ * on the selected item. 
+ * @note There is also an added option "Leave Inventory" that allows player to not choose
+ * any item and leave inventory. */
     void browseInventory();
-    void manageItemInteraction(int itemIndex);
+
     /**
+ * @brief Manages interaction with a selected item in the player's inventory.
+ *
+ * This method is called after an item is selected from the inventory. It displays
+ * detailed information about the selected item, shows the possible actions the player
+ * can take (e.g., use, equip, discard), and allows the player to choose one of the
+ * available actions via the cursor.
+ *
+ * @param itemIndex The index of the selected item in the inventory.
+ */
+    void manageItemInteraction(int itemIndex);
+    
+/**
     * @brief Executes the selected option from the In-Game Menu.
     *
     * This function handles the execution of the option chosen by the player in the In-Game Menu.
@@ -231,6 +251,26 @@
     * @see executeInventoryOption() for handling specific inventory actions.
     */
     void accessInventory();
+
+/**
+ * @brief Handles the process of discarding an item from the player's inventory.
+ *
+ * This function displays the information about the item, asks the user to confirm the discard action,
+ * and if confirmed, removes the item from the inventory.
+ *
+ * @param item A pointer to the item to be discarded.
+ * @param itemIndex The index of the item in the inventory list.*/
+    void handleItemDiscard(Item* item, int itemIndex);
+
+/**
+ * @brief Gets input from the user if they want to discard an item.
+ *
+ * This function displays a confirmation message asking if the user wants to discard the item.
+ * It waits for the user to navigate options via the cursor and returns true if the user confirms,
+ * or false if the user declines.
+ *
+ * @return True if the user confirms the discard action, otherwise false. */
+    bool confirmDiscardItem();
 
 public:
     /**

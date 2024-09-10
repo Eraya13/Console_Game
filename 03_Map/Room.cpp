@@ -5,27 +5,24 @@ Room::Room(std::string roomFilePath) {
     m_EntityManager = new EntityManager();
 }
 
-/// Funkce čte soubor po řádcích a v řádcích po znacích
-/// každý znak reprezentuje Tilu - tzn. co na ní je Entita nebo to je Wall či grass
-/// Ošetřeno o to, že jsou jen dané typy til - cokoliv mimo povolené je chyba v souboru (nutná oprava souboru)
 void Room::createTileField (std::string roomFilePath) {
     std::ifstream fileRoom (roomFilePath);
     if (fileRoom.is_open()) {
-        for (int row = 0; row < m_tileField.size(); row++) {        // cteni po radcich  0-19 = 20 hodnot!!!        velikost 20, last index 19
-            for (int column = 0; column < m_tileField.size(); column++) {   // definitivni urceni hodnot na collumns
+        for (int row = 0; row < m_tileField.size(); row++) {        // reading by rows 0-19 = 20 rows
+            for (int column = 0; column < m_tileField.size(); column++) {   // reading by columns = exact value (also 0-19)
                 char tileFromFile;
                 fileRoom.get(tileFromFile);
                 if (tileFromFile != '\n') {
-                    tileFromFile = toupper(tileFromFile);   // potlaceni malych pismen
-                    if (tileFromFile == '.' || tileFromFile == '#' || tileFromFile == 'O' || tileFromFile == 'H'                // non-Entity Types of tile
-                        || tileFromFile == 'E' || tileFromFile == 'I' || tileFromFile == 'P') {          // Entity types of tile
+                    tileFromFile = toupper(tileFromFile);
+                    if (tileFromFile == '.' || tileFromFile == '#' || tileFromFile == 'O' || tileFromFile == 'H'
+                        || tileFromFile == 'E' || tileFromFile == 'I' || tileFromFile == 'P') {
 
                         m_tileField.at(row).at(column) = new Tile(tileFromFile);
                     }
                     else {
                         //Errors::Unknown_Char_in_Room_File(row, column, tileFromFile);
                     }
-                } // "\n" ignor -  // kvuli get. omezeni (nacita v souboru "\n")
+                } // Ignore "\n" - // Due to the limitations of get (it reads "\n" from the file)
                 else {
                     column--;
                 }
@@ -39,8 +36,6 @@ void Room::createTileField (std::string roomFilePath) {
     }
 }
 
-// další funkce - s Entity Managerem
-
 IEntity* Room::recognizeEntityTypeTile(char tileType, int& e, int& i) {
     IEntity* entity;
     switch (tileType) {
@@ -53,7 +48,7 @@ IEntity* Room::recognizeEntityTypeTile(char tileType, int& e, int& i) {
             // entity = m_EntityManager->getItemReference(i_index);
             i++;
             break;
-        default:  // pokud narazí na non-entity tile
+        default:  // if it encounters a non-entity tile
             entity = nullptr;
     }
     return entity;
@@ -68,8 +63,8 @@ void Room::assignEntitiesToTiles() {
             // -- prohledavani dokud:       (pokud všechny tři)
             //    if  (e < l_enemies.last_index || n <= l_NPCs.last_index || i <= l_Items.last_index)
             //    else { break;}
-    for (int row = 0; row < m_tileField.size(); row++) {                    // cteni po radcich  0-19 = 20 hodnot!!!        velikost 20, last index 19
-        for (int column = 0; column < m_tileField.size(); column++) {       // definitivni urceni hodnot na collumns
+    for (int row = 0; row < m_tileField.size(); row++) {
+        for (int column = 0; column < m_tileField.size(); column++) { 
         tileType = m_tileField.at(row).at(column)->getTileType();
                         entity = recognizeEntityTypeTile(tileType, e_index, i_index);
             if (entity!= nullptr) {
