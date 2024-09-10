@@ -1,7 +1,5 @@
 #include "ConsoleManager.h"
 
-ConsoleManager::ConsoleManager() {}
-
 // inicializace statických proměnných
 CONSOLE_CURSOR_INFO ConsoleManager::cursorInfo = { 0 }; // Inicializace struktury na nuly
 COORD ConsoleManager::cursorPos = { 0, 0 }; // výchozí pozice pro printRoomky
@@ -13,7 +11,7 @@ short ConsoleManager::m_cursorMin = 0;
 void ConsoleManager::setCursorForRoomPrint() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     cursorPos = { 0, 0 };
-    SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y}); // nastavení kurzoru na zadanou pozici
+    SetConsoleCursorPosition(hConsole, {cursorPos.X, cursorPos.Y});
 }
 
 void ConsoleManager::setCursorINvisible() {
@@ -30,7 +28,7 @@ void ConsoleManager::setCursorVisible() {
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
 
-//*********** Navigation private functions:
+// Cursor Navigation private functions:
 void ConsoleManager::setCursorPosForMenu() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     cursorPos = { 0, m_cursorMin };
@@ -48,7 +46,6 @@ void ConsoleManager::setCursorPosition () {
     SetConsoleCursorPosition(hConsole, cursorPos);
 }
 
-// getne současný kurzor pro určení optiony na základě pozice pod mapou
 COORD ConsoleManager::getConsoleCursorPosition (HANDLE hConsole) {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(hConsole, &csbi);
@@ -77,9 +74,6 @@ void ConsoleManager::changeCursorPos() {
     } while (input!= '\r');
 }
 
-
-
-// spustí se navigace kurzoru - tzn. hráč si může přesouvat kurzor a když zmáčkne enter vše skončí (něco si vybere)
 void ConsoleManager::cursorNavigation (int short const start_position, int short const total_options){
     setCursorRange(start_position, total_options);
     setCursorPosForMenu();
@@ -88,33 +82,29 @@ void ConsoleManager::cursorNavigation (int short const start_position, int short
 
 //----------**GUI & Main Print (PrintRoom)----------**
 char ConsoleManager::readUserInput() {
-    //std::cout << "Ctu zmacknuti tlacitka: \n";      // debug_print
-    char input = toupper(_getch());          // WASD + tab + enter
+    //std::cout << "Ctu zmacknuti tlacitka: \n";      // debug print
+    char input = toupper(_getch());          
     return input;
 }
 
 // --------Colors settings--------
-// Negativní důsledek: Pokud se pokusím zobrazit text - je zobrazet podle poslední vypsané tily (nehezký tedy)
-// obarví tilu pro mapu dle typu tily a následně setne Konzoli na černou...
 void ConsoleManager::setColorTile(int color) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, BACKGROUND * color);    // nastavi se pozadovana barva pro "mezeru"
-    printf(" "); // print požadovanou barvou
+    SetConsoleTextAttribute(hConsole, BACKGROUND * color);    // sets required color for the space character
+    printf(" "); // print of space character
 }
 
-// Text je opět viditelný - má být v případě, že dojde k cestování nebo menu zobrazení
-// automaticky je zas neviditelný v případě provedení akce na mapě (znovunačtení roomky)
 void ConsoleManager::setTextVisible() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole,(int)Colors::White); // nastavi pismo na white
+    SetConsoleTextAttribute(hConsole,(int)Colors::White); // sets text to white color
 }
 
 std::array<std::array <char, 40>, 20> ConsoleManager::AdjustTileFieldToSquareAspect(Room* actualRoom) {
     std::array<std::array <Tile*, 20>, 20> realTileField = actualRoom-> m_tileField;
     std::array<std::array <char, 40>, 20> virtualTileField;
-    for (int row = 0; row < virtualTileField.size(); row++) {      // 0 - 20 řádek
+    for (int row = 0; row < virtualTileField.size(); row++) {      // 0 - 19 row
         std::array <char, 40> tileRow;
-        for (int column = 0; column < virtualTileField.size(); column++) {     // 0 - 39 sloupec
+        for (int column = 0; column < virtualTileField.size(); column++) {     // 0 - 39 column
             virtualTileField.at(row).at(2*column) = realTileField.at(row).at(column)->getTileType();
             virtualTileField.at(row).at((2*column) + 1) = realTileField.at(row).at(column)->getTileType();
         }
@@ -124,11 +114,9 @@ std::array<std::array <char, 40>, 20> ConsoleManager::AdjustTileFieldToSquareAsp
 
 void ConsoleManager::printRoom(std::array<std::array <char, 40>, 20> virtualTileField) {
     char tileType;
-    for (int row = 0; row < virtualTileField.size(); row++) {  // kolik má pole v sobě polí (tzn. řádků)
-        //-- Pole řádků - řádek obsahuje sloupce = vnější se skládá z pole a pole z polí (pokud je) nebo z prvků
-        for (int column = 0; column < virtualTileField.at(row).size(); column++) { // kolik má řádek prvků
-            char tileType = virtualTileField.at(row).at(column); // Toto je konkretni Tila!!!
-            // Vypíše se konkrétní Tile type - grafické zobrazení
+    for (int row = 0; row < virtualTileField.size(); row++) {
+        for (int column = 0; column < virtualTileField.at(row).size(); column++) {
+            char tileType = virtualTileField.at(row).at(column);
             switch (tileType) {
             case '#': // WALL
                 setColorTile((int) Colors::Grey);
@@ -156,12 +144,6 @@ void ConsoleManager::printRoom(std::array<std::array <char, 40>, 20> virtualTile
         }
         std::cout << std::endl;
     }
-}
-
-
-// ------**DisplayPrints**------
-void ConsoleManager::displayInGameMenu() {
-    View::inGameMenu_m();
 }
 
 // ------**Execution of Menus**------               // ZMĚNÍ SE: ZŮSTANE POUZE PERSONAL STATS, INVENTORY, EXIT MENU, LEAVE GAME

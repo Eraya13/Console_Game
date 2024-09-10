@@ -22,7 +22,7 @@ void Game::setGameElements() {
     // Here are created game elements
 	system ("cls");
     m_player = new Player("Derien", 40, 40);
-	createMap("LocationsNames.txt");
+	createMap(Map::LOCATION_NAMES);
 	// setting game elements
     m_actualRoom = m_map->getRoom(START_LOCATION, START_ROOM);
     m_playerController = new PlayerController (6, 7, m_player, m_actualRoom);
@@ -62,7 +62,6 @@ ActionType Game::decideActionType() {
 	return ActionType::QuitGame;
 }
 
-// provede akci - na základě hodnoty, která se vrátí z decideActionType()
 void Game::performAction(ActionType action) {
 	bool changeRoomYesOrNo = false;		// default value - no travel is required right away
 	switch (action) {
@@ -94,6 +93,25 @@ void Game::performAction(ActionType action) {
 	}
 }
 
+bool Game::confirmDiscardItem() {
+    View::showDiscardConfirmationMessage();
+    ConsoleManager::cursorNavigation(8, 2);
+    int option = ConsoleManager::getOptionIndex();
+    if (option==1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void Game::handleItemDiscard(Item* item, int itemIndex) {
+View::displayItemInfo(item);
+        if (confirmDiscardItem()) {
+            m_player->discardItem(item, itemIndex);
+        }
+}
+
 void Game::browseInventory() {
     std::vector<Item*> items = m_player->getInventoryItemList();
     View::listInventoryItems(items);
@@ -108,16 +126,16 @@ void Game::browseInventory() {
         manageItemInteraction(realItemIndex);
     }
 }
-
+// todo const item* get and parameter const item* 
 void Game::manageItemInteraction(int itemIndex) {
     Item* selectedItem = m_player->selectItem(itemIndex);
-    View::displayItem(selectedItem);
-    ConsoleManager::cursorNavigation(5, 3);
+    View::displayItemInfo(selectedItem);
+    View::displayItemActions(selectedItem);
+    ConsoleManager::cursorNavigation(6, 4);
     executeItemAction(selectedItem, itemIndex);
 }
 
 // ------**Execution of Menus**------
-// **Provedení vybraných možností z InGameMenu
 void Game::executeInGameMenuOption(bool &gameOngoing) {
     int option = ConsoleManager::getOptionIndex();		// Gets option to perform based on cursor Position
     system ("cls");
@@ -133,10 +151,7 @@ void Game::executeInGameMenuOption(bool &gameOngoing) {
         break;
     case 4:
         gameOngoing = false;
-        break;
-    default:
-        std::cout << "\nError - no option found\n" << std::endl; // todo ErorLog
-        system ("pause");
+        return;
     }
     system ("cls");
 }
@@ -163,7 +178,7 @@ void Game::executeItemAction(Item* item, int itemIndex) {
     int option = ConsoleManager::getOptionIndex();
     system("cls");
     switch(option) {
-    case 1:
+    case 1:		// todo separate function
         if (item->getCategory()=="Potion") {
             m_player->drinkPotion();
         }
@@ -172,17 +187,21 @@ void Game::executeItemAction(Item* item, int itemIndex) {
         }
         break;
     case 2:
-        m_player->discardItem(item, itemIndex);
+	handleItemDiscard(item, itemIndex);        
+            system("cls");
         break;
     case 3:   // Back to inventory
-        // action to display list of items again
-	break;
+        break;
+    case 4:   // Leave inventory
+        return;
     }
+    //browseInventory();
+    accessInventory();
 }
 
 void Game::accessInventory() {
     int totalPotions = m_player->getNumberOfPotions();
-    View::Inventory_m(totalPotions);
+    View::displayInventory_m(totalPotions);
     ConsoleManager::cursorNavigation(4, 3);
     executeInventoryOption();
 }

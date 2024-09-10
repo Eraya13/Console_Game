@@ -31,7 +31,7 @@ void View::playerStats() {
     std::cout << "\t\t\t~Press [any key] to continue";
 }
 
-void View::Inventory_m(int totalPotions) {
+void View::displayInventory_m(int totalPotions) {
     std::cout << "-----------**Inventory**-----------" << "\n\n"
               /*"Total Coins"*/
               << "\tHP potions: " << "\t\t" << totalPotions << "\n\n"
@@ -52,7 +52,7 @@ void View::listInventoryItems(std::vector<Item*> items) {
     howToSelect();
 }
 
-void View::displayItem(Item* item) {
+void View::displayItemInfo(Item* item) {
     system("cls");
     std::cout << "-----------**Item details**-----------" << "\n\n"
               << "\t" << item->getName() << "\n"
@@ -60,26 +60,39 @@ void View::displayItem(Item* item) {
 
     // dynamic cast special vlastnosti
     if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
-        std::cout << "\t+" << weapon->getAttackBonus() << " damage\n\n";
+        std::cout << "\n\tThis weapon increases attack power by " << weapon->getAttackBonus()
+                  << " points, enhancing the player's damage potential.\n\n";
+    }
+    else if (Potion* potion = dynamic_cast<Potion*>(item)) {
+        std::cout << "\n\tThis potion restores " << potion->getHealthBonus()
+                  << " health points on use.\n\n";
+    }
+    else if (Armor* armor = dynamic_cast<Armor*>(item)) {
+        std::cout << "\n\tThis armor increases defense by " << armor->getDefenseBonus()
+                  << " points, making the player more resilient to damage.\n\n";
+    }
+    else {
+        std::cout << "\nDynamic cast of Item* (Father) failed" << std::endl;
+    }
+}
+
+void View::displayItemActions(Item* item) {
+    // dynamic cast special vlastnosti
+    if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
         toEquipOption(weapon);
     }
     else if (Potion* potion = dynamic_cast<Potion*>(item)) {
-        std::cout << "\n\tThis potion restores " << potion->getHealthBonus() << " health points on use"
-                  << "\n\n\tDrink potion";
+    std::cout << "\tDrink potion\n";
     }
     else if (Armor* armor = dynamic_cast<Armor*>(item)) {
-        std::cout << "\t+" << armor->getDefenseBonus() << " defense\n\n";
         toEquipOption(armor);
     }
     else {
-        std::cout << "\nDynamic cast of Item* Father failed" << std::endl;
+        std::cout << "\nDynamic cast of Item* (Father) failed" << std::endl;
     }
-    displayItem_m();
-}
-
-void View::displayItem_m() {
     std::cout << "\tDiscard item" << "\n"
-              << "\tBack to inventory" << "\n\n";
+              << "\tBack to inventory\n"
+              << "\tLeave inventory\n\n";
     howToSelect();
 }
 
@@ -99,4 +112,10 @@ void View::toEquipOption(Armor* armor) {
     else {
         std::cout << "\tEquip" << "\n";
     }
+}
+
+void View::showDiscardConfirmationMessage() {
+    std::cout << "Are you sure you want to discard this item?\n\n"
+              << "\t\tYes\n"
+              << "\t\tNo\n";
 }
