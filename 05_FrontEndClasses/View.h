@@ -65,7 +65,8 @@ public:
     *
     * Shows options for using, equipping, unequipping, or discarding the item, depending on its type. */
     static void displayItemActions(Item* item);
-     
+
+    static void displayGameInstructions();
     /**
     * @brief Displays personal stats of the player.
     *

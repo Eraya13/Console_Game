@@ -13,6 +13,33 @@ void View::inGameMenu_m () {
     howToSelect();
 }
 
+void View::displayGameInstructions() {
+    std::cout << "-----------**Game Instructions**-----------" << "\n\n";
+
+    std::cout << "Movement:\n\n"
+              << "\tUse W, A, S, D keys to move on the map." << "\n\n"
+              <<  "\t *W* - UP" << "\t *A* - LEFT \n"
+              <<  "\t *S* - DOWN" << "\t *D* - RIGHT \n\n";
+
+    std::cout << "Control of game Menu:\n\n"
+              << "\tPress [Tab] to display the Game Menu." << "\n"
+              << "\tNavigate menu options with W, A, S, D keys." << "\n"
+              << "\tConfirm selection with [Enter]." << "\n\n"
+              << "\tExit the game by pressing [Esc]." << "\n\n";
+
+    std::cout << "Game Menu Options:\n\n"
+              << "\tView Personal Stats, Inventory, Leave menu and Quit Game" << "\n\n";
+
+    std::cout << "Health and Game Over:\n\n"
+              << "\tThe game will continue as long as you have at least 1 life." << "\n"
+              << "\tIf you lose all your health, it's Game Over." << "\n\n";
+
+    std::cout << "Starting Equipment:\n\n"
+              << "\tYou start with basic armor and no weapon." << "\n\n";
+
+   // std::cout << "\t\t\t~Press [any key] to continue" << std::endl;
+}
+
 void View::playerStats() {
     std::cout << "-----------**Personal Stats**-----------" << "\n\n";
             /*<< "\t\t Name:\t" << m_player->getName() << "\n"

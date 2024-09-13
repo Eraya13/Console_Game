@@ -8,9 +8,12 @@
     *
     * - **Movement**: Represents player movement actions
     * - **InGameMenu**: Represents interaction with the in-game menu
-    * - **QuitGame**: Represents the action to exit or quit the game*/
+    * - **QuitGame**: Represents the action to exit or quit the game
+    * - **Help**: Represents the information about how to control the game
+    */
 enum class ActionType {
     Movement,     ///< Player movement actions
     InGameMenu,   ///< Interactions with the in-game menu
-    QuitGame      ///< Action to exit or quit the game
+    QuitGame,      ///< Action to exit or quit the game
+    Help          ///< Info about how to control the game
 };

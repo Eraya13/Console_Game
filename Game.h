@@ -4,6 +4,7 @@
 #include "03_Map/Map.h"
 #include "05_FrontEndClasses/ConsoleManager.h"
 #include "01_Enums/ActionType.h"
+#include <windows.h>
 
 //TODO ERRORLOG globalem nebo singletonem
 ///TODO InGame rename to Actions_m also find "InGameMenu" zmínky

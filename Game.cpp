@@ -55,8 +55,12 @@ ActionType Game::decideActionType() {
 			case 'D':
                 m_playerController->setDirection(key);
 				return ActionType::Movement;
-			case '\t':				// TAB key
-				return ActionType::InGameMenu;	
+            case 'H':
+                return ActionType::Help;
+            case '\t':				// TAB key
+                return ActionType::InGameMenu;
+
+
 		}
     } while (key != 27);		// ENTER key
 	return ActionType::QuitGame;
@@ -78,15 +82,24 @@ void Game::performAction(ActionType action) {
                 system ("cls");
 			}
 			break;
+        case ActionType::Help:
+            ConsoleManager::setTextVisible();
+            ConsoleManager::setCursorVisible();
+            system("cls");
+            View::displayGameInstructions();
+            system ("pause");
+            system("cls");
+            break;
 		case ActionType::InGameMenu:
-            // Here are function that prepares Console for printing menu	 
-            ConsoleManager::setTextVisible();        
-            ConsoleManager::setCursorVisible();      
+            // Here are function that prepares Console for printing menu
+            ConsoleManager::setTextVisible();
+            ConsoleManager::setCursorVisible();
             View::inGameMenu_m();
             // value of 22 = the exact line number on Console for selection of 1st option from menu                   
             ConsoleManager::cursorNavigation(22, 4);  
             executeInGameMenuOption(m_gameOngoing);
             break;
+
         case ActionType::QuitGame:
             m_gameOngoing = false;
             break;
