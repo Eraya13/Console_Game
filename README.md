@@ -12,7 +12,7 @@ developed in C++. It serves as a demonstration of OOP concepts within a simple, 
 ![UsedProgrammingLanguage](https://img.shields.io/badge/C++-00599C?style=flat&logo=C%2B%2B)
 ![UsedProgrammingLanguage](https://img.shields.io/badge/C-073551?style=flat&logo=C)
 ![Docs](https://img.shields.io/badge/Documentation-InProgress-orange)
-![Status](https://img.shields.io/badge/Status-completed-brightgreen)
+![Status](https://img.shields.io/badge/Status-InProgress-orange)
 
 # Setting up the application
 
