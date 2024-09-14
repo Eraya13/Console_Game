@@ -1,7 +1,7 @@
 
 ![Example Image](Console_Game_banner.png)
 
-## Brief Description of the Game
+# Brief Description of the Game
 A brief description of what this project does and who it's for
 
 ## Badges
