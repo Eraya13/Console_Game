@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <vector>
 
 #include "../02_Entity/Enemy.h"
@@ -13,7 +12,7 @@
 	//	-- jaké fily jsou určeny pro tvorbu Entit dané Roomky
 	// EntityManager spravuje vznik, zánik a drží si informace o Entitách pro danou roomku
 /**
- * @class EntityManager
+ * @class EntityManager.
  * @brief Manages the creating of Entities in the game.
  *
  * This class is responsible for storing and managing entities such as items and enemies. It initializes a predefined list based on text filed that specifies the stats of entity.
@@ -33,8 +32,7 @@ public:
 
     /**
     * @brief Adds a new enemy to the list.
-    * @param enemy Pointer to the Enemy object to be added.
-    */
+    * @param enemy Pointer to the Enemy object to be added. */
     void addEntity(Enemy* enemy);
      
     /**

@@ -1,8 +1,8 @@
 #pragma once
 
     /**
-    * @enum Colors
-    * @brief Defines a set of colors used in the game
+    * @enum Colors.
+    * @brief Defines a set of colors used in the game.
     *
     * This enum class defines the colors used for text and background that can be displayed on the Windows console. */
 enum class Colors {

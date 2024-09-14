@@ -6,6 +6,7 @@
 #include "../02_Entity/Weapon.h"
 #include "../02_Entity/Potion.h"
 
+//todo
 class Inventory
 {
 private:

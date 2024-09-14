@@ -10,13 +10,13 @@
 ///TODO InGame rename to Actions_m also find "InGameMenu" zmínky
 
     /**
-    * @class Game
+    * @class Game.
     * @brief Manages the core gameplay functionality.
     *
-    * @section Basic Information
+    * @section Basic Information.
     * The Game class handles the initialization of game elements, manages the main game loop, and processes player actions.
     *
-    * @section Key Responsibilities
+    * @section Key Responsibilities.
     * Coordinates the game environment, including player interactions, inventory management, and game state.
     * - **Initialization**: Sets up the game environment by creating and initializing key elements
     *
@@ -30,37 +30,36 @@
     *
     * - **Game State Management**: Controls the game's continuation or termination based on player decisions and game events.
     *
-    * The Game class acts as the main controller for game operations.*/
-
+    * The Game class acts as the main controller for game operations. */
     class Game {
     private:
     /**
-    * @brief The starting room index
+    * @brief The starting room index.
     *
     * This constant represents the initial index of room where player starts in the game.*/
     const int START_ROOM = 0;
 
     /**
-    * @brief The starting location index
+    * @brief The starting location index.
     *
     * This constant represents the initial index of location where player starts in the game.*/
     const int START_LOCATION = 0;
 
     /**
-    * @section Entity section: Entity
+    * @section Entity section: Entity.
     *
     * This section describes the member variables that interact with essential entities
-    * and play a crucial role in managing the game's state and functionality
-    */
+    * and play a crucial role in managing the game's state and functionality. */
+
     /**
-    * @brief Pointer to the player object
+    * @brief Pointer to the player object.
     *
     * This pointer refers to the current player instance, which is central to the game's progression.
     * Also there are no other players - only this one.*/
     Player* m_player;
 
     /**
-    * @brief Pointer to the map object
+    * @brief Pointer to the map object.
     *
     * This pointer refers to the map instance, which defines the game's world and its layout.
     * For a detailed explanation of how the map is structured and its attributes, please refer to the Map class documentation.
@@ -68,13 +67,13 @@
     Map* m_map;
 
     /**
-    * @brief Pointer to the current room object
+    * @brief Pointer to the current room object.
     *
     * This pointer refers to the room where the player is currently located. */
     Room* m_actualRoom;
 
     /**
-    * @brief Pointer to the PlayerController object managing player representation in the Room
+    * @brief Pointer to the PlayerController object managing player representation in the Room.
     *
     * This pointer refers to the `PlayerController` class, which manages the representation of player's position and
     * updates his representation within a tile-based room.
@@ -83,7 +82,7 @@
     PlayerController* m_playerController;
 
     /**
-    * @brief Flag indicating if the game is ongoing
+    * @brief Flag indicating if the game is ongoing.
     *
     * This boolean variable tracks whether the game should continue running. It is used to determine
     * if the game should keep playing or stop, based on player status or game exit decisions.
@@ -92,21 +91,20 @@
     bool m_gameOngoing;
 
     /**
-    * @brief Creates and initializes the game map
+    * @brief Creates and initializes the game map.
     *
     * This function creates a new instance of the `Map` class and assigns it to the `m_map` member variable.
     * The `Map` instance is initialized using the specified name of File ("filename"), which provides the
     * necessary data for map layout.
     *
-    * @param filename The name of the file containing the map data.*/
+    * @param filename The name of the file containing the map data. */
     void createMap(std::string filename);
 
     /**
     * @brief Configures the cursor for room to be hidden.
     *
     * This method sets the cursor to an appropriate position for printing the room tile field that start from position [0, 0]
-    * and then makes the cursor invisible because its visibility is not needed while display room.
-    */
+    * and then makes the cursor invisible because its visibility is not needed while display room. */
     void setCursor();
 
     /**
@@ -142,33 +140,32 @@
     * - **Quit Game**:
     *   - Sets `m_gameOngoing` to `false`, which will stop the main game loop - that ActionType is get if the player choose in Game munu to quit game.
     *
-    * @param action - The type of action to perform is determined by method `decideActionType`.*/
+    * @param action The type of action to perform is determined by method `decideActionType`.*/
     void performAction(ActionType action);
 
-/**
- * @brief Displays the player's inventory and handles item selection.
- *
- * This method retrieves the list of items from the player's inventory, displays them,
- * and allows the player to navigate through the inventory using the cursor.
- * Once an item is selected, it calls `manageItemInteraction()` to handle further actions
- * on the selected item. 
- * @note There is also an added option "Leave Inventory" that allows player to not choose
- * any item and leave inventory. */
+    /**
+    * @brief Displays the player's inventory and handles item selection.
+    *
+    * This method retrieves the list of items from the player's inventory, displays them,
+    * and allows the player to navigate through the inventory using the cursor.
+    * Once an item is selected, it calls `manageItemInteraction()` to handle further actions
+    * on the selected item.
+    * @note There is also an added option "Leave Inventory" that allows player to not choose
+    * any item and leave inventory. */
     void browseInventory();
 
     /**
- * @brief Manages interaction with a selected item in the player's inventory.
- *
- * This method is called after an item is selected from the inventory. It displays
- * detailed information about the selected item, shows the possible actions the player
- * can take (e.g., use, equip, discard), and allows the player to choose one of the
- * available actions via the cursor.
- *
- * @param itemIndex The index of the selected item in the inventory.
- */
+    * @brief Manages interaction with a selected item in the player's inventory.
+    *
+    * This method is called after an item is selected from the inventory. It displays
+    * detailed information about the selected item, shows the possible actions the player
+    * can take (e.g., use, equip, discard), and allows the player to choose one of the
+    * available actions via the cursor.
+    *
+    * @param itemIndex The index of the selected item in the inventory.*/
     void manageItemInteraction(int itemIndex);
     
-/**
+    /**
     * @brief Executes the selected option from the In-Game Menu.
     *
     * This function handles the execution of the option chosen by the player in the In-Game Menu.
@@ -249,28 +246,27 @@
     * After displaying the inventory menu, it allows the user to choose an action by calling
     * the `executeInventoryOption` method.
     *
-    * @see executeInventoryOption() for handling specific inventory actions.
-    */
+    * @see executeInventoryOption() for handling specific inventory actions. */
     void accessInventory();
 
-/**
- * @brief Handles the process of discarding an item from the player's inventory.
- *
- * This function displays the information about the item, asks the user to confirm the discard action,
- * and if confirmed, removes the item from the inventory.
- *
- * @param item A pointer to the item to be discarded.
- * @param itemIndex The index of the item in the inventory list.*/
+    /**
+    * @brief Handles the process of discarding an item from the player's inventory.
+    *
+    * This function displays the information about the item, asks the user to confirm the discard action,
+    * and if confirmed, removes the item from the inventory.
+    *
+    * @param item A pointer to the item to be discarded.
+    * @param itemIndex The index of the item in the inventory list.*/
     void handleItemDiscard(Item* item, int itemIndex);
 
-/**
- * @brief Gets input from the user if they want to discard an item.
- *
- * This function displays a confirmation message asking if the user wants to discard the item.
- * It waits for the user to navigate options via the cursor and returns true if the user confirms,
- * or false if the user declines.
- *
- * @return True if the user confirms the discard action, otherwise false. */
+    /**
+    * @brief Gets input from the user if they want to discard an item.
+    *
+    * This function displays a confirmation message asking if the user wants to discard the item.
+    * It waits for the user to navigate options via the cursor and returns true if the user confirms,
+    * or false if the user declines.
+    *
+    * @return True if the user confirms the discard action, otherwise false. */
     bool confirmDiscardItem();
 
 public:
@@ -287,8 +283,7 @@ public:
     *
     * This method initializes various game components, including setting the console output to UTF-8,
     * creating the player with its inner pointer to objects, map, setting the initial room, controls of movement and action of representation of player
-    * and finally configuring the cursor for print of actual room where player starts.
-    */
+    * and finally configuring the cursor for print of actual room where player starts. */
 	void setGameElements();
 
     /**
@@ -300,9 +295,9 @@ public:
     * - Determines the action type based on user input and performs the corresponding action.
     * - Resets the cursor for printing the actual room after each action.
     * - Checks if the game should continue; if `m_gameOngoing` is false, the loop will eventually stop.
-    * - Reprints the room after each action if the game has not ended because player died still ongoing.
-    */
+    * - Reprints the room after each action if the game has not ended because player died still ongoing. */
 	void gameLoop();
+
 	void testFunction(); 	// method for testing - it is not important and will be deleted
 };
 

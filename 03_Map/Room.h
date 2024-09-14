@@ -6,6 +6,7 @@
 #include "EntityManager.h"
 
 /**
+ * @class Room.
  * @brief Represents a single room in a larger location within the game, consisting of a grid of tiles.
  * 
  * A room is a single navigable area in which the player can move around. Rooms are interconnected by portals,

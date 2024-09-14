@@ -5,6 +5,7 @@
 
 
 /**
+ * @class PlayerController.
  * @brief Manages player's movement and interactions within the room.
  *
  * The PlayerController class handles the movement of the player, including determining valid moves,
@@ -113,16 +114,16 @@ public:
     PlayerController(int x, int y, Player* player, Room* room);			// x = row	y = column
 
 	/**
-    * @brief Create the player's next position based on their current direction
+    * @brief Create the player's next position based on their current direction.
     *
     * The method first gets the player's old position (`getOldPosition()`) to `m_playerNextPosition` and
     * then modifies it based on the movement direction that was get in different method. The direction is provided as a character
     * ('W', 'A', 'S', 'D'), corresponding to movement.
     *
-    * - 'W' (up): Decreases the X coordinate
-    * - 'S' (down): Increases the X coordinate
-    * - 'A' (left): Decreases the Y coordinate
-    * - 'D' (right): Increases the Y coordinate */
+    * - 'W' (up): Decreases the X coordinate.
+    * - 'S' (down): Increases the X coordinate.
+    * - 'A' (left): Decreases the Y coordinate.
+    * - 'D' (right): Increases the Y coordinate. */
 	void createNextPosition();
 
     /**
@@ -135,7 +136,7 @@ public:
     void processNextPosition(bool& changeRoomYesOrNo);
 
     /**
-    * @brief Gets the player's old position before movement
+    * @brief Gets the player's old position before movement.
     *
     * This function returns the previous position of the player within the room.
     *
@@ -145,7 +146,7 @@ public:
     //Position getNextPosition();			bude se hodit pro portaly
 
     /**
-    * @brief Gets the tile type at the player's next position
+    * @brief Gets the tile type at the player's next position.
     *
     * This function fetches the tile type from the room's tile field for the position where the player intends to move next.
     *
@@ -153,7 +154,7 @@ public:
 	char getTileType_nextPosition();
 
     /**
-    * @brief Initializes the player's position on the map
+    * @brief Initializes the player's position on the map.
     *
     * Sets the player's initial position on the tile field when the game starts or
     * when the player enters a new room. */

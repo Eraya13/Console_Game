@@ -67,6 +67,7 @@ public:
     static void displayItemActions(Item* item);
 
     static void displayGameInstructions();
+
     /**
     * @brief Displays personal stats of the player.
     *

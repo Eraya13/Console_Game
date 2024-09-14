@@ -13,6 +13,7 @@
 #include "../01_Enums/Colors.h"
 #include "../03_Map/Room.h"
 
+
 class ConsoleManager
 {
 private:
@@ -40,7 +41,8 @@ private:
     * @brief Sets the cursor position for printing the room layout. */
     static COORD getConsoleCursorPosition (HANDLE hConsole);
 
-    // interní funkce cursorNavigation()
+    //----- **private funkce metody cursorNavigation()** -----
+
     /**
     * @brief Sets the vertical range of the cursor for menu navigation.
     *

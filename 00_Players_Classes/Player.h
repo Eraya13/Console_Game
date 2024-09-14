@@ -5,7 +5,8 @@
 #include "Inventory.h"
 
 /**
- * @brief Represents the player character in the game
+ * @class EntityManager.
+ * @brief Represents the player character in the game.
  *
  * The Player class manages the player's attributes such as health, attack, defense, inventory, and equipped items (armor and weapon).
  * It provides methods to interact with the player's inventory, manage health, and engage in combat with enemies. */
@@ -17,45 +18,45 @@ private:
     std::string m_name;
 
     /**
-    * @brief The player's current health points
+    * @brief The player's current health points.
     *
     * Determines if the player is hurt or not. If there is no damage the value is 100 HP and if health reaches 0,
     * the player is defeated and game is over. */
     int m_health;
 
     /**
-    * @brief The player's attack power
+    * @brief The player's attack power.
     *
     * Used to calculate the damage dealt to enemies during combat without weapon, weapon adds bonus to attack. */
     int m_attack;
 
     /**
-    * @brief The player's defense value
+    * @brief The player's defense value.
     *
     * Reduces incoming damage from enemies based on this value. The value stores only natural defense without any armor.*/
     int m_defense;
 
     /**
-    * @brief A pointer to the player's inventory
+    * @brief A pointer to the player's inventory.
     *
     * Holds the items the player has collected, such as potions, weapons, armor and coins. */
     Inventory* m_inventory;
     
     /**
-    * @brief A pointer to the armor currently equipped by the player
+    * @brief A pointer to the armor currently equipped by the player.
     *
     * Armor increases the player's defense and provides protection during combat.*/
     Armor* m_armor;
 
     /**
-    * @brief A pointer to the weapon currently equipped by the player
+    * @brief A pointer to the weapon currently equipped by the player.
     *
     * Weapons are used to increase the player's attack power during combat.*/
     Weapon* m_weapon;
 
 public:
     /**
-    * @brief Constructs a Player object with a given name, health, and attack power
+    * @brief Constructs a Player object with a given name, health, and attack power.
     *
     * Initializes the player with specified attributes including name, health, and attack value.
     * An `Inventory` object is automatically created when the player is constructed.
@@ -101,7 +102,7 @@ public:
     void drinkPotion(Potion* potion, int itemIndex);
     
     /**
-    * @brief Makes the player drink a potion to restore health
+    * @brief Makes the player drink a potion to restore health.
     *
     * Searches the player's inventory for a potion, restores health based on the potion's
     * health bonus, and then discards the potion from the inventory.
@@ -110,7 +111,7 @@ public:
     void drinkPotion();
 
     /**
-    * @brief Restores the player's health by a specified amount get from potion
+    * @brief Restores the player's health by a specified amount get from potion.
     *
     *  This method increases the player's health by the given amount, up to a maximum limit.
     *
@@ -118,7 +119,7 @@ public:
     void restoreHealth(int amount);
 
     /**
-    * @brief Returns a list of items currently in the player's inventory
+    * @brief Returns a list of items currently in the player's inventory.
     *
     * @return A vector of pointers to the items in the player's inventory.*/
     std::vector<Item*> getInventoryItemList();
