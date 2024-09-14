@@ -1,5 +1,5 @@
 #pragma once
-#include "../02_Entity/Entity.h"
+#include "IEntity.h"
 
 class Item: public IEntity {
 protected:
@@ -12,7 +12,11 @@ public:
 	Item(std::string name);
 	std::string getName() const;
 	std::string getCategory() const;
-	std::string getInfo() const;
-	virtual void setInfo() = 0;
-	virtual void setCategory() = 0;
+    std::string getInfo() const;
+    void printInfo();
+    virtual void setInfo(std::string info) = 0;
+    virtual void setCategory(std::string category) = 0;
+    // specifická metoda, která zobrazí formátovaně info o daném objektu místo předání hodnot
+    virtual void printBriefInfo() = 0;
+    virtual ~Item() = 0;
 };

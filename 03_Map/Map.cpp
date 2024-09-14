@@ -1,66 +1,78 @@
 #include "Map.h"
 
-Map::Map(std::string filename) {
-	createMap(filename);
+// Initialize constants for file paths
+const std::string Map::MAP_FOLDER = "Files/Map/Locations/"; // Path to the folder containing location files
+const std::string Map::LOCATION_NAMES = "LocationsNames.txt"; // File containing names of location directories
+
+Map::Map(std::string fileName) {
+    std::string path_locationNames = Map::MAP_FOLDER + fileName;
+    createMap(path_locationNames);
 }
 
-// precteni jmen lokaci (dirs) + ulozeni techto jmen do arraye m_dir_location
-void Map::readLocationNames(std::string const path_locationsNames) {	
-	std::ifstream f_dirLocations;			   // deklarace citatka pro konkretni soubor
-	f_dirLocations.open(path_locationsNames); // nacteni cesty
-	if (f_dirLocations.is_open()) {
-		int indexLokace = 0;					// starting index lokace = Village
-		while (!(f_dirLocations.eof())) {
-			std::string name;
-			getline(f_dirLocations, name);			// cteni 1 radku = 1 lokace
-			m_dir_location.at(indexLokace) = name;		// array imp part of path lokace
-			indexLokace++;
-		}
-		f_dirLocations.close();
-	}
-}
-// hlavni prostredi vytvareni mapy
-void Map::createMap(std::string f_locationsName) {
-	std::string path = MapFolder + f_locationsName;			// MapFolder is type of relative path
-	// debugPrint
-	//std::cout << completePath << "\n\n";
-	if (std::filesystem::exists(path)) {
-		readLocationNames(path);
-		createRooms();
-	}
-	else {
-		Errors::File_Not_Found();
-	}
+
+void Map::createMap(std::string path_locationNames) {
+    if(readLocationNames(path_locationNames)) {
+        createRooms();
+    }
+    else {
+        std::cerr << "File not found. The path leads to not-existing file." << std::endl;
+    }
 }
 
-// vytvareni Roomek a ukladani do 2D vektoru m_map
+bool Map::readLocationNames(std::string const path_locationNames) {
+    std::ifstream f_LocationNames(path_locationNames);
+    if (!f_LocationNames.is_open()) {
+        return false;
+        //std::cout << "File cannot be open - no file for relative path: " << path_locationNames;
+    }
+
+    int indexLokace = 0;					// starting index location
+    while (!(f_LocationNames.eof())) {
+        std::string name;
+        getline(f_LocationNames, name);			// 1 line = 1 location name
+        m_dir_location.at(indexLokace) = name;		// storing names at the singular indexes of location 0- 9
+        indexLokace++;
+    }
+
+    // if all is succesful - file will be closed a method returns true
+    f_LocationNames.close();
+    return true;
+}
+
+bool Map::readRoomFile(std::string path) {
+    std::ifstream roomFile(path);
+    if (!roomFile.is_open()) {
+        //std::cerr << "File in relative path - "<< path << " has not been found - probably does not exist" << std::endl;
+        return false;
+    }
+    return true;
+}
+
 void Map::createRooms() {
-	std::vector<Room*> lokace;		// lokalni promenna pro push_back roomek do m_mapy
-	std::string filePathRoom;        // Village = home
-	int locationAmount = 4;			// pocet lokaci ve hre (tolik mame slozek)
+    std::vector<Room*> lokace;	
+    std::string path_Room;         
+    int locationAmount = 4;	// total number of location for the game
 
-	for (int indexL = 0; indexL < locationAmount && !m_dir_location.empty(); indexL++) {					// indexL = Location		// indexR = Room
-		lokace.clear();											//vycisti vektor lokaci - pushuju tam nove m_rooms
-		for (int indexR = 1; indexR <= 9; indexR++) {
-			filePathRoom = MapFolder + m_dir_location.at(indexL) + "/0" + std::to_string(indexR) + ".txt";
-			if (std::filesystem::exists(filePathRoom)) {
-				m_room = new Room(filePathRoom);
-				lokace.push_back(m_room);
-			}
-			else { // **Debug Errors**
-				//Errors::File_Not_Found();
-				//std::cout << Errors::amountErrors;		// vzdy errors  by melo byt jako pocet lokaci
-				break;
-			}
-		}
-		/*Debug prints
-		/std::cout << filePathRoom << std::endl;
-		std::cout << "Adding location: " << m_dir_location.at(indexL) <<  " to m_map."  << std::endl;
-		std::cout << "Number of rooms in lokace: " << lokace.size() << std::endl;
-		system("pause");*/
-		// Pridani lokace m_mapy
-		m_map.push_back(lokace);
-	}
+    for (int indexL = 0; indexL < locationAmount; indexL++) {		// indexL = index of Location		
+        lokace.clear();
+        for (int indexR = 1; indexR <= 9; indexR++) { 		// indexR = index of Room
+            path_Room = Map::MAP_FOLDER + m_dir_location.at(indexL) + "/0" + std::to_string(indexR) + ".txt"; // path to specific room in the location
+
+            if(!readRoomFile(path_Room)) {  // if it cannot be open - break of the cycle and new room from next location will be read
+                break;
+            }
+  
+            m_room = new Room(path_Room);
+            lokace.push_back(m_room);
+        }
+        
+        //Debug prints
+        //std::cout << path_Room << std::endl;
+        /*std::cout << "Adding location: " << m_dir_location.at(indexL) <<  " to m_map."  << std::endl;
+        std::cout << "Number of rooms in lokace: " << lokace.size() << std::endl;
+        system("pause");*/
+        m_map.push_back(lokace);
+    }
 }
 
 Room* Map::getRoom(int location, int index) const {

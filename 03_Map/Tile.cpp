@@ -11,13 +11,14 @@ void Tile::setTileType(char newType) {
 }
 
 void Tile::setTileEntity(IEntity *entity) {
-	if (entity !=nullptr) {
+    if (entity == nullptr) {
 		m_entity = entity;
 	}
-	else {	// Kdybych neomezila jinde... zamyslet se nad potrebnosti zde
-		std::cout << "Error: try for setting nullptr entity to attribute m_entity!" << std::endl;
+	else {
+		 std::cout << "Warning: Attempting to assign a entity to tile that is occuppied by entity!" << std::endl;
 	}
 }
+
 void Tile::emptyTileEntity() {
 	//m_entity = nullptr;
 }

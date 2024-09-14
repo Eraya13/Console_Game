@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
-#include "../02_Entity/IEntity.h"
+#include "IEntity.h"
 
 class Entity : public IEntity {
 protected:

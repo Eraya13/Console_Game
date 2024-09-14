@@ -1,6 +1,6 @@
-#include "Controls.h"
+#include "PlayerController.h"
 
-Controls::Controls(int x, int y, Player* player, Room* room) {
+PlayerController::PlayerController(int x, int y, Player* player, Room* room) {
 	m_player = player;
 	m_actualRoom = room;
 	m_playerOldPosition = { x, y };
@@ -8,14 +8,13 @@ Controls::Controls(int x, int y, Player* player, Room* room) {
 	m_direction = 'N';
 }
 
-void Controls::setDirection(char key) {
+void PlayerController::setDirection(char key) {
 	m_direction = key;
 }
 
-// gettery:
-Position Controls::getOldPosition() const { return m_playerOldPosition; }
+Position PlayerController::getOldPosition() const { return m_playerOldPosition; }
 
-char Controls::getTileType_nextPosition() {
+char PlayerController::getTileType_nextPosition() {
 	int nextPos_x = m_playerNextPosition.st_x;
 	int nextPos_y = m_playerNextPosition.st_y;
 	char tileType;
@@ -24,10 +23,9 @@ char Controls::getTileType_nextPosition() {
 	return tileType;
 }
 
-// pozice sprava
-void Controls::createNextPosition() {
+void PlayerController::createNextPosition() {
 	m_playerNextPosition = getOldPosition();
-	switch (m_direction) {				// uprava nextPozice dle directionu
+    switch (m_direction) {
 	case 'W':
 		m_playerNextPosition.st_x--;
 		break;
@@ -42,56 +40,50 @@ void Controls::createNextPosition() {
 		break;
 	}
 }
-// settery pozice
-void Controls::updateControlsPosition() {
-	m_playerOldPosition = m_playerNextPosition;		// nextPozice se prepisuje - neni treba menit
+
+void PlayerController::updateControlsPosition() {
+    m_playerOldPosition = m_playerNextPosition;
 }
 
-void Controls::setOldPlayerPosition_onTF() {
-	// nastaveni na noneTile - "smazani" reprezentovane pozice
+void PlayerController::removeOldPlayerPosition_onTF() {
 	m_actualRoom->m_tileField.at(m_playerOldPosition.st_x).at(m_playerOldPosition.st_y)->setTileType('.');
 }
 
-void Controls::setNextPlayerPosition_onTF() {
-	// nastaveni na reprezentovanou pozici hrace
+void PlayerController::setNextPlayerPosition_onTF() {
 	m_actualRoom->m_tileField.at(m_playerNextPosition.st_x).at(m_playerNextPosition.st_y)->setTileType('P');
 }
 
-void Controls::setPlayerOnMap() {
+void PlayerController::setPlayerOnMap() {
 	m_actualRoom->m_tileField.at(m_playerOldPosition.st_x).at(m_playerOldPosition.st_y)->setTileType('P');
 }
 
-void Controls::move(char tileType) {
-	switch (tileType) {			// posouzeni pozice - if good ulozi se na starou
+void PlayerController::move(char tileType) {
+    switch (tileType) {
 	case '.':
 	case 'I':
-		setOldPlayerPosition_onTF();
+        removeOldPlayerPosition_onTF();
 		setNextPlayerPosition_onTF();
 		updateControlsPosition();
 		break;
 	}
 }
 
-void Controls::interact(char tileType) {
+void PlayerController::interact(char tileType) {
 	switch (tileType) {
 	case 'E':
 		// battleOnTily()
-		break;
-	case 'N':
-		// 
 		break;
 	case 'I':
 		break;
 	}
 }
 
-void Controls::travel(char tileType, bool& changeRoomYesOrNo) {
-	setOldPlayerPosition_onTF();
+void PlayerController::travel(char tileType, bool& changeRoomYesOrNo) {
+    removeOldPlayerPosition_onTF();
 	changeRoomYesOrNo = true;
 }
 
-// analyzujeNextPozici a podle ni nastavie hodnoty pro movement ci interakci
-void Controls::analyzeAperformNextPosition(bool &changeRoomYesOrNo) {
+void PlayerController::processNextPosition(bool &changeRoomYesOrNo) {
 	char tileType = getTileType_nextPosition();
 	move(tileType);
 	interact(tileType);

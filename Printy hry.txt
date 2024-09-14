@@ -1,0 +1,271 @@
+Printy:
+
+travel // vymyslet pak podmínky pro print jednotlivých řádků
+
+(tzn podle Quest Levelu hráče)
+
+Forest = 2
+Deep Forest = 3
+
+
+rule: another print +1 řádek
+
+vždy tři části printu:
+nadpis menu()
+Press Enter to select (in the end)
+
+
+-----------**Travel Menu**-----------
+
+	Forest
+	Deep Forest
+	The Fields
+
+		~Press [ENTER] to make selection
+
+----------**In Game Menu**-----------
+
+	Personal Stats
+	Inventory
+	Exit Menu
+	Leave Game
+			
+		~Press [ENTER] to make selection
+
+
+Future:
+****--BIG Prinart ****--
+
+Start Game
+
+Load Game
+Upscale Option
+
+Leave Game
+
+
+Alfa version
+
+
+----PRINT ART----
+
+	(play art) Start Game
+
+	Exit game
+
+
+-----------**Personal Stats**-----------
+
+	Name of hero: 		Derrien
+	Health:			number	HP
+	Attack damage:		attack->m_player	(+40 bonus)
+	Defense:		defence->m_player	(+cislo bonus)
+
+	Equipped armor:		nazev armor		-------**Experience**------
+	--   Details:
+		Name:			name		Level:		cislo
+		Bonus Defence:		40		Total XP:		xp Total->m_player
+		Bonus Attack:		none		XP to Next Lv: 		xp (výpočet)
+	Description: blahfjlablaf
+	
+	Equipped weapon:		name
+	--   Details:
+		Bonus Defence:		40
+		Bonus Attack:		20
+	Description: blahfjlablaf
+	
+	
+					~Press [any key] to continue
+
+-----------**Inventory**-----------
+
+	Total coins:		cislo
+	HP potions:		cislo
+		
+	Drink potion			~PRESS 1
+	Display all items		~PRESS 2
+	Exit 				~PRESS 0
+
+
+---- List all items ----
+
+  Name
+  Name
+  Name
+  Name
+  Name
+  Name
+  Name
+
+
+			~Press [ENTER] to make selection for additional info
+-----Zobrazení itemu----
+
+Weapon:
+	Moonlight sword		m_item->Name					
+	Weapon			m_item->Category
+	
+	blahdsa bldjflkdsf hksjlakl jikr 	Description
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+	~ Equip / Unequip			-- zobrazí se podle nějaké proměnné bool
+	~ Discard item
+	~ Back to inventory (zobrazí se list itemů again)
+Armour:
+
+	Silver armour						
+	Armour
+	
+	blahdsa bldjflkdsf hksjlakl jikr 
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+	~ Equip / Unqeuip		
+	~ Discard item
+	~ Back to inventory (zobrazí se list itemů again)
+
+-----------------------------------------**Inventory**-----------------------------------------
+Potion:
+	Health Potion						
+	Potion		+ 100 HP
+	
+	blahdsa bldjflkdsf hksjlakl jikr 
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+	~ Drink potion
+	~ Discard item
+	~ Back to inventory (zobrazí se list itemů again)
+
+------------**Discard Menu:
+
+	Health Potion						
+	Potion
+	
+	blahdsa bldjflkdsf hksjlakl jikr 
+	sjka rkuzrsa\bfsalke
+	kůsf kjasljrk  jlkra lkjlsd 
+
+
+Are you sure you want to discard this item?
+
+		Yes
+		No
+	
+
+
+Postup Inventáře:
+
+- zobrazí se inventář - člověk má omezené možnosti (musí potvrdit enterem) = enter stop getch
+- na základě cursorPos se zvolí nějaká volba 
+
+a) vypití poitionu: - přidání health -> systém (cls) -> printMapy -> zobrazení hlášky pod mapou
+
+\t\tYou drank the health potion and recovered x HP points.
+\nYour actual health: číslo m_player->getHealth();
+
+b) Exit: system(cls) -> printMapy
+
+c) List all items -> metoda listAllItems - "header" + each položka ve formátu:
+
+ID	  |   Type		   |	Name		|   	Item Bonus			
+----------------------------------------------------------------------------------------------
+40	  |   Weapon		   |    Diamond Sword	|	+ 40 damage	
+
+
+-- kurzor - setne pozice na základě toho, že bude kopírovat for cyklus při výpisu položek - tzn. hodnotu "kolik je předmětů" v itemlistu inventory
+
+na základě pozice se vybere item -> new screen - podrobnosti o itemu + akce (opět výběr se setne jen na možnosti pod zobrazením)
+
+Discard = screena pod textem Opravdu chcete tento předmět smazat? Yes, no (vertikální)
+-- v obou případech návrat do inventáře (předmět tam už nemá být)
+Yes = -- Napsat hned pod to hlášku o smazání předmětu
+
+	--- will be listed by Type
+	
+	Back to the inventory
+(version of getch if item quest item / armor || shield || weapon / HP potion)
+
+OR selection na základě pozic pointerů (opět variace...)
+
+case 'HP potion':
+	setting coursor range:
+	1	= drink potion
+	2	= discard / delete -> destruktor
+	3	= Back to inventory
+case 'Armour / Weapon':
+	1	Equip
+	2	Discard & Drop item
+	3	Back to Inventory
+case 'Ques Item':
+	- only display information
+	- ENTER / ANY KEY TO CONTINUE
+if armour equip: print:
+
+	Armour is equipped by Hero
+
+
+--- asi nejlepší (pojistím si vstupy)
+
+Finální varianta: Pouze se "rozbalí" seznam itemů - jeden po druhém
+(problém - příliš moc rozbalených itemů - dlouhý telefonní seznam...)
+-- nutný print po každém "rozbalení"
+
+
+- 1) HP					
+- 2) Armor
+	then by id -> lower to highest
+- 3) Weapon
+- 4) Quest Items
+	
+
+
+eg.	Note: 
+		To display more info or perfom action press [ENTER] on choisen item
+
+					****Weapons****
+
+ID	  |   Type		   |	Name		|   	Item Bonus			
+----------------------------------------------------------------------------------------------
+40	  |   Weapon		   |    Diamond Sword	|	+ 40 damage	
+	
+
+
+
+
+-----------**Upscale Options**-----------
+
+Note: Setting for bigger or smaller console print of game map 
+
+Actual Upscale: 1		(normal)
+New:		2
+				~PRESS [W] / [S] 
+					to increse or decrease upscale
+				
+				~PRESS [ENTER] to confirm value
+
+
+-----------**Quest List**-----------
+
+
+				****In progress****
+= 1
+|     Name	   	|		Location		|   	Assign by
+----------------------------------------------------------------------------------------------
+				
+
+
+
+				****Ready to submit****
+
+= 2
+				****Completed****
+= 3
+
+
+
+
+
+			
+	
