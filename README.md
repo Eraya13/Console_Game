@@ -1,11 +1,9 @@
 
 ![Example Image](Console_Game_banner.png)
-# Console Game Demo
-
-A brief description of what this project does and who it's for
-
 
 ## Brief Description of the Game
+A brief description of what this project does and who it's for
+
 ## Badges
 
 Add badges from somewhere like: [shields.io](https://shields.io/)
