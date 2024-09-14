@@ -1,4 +1,5 @@
 
+![Example Image](Console_Game_banner.png)
 # Console Game Demo
 
 A brief description of what this project does and who it's for
