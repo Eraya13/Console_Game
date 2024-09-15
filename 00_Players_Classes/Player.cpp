@@ -10,15 +10,15 @@ Player::Player(std::string name, int health, int attack) {
     m_inventory = new Inventory();
 }
 
-int Player::getHealth() {
+int Player::getHealth() const {
 	return m_health;
 }
 
-int Player::getAttack() {
+int Player::getAttack() const {
 	return m_attack;
 }
 
-std::string Player::getName() {
+std::string Player::getName() const {
     return m_name;
 }
 
@@ -52,7 +52,7 @@ std::vector<Item*> Player::getInventoryItemList() {
     return m_inventory->getItemList();
 }
 
-int Player::getNumberOfPotions() {
+int Player::getNumberOfPotions() const {
     return m_inventory->getNumberOfPotions();
 }
 
@@ -71,7 +71,6 @@ void Player::discardItem(Item* item, int itemIndex) {
 void Player::drinkPotion() {
     Item* potion = nullptr;
     int index = -1;
-
     m_inventory->findPotion(potion, index);
 
     if (potion != nullptr) {
@@ -85,9 +84,77 @@ void Player::drinkPotion() {
     }
 }
 
+
 void Player::drinkPotion(Potion* potion, int itemIndex) {
     int healthBonus = potion->getHealthBonus();
     restoreHealth(healthBonus);
     m_inventory->discardItem(potion, itemIndex);
 }
 
+int Player::getTotalAttackPower() const {
+    return m_weapon->getAttackBonus() + getAttack();
+}
+
+void Player::equip(Weapon* weapon) {
+    system ("cls");
+    if (m_weapon == nullptr) {
+        m_weapon = weapon;
+        m_weapon->setEquipped();
+    }
+    else {
+        m_weapon->setUnequipped();
+        m_weapon = weapon;
+        m_weapon->setEquipped();
+    }
+    // zde volat View... OR jen provést akce a podle návratové hodnoty volat toto níže...
+    int totalAttackPower = m_weapon->getAttackBonus() + getAttack();
+    std::cout << "You have equipped the " << m_weapon->getName() << " (+ " << m_weapon->getAttackBonus() << " attack power).\n";
+    std::cout << "Your total attack power is " << totalAttackPower << std::endl;
+    system("pause");
+}
+
+void Player::equip(Armor* armor) {
+    system ("cls");
+    if (m_armor == nullptr) {
+        m_armor = armor;
+        m_armor->setEquipped();
+    }
+    else {
+        m_armor->setUnequipped();
+        m_armor = armor;
+        m_armor->setEquipped();
+    }
+    // zde volat View... OR jen provést akce a podle návratové hodnoty volat toto níže...
+    //int totalDefensePower = m_armor->getDefenseBonus() + getDefense();
+    std::cout << "You have equipped the " << m_armor->getName() << " (+ " << m_armor->getDefenseBonus() << " defense power).\n";
+    //std::cout << "Your total defense power is " << totalDefensePower << std::endl;
+    system("pause");
+}
+
+void Player::unequipWeapon() {
+    m_weapon->setUnequipped();
+    m_weapon = nullptr;
+}
+
+void Player::unequipArmor() {
+    m_armor->setUnequipped();
+    m_armor = nullptr;
+}
+
+void Player::toggleEquipment(Weapon* weapon) {
+    if (m_weapon != weapon) {
+        equip(weapon);
+    }
+    else {
+        unequipWeapon();
+    }
+}
+
+void Player::toggleEquipment(Armor* armor) {
+    if (m_armor != armor) {
+        equip(armor);
+    }
+    else {
+        unequipArmor();
+    }
+}

@@ -4,7 +4,9 @@ Inventory::Inventory() {
     m_totalNumberItems=0;
     addItem(new Potion("Health Potion"));
     addItem(new Weapon("Silver katana", 40));
-    addItem(new Armor("Welvet gear", 40));
+    addItem(new Weapon("Blood Dagger", 20));
+    addItem(new Armor("Iron gear", 40));
+    addItem(new Armor("Welvet gear", 10));
 }
 
 void Inventory::addItem(Item* item) {

@@ -191,17 +191,24 @@ void Game::executeItemAction(Item* item, int itemIndex) {
     int option = ConsoleManager::getOptionIndex();
     system("cls");
     switch(option) {
-    case 1:		// todo separate function
-        if (item->getCategory()=="Potion") {
-            m_player->drinkPotion();
+    case 1: // cast
+        if (Potion* potion = dynamic_cast<Potion*>(item)) {
+            m_player->drinkPotion(potion, itemIndex);
         }
-        if (item->getCategory()=="Armor" || item->getCategory()=="Weapon") {
-            // equip
+        else if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
+            m_player->toggleEquipment(weapon);
+            //m_player->getTotalAttackPower();
+            //View::EquippedMessage(weapon) -- vypíše co si hráč nasadil + jak se mu změnili staty
         }
+        else if (Armor* armor = dynamic_cast<Armor*>(item)) {
+            m_player->toggleEquipment(armor);
+            //View::EquippedMessage(armor) -- vypíše co si hráč nasadil + jak se mu změnili staty
+        }
+        system("cls");
         break;
     case 2:
-	handleItemDiscard(item, itemIndex);        
-            system("cls");
+        handleItemDiscard(item, itemIndex);
+        system("cls");
         break;
     case 3:   // Back to inventory
         break;

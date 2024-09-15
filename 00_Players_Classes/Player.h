@@ -72,20 +72,20 @@ public:
     *
     * @return The current health value of the player.
     */
-    int getHealth();
+    int getHealth() const;
     /**
     * @brief Retrieves the player's attack power.
     *
     * @return The player's attack value.
     */
-    int getAttack();
+    int getAttack() const;
 
     /**
     * @brief Retrieves the player's name
     *
     * @return The name of the player as a string.
     */
-    std::string getName();
+    std::string getName() const;
 
 	void setHealth(int minusHealth);
 
@@ -144,8 +144,9 @@ public:
     * @brief Retrieves the total number of potions in the player's inventory.
     *
     * @return The number of potions the player currently has in their inventory.*/
-    int getNumberOfPotions();
+    int getNumberOfPotions() const;
 
+    int getTotalAttackPower() const;
     /**
     * @brief Returns the total number of items in the player's inventory.
     *
@@ -160,6 +161,16 @@ public:
     * @param itemIndex The index of the item to select.
     * @return A pointer to the selected `Item` object.*/
     Item* selectItem(int itemIndex);
+
+    void toggleEquipment(Weapon* weapon);
+    void toggleEquipment(Armor* armor);
+
+    void equip(Weapon* weapon);
+
+    void equip(Armor* armor);
+
+    void unequipWeapon();
+    void unequipArmor();
     /**
     * @brief Initiates a battle between the player and the specified enemy.
     *
