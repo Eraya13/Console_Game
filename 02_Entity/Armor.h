@@ -9,6 +9,8 @@ public:
 	Armor(std::string name, int defenseBonus);
 	int getDefenseBonus() const;
     void setInfo(std::string info) override;
+    void setEquipped();
+    void setUnequipped();
     bool isEquipped();
     void setCategory(std::string category) override;
     void printBriefInfo() override;

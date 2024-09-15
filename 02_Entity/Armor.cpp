@@ -19,6 +19,10 @@ void Armor::setInfo (std::string info) {
 // ** getters **
 int Armor::getDefenseBonus () const { return m_defenseBonus; }
 
+void Armor::setEquipped() { m_equipped = true; }
+
+void Armor::setUnequipped() { m_equipped = false; }
+
 bool Armor::isEquipped() { return m_equipped; }
 
 void Armor::printBriefInfo() {
