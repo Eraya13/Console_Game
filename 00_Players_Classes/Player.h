@@ -1,41 +1,30 @@
 #pragma once
-#include "../02_Entity/Enemy.h"
-#include "../02_Entity/Weapon.h"
-#include "../02_Entity/Armor.h"
 #include "Inventory.h"
+#include "Enemy.h"
+#include "../05_FrontEndClasses/View.h"
+#include "../02_Entity/Entity.h"
 
 /**
- * @class EntityManager.
- * @brief Represents the player character in the game.
+ * @class Player
+ * @brief Represents the player's character in the game.
  *
- * The Player class manages the player's attributes such as health, attack, defense, inventory, and equipped items (armor and weapon).
- * It provides methods to interact with the player's inventory, manage health, and engage in combat with enemies. */
-class Player {
-private:
-/**
- * @brief The name of the player character.
+ * The `Player` class model represents the character that player controls in the game, inheriting from the `Entity` class.
+ * It extends the base functionality of an entity by introducing the player's inventory, equipped armor, and weapon.
+ * The class provides methods to interact with the player's inventory (adding, discarding, equipping items),
+ * and engage in combat with enemies.
+ *
+ * The `Player` is a central game entity that keeps track of attributes such as attack, defense, health, and
+ * experience points (XP). The player can also equip and use various items such as weapons and armor to influence
+ * these attributes.
+ *
+ * @details
+ * - The player's inventory allows for the collection and management of items like potions, armor, and weapons.
+ * - Equipped items directly affect the player's attack and defense stats.
+ * - Health management includes healing via potions.
+ * - The player gains experience points (XP) from defeating enemies, which can potentially be used for leveling up.
  */
-    std::string m_name;
-
-    /**
-    * @brief The player's current health points.
-    *
-    * Determines if the player is hurt or not. If there is no damage the value is 100 HP and if health reaches 0,
-    * the player is defeated and game is over. */
-    int m_health;
-
-    /**
-    * @brief The player's attack power.
-    *
-    * Used to calculate the damage dealt to enemies during combat without weapon, weapon adds bonus to attack. */
-    int m_attack;
-
-    /**
-    * @brief The player's defense value.
-    *
-    * Reduces incoming damage from enemies based on this value. The value stores only natural defense without any armor.*/
-    int m_defense;
-
+class Player : public Entity {
+private:
     /**
     * @brief A pointer to the player's inventory.
     *
@@ -53,7 +42,6 @@ private:
     *
     * Weapons are used to increase the player's attack power during combat.*/
     Weapon* m_weapon;
-
 public:
     /**
     * @brief Constructs a Player object with a given name, health, and attack power.
@@ -65,29 +53,7 @@ public:
     * @param name The name of the player character
     * @param health - The player's starting health points
     * @param attack - The player's initial attack power */
-    Player(std::string name, int health, int attack);       // todo defense, level, xp
-
-    /**
-    * @brief Retrieves the player's current health points.
-    *
-    * @return The current health value of the player.
-    */
-    int getHealth() const;
-    /**
-    * @brief Retrieves the player's attack power.
-    *
-    * @return The player's attack value.
-    */
-    int getAttack() const;
-
-    /**
-    * @brief Retrieves the player's name
-    *
-    * @return The name of the player as a string.
-    */
-    std::string getName() const;
-
-	void setHealth(int minusHealth);
+    Player(std::string name, int attack, int defense, int health, int xp);       // todo defense, level, xp
 
     /**
     * @brief Makes the player drink the specified potion to restore health.
@@ -146,12 +112,22 @@ public:
     * @return The number of potions the player currently has in their inventory.*/
     int getNumberOfPotions() const;
 
-    int getTotalAttackPower() const;
     /**
-    * @brief Returns the total number of items in the player's inventory.
+    * @brief Calculates the player's total attack power.
     *
+    * This method retrieves the player's base attack value using `getAttack()`
+    * and adds any bonus attack power provided by the currently equipped weapon.
+    * If no weapon is equipped, only the base attack value is returned.
+    * @brief Returns the total number of items in the player's inventory.
+
+    * @return The player's total attack power, including weapon bonuses if applicable.
+    */
+    int getTotalAttackPower() const;
+
+    /**
+    **
     * @return The total count of items in the player's inventory.*/
-    int getTotalNumberOfItems();
+    int getTotalNumberOfItems() const;
 
     /**
     * @brief Selects an item from the player's inventory based on the index.
@@ -162,19 +138,61 @@ public:
     * @return A pointer to the selected `Item` object.*/
     Item* selectItem(int itemIndex);
 
+    /**
+    * @brief Toggles weapon equipment.
+    *
+    * This method perform equipping or unqeuiping action whether the weapon is equipped or not
+    * If the weapon is already equipped, it will be unequipped.
+    * If the weapon is not equipped, it will be equipped.
+    *
+    * @param weapon A pointer to the Weapon object to be toggled. */
     void toggleEquipment(Weapon* weapon);
+
+    /**
+    * @brief Toggles weapon equipment.
+    *
+    * This method perform equipping or unqeuiping action whether the armor is equipped or not
+    * If the armor is already equipped, it will be unequipped.
+    * If the armor is not equipped, it will be equipped.
+    *
+    * @param armor A pointer to the Armor object to be toggled. */
     void toggleEquipment(Armor* armor);
 
+    /**
+    * @brief Equips a weapon to the player.
+    *
+    * If no weapon is currently equipped, the specified weapon is equipped.
+    * If weapon is already equipped, it is unequipped and replaced by the new one.
+    *
+    * @param weapon A pointer to the Weapon object to be equipped. */
     void equip(Weapon* weapon);
 
+    /**
+    * @brief Equips armor to the player.
+    *
+    * If no armor is currently equipped, the specified armor is equipped.
+    * If armor is already equipped, it is unequipped and replaced by the new one.
+    *
+    * @param armor A pointer to the Armor object to be equipped. */
     void equip(Armor* armor);
-
+    /**
+    * @brief Unequips the currently equipped weapon.
+    *
+    * This function sets the current weapon to unequipped state and removes it from the player. */
     void unequipWeapon();
+
+    /**
+    * @brief Unequips the currently equipped armor.
+    *
+    * This function sets the current armor to unequipped state and removes it from the player.*/
     void unequipArmor();
+
     /**
     * @brief Initiates a battle between the player and the specified enemy.
     *
     * @param Enemy A pointer to the `Enemy` object the player will battle. */
 	void battle(Enemy* Enemy);
+
+    void printInfo() override; // not used method yet
 };
 
