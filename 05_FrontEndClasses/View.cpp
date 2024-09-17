@@ -4,7 +4,7 @@ void View::howToSelect() {
     std::cout << "\t\t\t~Press [ENTER] to make selection";
 }
 
-void View::inGameMenu_m () {
+void View::gameMenu() {
     std::cout << "--------------****In Game Menu****---------------\n\n"
               << "\t\tPersonal Stats\n"
               << "\t\tInventory\n"
@@ -13,7 +13,7 @@ void View::inGameMenu_m () {
     howToSelect();
 }
 
-void View::displayGameInstructions() {
+void View::gameInstructions() {
     std::cout << "-----------**Game Instructions**-----------" << "\n\n";
 
     std::cout << "Movement:\n\n"
@@ -58,7 +58,7 @@ void View::playerStats() {
     std::cout << "\t\t\t~Press [any key] to continue";
 }
 
-void View::displayInventory_m(int totalPotions) {
+void View::inventoryMenu(int totalPotions) {
     std::cout << "-----------**Inventory**-----------" << "\n\n"
               /*"Total Coins"*/
               << "\tHP potions: " << "\t\t" << totalPotions << "\n\n"
@@ -68,18 +68,18 @@ void View::displayInventory_m(int totalPotions) {
     howToSelect();
 }
 
-void View::listInventoryItems(std::vector<Item*> items) {
-    std::cout << "---------------------------------------**Inventory**--------------------------------------" << "\n";
-    std::cout << "\tType\t\t|\t\tName\t\t\t|\tItem Bonus\n"
-              << "------------------------------------------------------------------------------------------\n";
+void View::inventoryItems(std::vector<Item*> items) {
+    std::cout << "---------------------------------------**Inventory**--------------------------------" << "\n";
+    std::cout << "\tName\t\t|\tType\t\t\t|\tItem Bonus\n"
+              << "------------------------------------------------------------------------------------\n";
     for (Item* item : items) {
-        item->printBriefInfo();
+        item->printInfo();     /// call of specific method due to polymorfism of parent Item
     }
     std::cout << "  Leave Inventory\n\n\t\t\t";
     howToSelect();
 }
 
-void View::displayItemInfo(Item* item) {
+void View::itemInfo(Item* item) {
     system("cls");
     std::cout << "-----------**Item details**-----------" << "\n\n"
               << "\t" << item->getName() << "\n"
@@ -103,16 +103,16 @@ void View::displayItemInfo(Item* item) {
     }
 }
 
-void View::displayItemActions(Item* item) {
+void View::itemActions(Item* item) {
     // dynamic cast special vlastnosti
     if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
-        toEquipOption(weapon);
+        EquipOption(weapon);
     }
     else if (Potion* potion = dynamic_cast<Potion*>(item)) {
     std::cout << "\tDrink potion\n";
     }
     else if (Armor* armor = dynamic_cast<Armor*>(item)) {
-        toEquipOption(armor);
+        EquipOption(armor);
     }
     else {
         std::cout << "\nDynamic cast of Item* (Father) failed" << std::endl;
@@ -123,7 +123,7 @@ void View::displayItemActions(Item* item) {
     howToSelect();
 }
 
-void View::toEquipOption(Weapon* weapon) {
+void View::EquipOption(Weapon* weapon) {
     if (weapon->isEquipped()) {
         std::cout << "\tUnequip" << "\n";
     }
@@ -132,7 +132,7 @@ void View::toEquipOption(Weapon* weapon) {
     }
 }
 
-void View::toEquipOption(Armor* armor) {
+void View::EquipOption(Armor* armor) {
     if (armor->isEquipped()) {
         std::cout << "\tUnequip" << "\n";
     }
@@ -141,8 +141,22 @@ void View::toEquipOption(Armor* armor) {
     }
 }
 
-void View::showDiscardConfirmationMessage() {
+void View::discardConfirmationMessage() {
     std::cout << "Are you sure you want to discard this item?\n\n"
               << "\t\tYes\n"
               << "\t\tNo\n";
+}
+
+void View::noPotionLeft() {
+    std::cout << "There is no potion in inventory. You have nothing to drink\n\n";
+}
+
+void View::equipmentInfo(Weapon* weapon, int totalAttack) {
+    std::cout << "You have equipped the " << weapon->getName() << " (+ " << weapon->getAttackBonus() << " attack power).\n";
+    std::cout << "Your total attack power is " << totalAttack << " points\n\n";
+}
+
+void View::equipmentInfo(Armor* armor, int totalDefense) {
+    std::cout << "You have equipped the " << armor->getName() << " (+ " << armor->getDefenseBonus() << " attack power).\n";
+    std::cout << "Your total defense power is " << totalDefense << " points\n\n";
 }
