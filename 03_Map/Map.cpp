@@ -1,14 +1,13 @@
 #include "Map.h"
 
 // Initialize constants for file paths
-const std::string Map::MAP_FOLDER = "Files/Map/Locations/"; // Path to the folder containing location files
-const std::string Map::LOCATION_NAMES = "LocationsNames.txt"; // File containing names of location directories
+const std::string Map::MAP_FOLDER = "Files/Map/Locations/";     // Path to the folder containing location files
+const std::string Map::LOCATION_NAMES = "LocationsNames.txt";   // File containing names of location directories
 
 Map::Map(std::string fileName) {
     std::string path_locationNames = Map::MAP_FOLDER + fileName;
     createMap(path_locationNames);
 }
-
 
 void Map::createMap(std::string path_locationNames) {
     if(readLocationNames(path_locationNames)) {
@@ -26,7 +25,7 @@ bool Map::readLocationNames(std::string const path_locationNames) {
         //std::cout << "File cannot be open - no file for relative path: " << path_locationNames;
     }
 
-    int indexLokace = 0;					// starting index location
+    int indexLokace = 0;					// starting location index
     while (!(f_LocationNames.eof())) {
         std::string name;
         getline(f_LocationNames, name);			// 1 line = 1 location name
@@ -49,12 +48,12 @@ bool Map::readRoomFile(std::string path) {
 }
 
 void Map::createRooms() {
-    std::vector<Room*> lokace;	
+    std::vector<Room*> location;
     std::string path_Room;         
     int locationAmount = 4;	// total number of location for the game
 
     for (int indexL = 0; indexL < locationAmount; indexL++) {		// indexL = index of Location		
-        lokace.clear();
+        location.clear();
         for (int indexR = 1; indexR <= 9; indexR++) { 		// indexR = index of Room
             path_Room = Map::MAP_FOLDER + m_dir_location.at(indexL) + "/0" + std::to_string(indexR) + ".txt"; // path to specific room in the location
 
@@ -63,15 +62,15 @@ void Map::createRooms() {
             }
   
             m_room = new Room(path_Room);
-            lokace.push_back(m_room);
+            location.push_back(m_room);
         }
         
-        //Debug prints
+        // Debug prints
         //std::cout << path_Room << std::endl;
         /*std::cout << "Adding location: " << m_dir_location.at(indexL) <<  " to m_map."  << std::endl;
         std::cout << "Number of rooms in lokace: " << lokace.size() << std::endl;
         system("pause");*/
-        m_map.push_back(lokace);
+        m_map.push_back(location);
     }
 }
 

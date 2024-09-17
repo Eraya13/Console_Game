@@ -12,9 +12,9 @@
 class Map {
 private:
     std::vector<std::vector<Room*>> m_map;
-    Room* m_room;                                   // sem se ulozi konkretni roomka
-    std::array<std::string, 10> m_dir_location;     // nazvy slozek s lokacemi
-    static const std::string MAP_FOLDER;    ///< The relative path to the folder containing map files.
+    Room* m_room;                                   ///< actual room that is in use
+    std::array<std::string, 10> m_dir_location;     ///< The names of directories with locations
+    static const std::string MAP_FOLDER;            ///< The relative path to the folder containing map files.
 
     /**
     * @brief Creates the map by reading location names and generating rooms.
@@ -54,8 +54,7 @@ public:
     static const std::string LOCATION_NAMES; ///< The name of the file containing location names.
 
     /**
-    * @brief Handles the process of changing rooms (to be implemented).
-    */
+    * @brief Handles the process of changing rooms (to be implemented).*/
     // changeRoom()
 };
 

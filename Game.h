@@ -7,7 +7,6 @@
 #include <windows.h>
 
 //TODO ERRORLOG globalem nebo singletonem
-///TODO InGame rename to Actions_m also find "InGameMenu" zmínky
 
     /**
     * @class Game.
@@ -114,7 +113,7 @@
     * It handles movement commands (W, A, S, D), game menu access (TAB), and game termination (ESC).
     * The action is determined as follows:
     * - **Movement**: If the input is W, A, S, or D, it sets the player's direction and returns `ActionType::Movement`.
-    * - **In-Game Menu**: If the input is TAB, it returns `ActionType::InGameMenu`.
+    * - **In-Game Menu**: If the input is TAB, it returns `ActionType::GameMenu`.
     * - **Quit Game**: If the input is ESC (27), it returns `ActionType::QuitGame`.
     *
     * @return The type of action to be performed based on the player input.*/
@@ -134,8 +133,8 @@
     * - **Game Menu**:
     *   - Makes the text and cursor visible for the menu.
     *   - Displays the game menu and allows the player to navigate in this menu.
-    *   - Executes the selected menu option by player by method `executeInGameMenuOption`, which can also affect the ongoing state of the game.
-    *   - For a detailed explanation of `executeInGameMenuOption`, refer to its documentation in the Game class.
+    *   - Executes the selected menu option by player by method `executeGameMenuOption`, which can also affect the ongoing state of the game.
+    *   - For a detailed explanation of `executeGameMenuOption`, refer to its documentation in the Game class.
     *
     * - **Quit Game**:
     *   - Sets `m_gameOngoing` to `false`, which will stop the main game loop - that ActionType is get if the player choose in Game munu to quit game.
@@ -162,7 +161,7 @@
     * can take (e.g., use, equip, discard), and allows the player to choose one of the
     * available actions via the cursor.
     *
-    * @param itemIndex The index of the selected item in the inventory.*/
+    * @param itemIndex The index of the selected item in the inventory. */
     void manageItemInteraction(int itemIndex);
     
     /**
@@ -189,7 +188,7 @@
     * After performing the selected action, the screen is cleared to reflect the choice of the player.
     *
     * @param gameOngoing A reference to the `gameOngoing` flag */
-    void executeInGameMenuOption(bool &gameOngoing);
+    void executeGameMenuOption(bool &gameOngoing);
 
     /**
     * @brief Executes the selected option from the Inventory Menu.
@@ -236,7 +235,7 @@
     * After the chosen action is executed, the screen is cleared and the appropriate interface is displayed.
     *
     * @param item Pointer to the item selected by the player.
-    * @param itemIndex Index of the item in the player's inventory.*/
+    * @param itemIndex Index of the item in the player's inventory. */
     void executeItemAction(Item* item, int itemIndex);
 
     /**
@@ -256,7 +255,7 @@
     * and if confirmed, removes the item from the inventory.
     *
     * @param item A pointer to the item to be discarded.
-    * @param itemIndex The index of the item in the inventory list.*/
+    * @param itemIndex The index of the item in the inventory list. */
     void handleItemDiscard(Item* item, int itemIndex);
 
     /**

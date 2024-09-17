@@ -21,7 +21,7 @@ void Game::setGameElements() {
     SetConsoleOutputCP(65001);	// sets coding to UTF-8
     // Here are created game elements
 	system ("cls");
-    m_player = new Player("Derien", 40, 40);
+    m_player = new Player("Derien", 40, 20, 80, 50);
 	createMap(Map::LOCATION_NAMES);
 	// setting game elements
     m_actualRoom = m_map->getRoom(START_LOCATION, START_ROOM);
@@ -57,12 +57,12 @@ ActionType Game::decideActionType() {
 				return ActionType::Movement;
             case 'H':
                 return ActionType::Help;
-            case '\t':				// TAB key
-                return ActionType::InGameMenu;
+            case '\t':				// TAB
+                return ActionType::GameMenu;
 
 
 		}
-    } while (key != 27);		// ENTER key
+    } while (key != 27);		// ENTER
 	return ActionType::QuitGame;
 }
 
@@ -86,18 +86,18 @@ void Game::performAction(ActionType action) {
             ConsoleManager::setTextVisible();
             ConsoleManager::setCursorVisible();
             system("cls");
-            View::displayGameInstructions();
+            View::gameInstructions();
             system ("pause");
             system("cls");
             break;
-		case ActionType::InGameMenu:
+        case ActionType::GameMenu:
             // Here are function that prepares Console for printing menu
             ConsoleManager::setTextVisible();
             ConsoleManager::setCursorVisible();
-            View::inGameMenu_m();
+            View::gameMenu();
             // value of 22 = the exact line number on Console for selection of 1st option from menu                   
             ConsoleManager::cursorNavigation(22, 4);  
-            executeInGameMenuOption(m_gameOngoing);
+            executeGameMenuOption(m_gameOngoing);
             break;
 
         case ActionType::QuitGame:
@@ -107,7 +107,7 @@ void Game::performAction(ActionType action) {
 }
 
 bool Game::confirmDiscardItem() {
-    View::showDiscardConfirmationMessage();
+    View::discardConfirmationMessage();
     ConsoleManager::cursorNavigation(8, 2);
     int option = ConsoleManager::getOptionIndex();
     if (option==1) {
@@ -119,7 +119,7 @@ bool Game::confirmDiscardItem() {
 }
 
 void Game::handleItemDiscard(Item* item, int itemIndex) {
-View::displayItemInfo(item);
+View::itemInfo(item);
         if (confirmDiscardItem()) {
             m_player->discardItem(item, itemIndex);
         }
@@ -127,7 +127,7 @@ View::displayItemInfo(item);
 
 void Game::browseInventory() {
     std::vector<Item*> items = m_player->getInventoryItemList();
-    View::listInventoryItems(items);
+    View::inventoryItems(items);
     int short totalOptions = m_player->getTotalNumberOfItems() + 1; // adds '1' for option 'Leave Inventory' without action
     ConsoleManager::cursorNavigation(3, totalOptions);
     int selectedOption = ConsoleManager::getOptionIndex();
@@ -142,14 +142,14 @@ void Game::browseInventory() {
 // todo const item* get and parameter const item* 
 void Game::manageItemInteraction(int itemIndex) {
     Item* selectedItem = m_player->selectItem(itemIndex);
-    View::displayItemInfo(selectedItem);
-    View::displayItemActions(selectedItem);
+    View::itemInfo(selectedItem);
+    View::itemActions(selectedItem);
     ConsoleManager::cursorNavigation(6, 4);
     executeItemAction(selectedItem, itemIndex);
 }
 
 // ------**Execution of Menus**------
-void Game::executeInGameMenuOption(bool &gameOngoing) {
+void Game::executeGameMenuOption(bool &gameOngoing) {
     int option = ConsoleManager::getOptionIndex();		// Gets option to perform based on cursor Position
     system ("cls");
     switch (option) {
@@ -170,7 +170,7 @@ void Game::executeInGameMenuOption(bool &gameOngoing) {
 }
 
 
-void Game::executeInventoryOption(){
+void Game::executeInventoryOption() {
     int option = ConsoleManager::getOptionIndex();
     std::vector<Item*> items = m_player->getInventoryItemList();
     system ("cls");
@@ -197,31 +197,32 @@ void Game::executeItemAction(Item* item, int itemIndex) {
         }
         else if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
             m_player->toggleEquipment(weapon);
-            //m_player->getTotalAttackPower();
-            //View::EquippedMessage(weapon) -- vypíše co si hráč nasadil + jak se mu změnili staty
+            int totalAttack = m_player->getTotalAttackPower();
+            View::equipmentInfo(weapon, totalAttack);
+            system("pause");
         }
         else if (Armor* armor = dynamic_cast<Armor*>(item)) {
             m_player->toggleEquipment(armor);
-            //View::EquippedMessage(armor) -- vypíše co si hráč nasadil + jak se mu změnili staty
+            //int totalDefense = m_player->getTotalDefense();
+            View::equipmentInfo(armor, 50);
+            system("pause");
         }
-        system("cls");
         break;
     case 2:
         handleItemDiscard(item, itemIndex);
-        system("cls");
         break;
     case 3:   // Back to inventory
         break;
     case 4:   // Leave inventory
         return;
     }
-    //browseInventory();
+    system("cls");
     accessInventory();
 }
 
 void Game::accessInventory() {
     int totalPotions = m_player->getNumberOfPotions();
-    View::displayInventory_m(totalPotions);
+    View::inventoryMenu(totalPotions);
     ConsoleManager::cursorNavigation(4, 3);
     executeInventoryOption();
 }
