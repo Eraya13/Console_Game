@@ -10,8 +10,7 @@
  *
  * The PlayerController class handles the movement of the player, including determining valid moves,
  * updating the player's position on the map, and managing interactions with entities such as items,
- * NPCs, and enemies. It also manages transitions between different rooms.
- */
+ * and enemies. It also manages transitions between different rooms. */
 class PlayerController {
 private:
     /**
@@ -165,7 +164,7 @@ public:
     *
     * @note The key is assumed to be validated before calling this function.
     *
-    * @param key The validated direction key ('W', 'A', 'S', 'D') */
+    * @param key The validated direction key ('W', 'A', 'S', 'D'). */
 	void setDirection(char key);
 };
 

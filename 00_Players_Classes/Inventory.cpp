@@ -36,9 +36,6 @@ void Inventory::discardItem(Item* item, int itemIndex) {
         delete item;
         m_totalNumberItems--;
     }
-    else {
-        std::cout << "\n\nItem could not be removed - because the index is not correct";
-    }
 }
 
 int Inventory::getNumberOfPotions() {

@@ -1,5 +1,6 @@
 #include "DataFormatting.h"
 
+// will not be used for project (probably)
 namespace DataFormatting {
     // funkce naformatuje Description na pozadovany tvar pro zobrazeni
     std::string formateDescription(std::string toBePrinted) {

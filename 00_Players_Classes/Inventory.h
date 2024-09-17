@@ -1,12 +1,19 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 #include <vector>
+
 #include "../02_Entity/Item.h"
 #include "../02_Entity/Armor.h"
 #include "../02_Entity/Weapon.h"
 #include "../02_Entity/Potion.h"
 
-//todo
+/**
+ * @class Inventory
+ * @brief Manages a collection of items for a player.
+ *
+ * The `Inventory` class is responsible for handling a player's collection of items in a game. It manages addition, discard, finding and getting the list or certain item. The inventory keeps track of all collected items and provides functionality to manage them.
+ *
+ * The `Inventory` class is responsible for handling a player's collection of items in a game. The main functions of this class include storing items, returning pointers to items, and managing their existence (e.g., adding and discarding items).*/
 class Inventory
 {
 private:
@@ -76,7 +83,7 @@ public:
     * This function iterates through the inventory items and counts how many of them are categorized as "Potion".
     *
     * @return The total number of potions in the inventory*/
-    int getNumberOfPotions();
+    int getNumberOfPotions() const;
     //int const getCoins();
  
     /**
@@ -85,7 +92,7 @@ public:
     * This function provides the total count of items currently stored in the inventory.
     *
     * @return The total number of items in the inventory*/
-    int getNumberOfItems();
+    int getNumberOfItems() const;
 
     /**
     * @brief Retrieves an item from the inventory by its index
@@ -97,7 +104,7 @@ public:
     * @return A pointer to the `Item` at the specified index.
     * @throws std::out_of_range If the index is out of the valid range.
     * @throws std::runtime_error If the item at the given index does not exist.*/
-    Item* getItem(int itemIndex);
+    Item* getItem(int itemIndex) const;
 
     /**
     * @brief Returns a list of all items in the inventory
@@ -105,7 +112,7 @@ public:
     * This function provides a vector containing all items currently in the inventory.
     *
     * @return A vector of pointers to all items in the inventory.*/
-    std::vector<Item*> getItemList();
+    std::vector<Item*> getItemList() const;
 };
 
 #endif // INVENTORY_H

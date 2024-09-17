@@ -10,10 +10,6 @@ Weapon::Weapon (std::string name, int attackBonus) : Item (name) {
 
 void Weapon::setCategory(std::string category) { m_category = "Weapon"; }
 
-void Weapon::setInfo (std::string info) {
-    m_info = "Some information about weapon";
-}
-
 void Weapon::setEquipped() { m_equipped = true; }
 
 void Weapon::setUnequipped() { m_equipped = false; }
@@ -28,6 +24,6 @@ Weapon::~Weapon() {
     std::cout << "Destruktor Weapon zavolán" << std::endl;
 }
 
-void Weapon::printBriefInfo() {
+void Weapon::printInfo() {
     std::cout  << "\t" << getCategory() << "\t\t|\t" << getName() << "\t\t|\t+ " << getAttackBonus() << " damage" << std::endl;
 }

@@ -4,16 +4,27 @@
 #include <conio.h>
 #include <vector>
 
+#include "../01_Enums/Colors.h"
 #include "../02_Entity/Item.h"
 #include "../02_Entity/Potion.h"
 #include "../02_Entity/Weapon.h"
 #include "../02_Entity/Armor.h"
-
-#include "View.h"
-#include "../01_Enums/Colors.h"
 #include "../03_Map/Room.h"
+#include "View.h"
 
-
+/**
+ * @class ConsoleManager
+ * @brief Manages console output and cursor behavior.
+ *
+ * The `ConsoleManager` class controls how information is printed in the console (e.g., cmd) and manages the visibility and movement of the console cursor. 
+ * It is responsible for controlling where and how content is displayed, including managing cursor visibility, setting boundaries for cursor movement in menus, 
+ * and ensuring a clean user interface for console-based interactions.
+ *
+ * Key responsibilities include:
+ * - Managing the console cursor’s visibility, and position.
+ * - Setting the cursor's position for selecting option in menus.
+ * - Defining boundaries for cursor movement (e.g., max and min Y positions).
+ * - Ensuring proper background color settings in the console output.*/
 class ConsoleManager
 {
 private:
