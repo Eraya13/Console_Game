@@ -136,7 +136,7 @@ public:
     *
     * @param itemIndex The index of the item to select.
     * @return A pointer to the selected `Item` object.*/
-    Item* selectItem(int itemIndex);
+    Item* selectItem(int itemIndex) const;
 
     /**
     * @brief Toggles weapon equipment.

@@ -53,4 +53,6 @@ public:
     *
     * This pure virtual method should be overridden to output item's information. */
     virtual void printInfo() = 0;
+
+    ~Item();
 };

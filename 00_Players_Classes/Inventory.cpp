@@ -38,7 +38,7 @@ void Inventory::discardItem(Item* item, int itemIndex) {
     }
 }
 
-int Inventory::getNumberOfPotions() {
+int Inventory::getNumberOfPotions() const {
     int totalPotions = 0;
     for (Item* item : m_items) {
         if(item->getCategory()=="Potion")
@@ -49,9 +49,9 @@ int Inventory::getNumberOfPotions() {
     return totalPotions;
 }
 
-int Inventory::getNumberOfItems() { return m_totalNumberItems; }
+int Inventory::getNumberOfItems() const { return m_totalNumberItems; }
 
-Item* Inventory::getItem(int itemIndex) {
+Item* Inventory::getItem(int itemIndex) const {
     if (itemIndex < 0 || itemIndex >= static_cast<int>(m_items.size())) {
         throw std::out_of_range("Index out of range");
     }
@@ -63,7 +63,7 @@ Item* Inventory::getItem(int itemIndex) {
     return item;
 }
 
-std::vector<Item*> Inventory::getItemList() { return m_items; }
+std::vector<Item*> Inventory::getItemList() const { return m_items; }
 
 Inventory::~Inventory() {
     // Uvolnění paměti

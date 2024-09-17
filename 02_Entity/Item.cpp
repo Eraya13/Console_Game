@@ -11,3 +11,6 @@ void Item::printInfo() {
     std::cout << "This is item parent.";
 }
 
+Item::~Item() {
+    //std::cout << "Destruktor Potion zavolán" << std::endl;
+}

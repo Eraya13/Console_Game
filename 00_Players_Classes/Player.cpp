@@ -43,7 +43,7 @@ int Player::getTotalNumberOfItems() const {
     return m_inventory->getNumberOfItems();
 }
 
-Item* Player::selectItem(int itemIndex) {
+Item* Player::selectItem(int itemIndex) const {
     return m_inventory->getItem(itemIndex);
 }
 
