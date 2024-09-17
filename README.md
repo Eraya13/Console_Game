@@ -7,7 +7,6 @@ This is a desktop game designed for the command line interface. Player explore a
 
 The game is designed using Object-Oriented Programming (OOP) principles and is entirely 
 developed in C++. It serves as a demonstration of OOP concepts within a simple, interactive environment.
-# Badges
 
 ![UsedProgrammingLanguage](https://img.shields.io/badge/C++-00599C?style=flat&logo=C%2B%2B)
 ![UsedProgrammingLanguage](https://img.shields.io/badge/C-073551?style=flat&logo=C)
