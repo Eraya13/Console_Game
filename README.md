@@ -71,7 +71,9 @@ This project is intended as a showcase of OOP principles applied to game behavio
 
 Please be aware of these limitations when exploring the project. I am committed to continually improving the application, including its documentation, and refining the code through regular refactoring to ensure it remains valuable and well-maintained.
 
-# Author
+# Author - about me
+
+I am a passionate developer of C/C++ and C#. Mostly I do Backend but for my projects I try both. What fascinates me about programming is the countless ways to express creativity. Besides that, I am a lover of fast rides in sports cars and anime.
 
 # Contribution
 
